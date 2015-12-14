@@ -1,0 +1,296 @@
+<style>
+img {
+	width: 100%;
+	height: 100%;
+}
+</style>
+</head>
+
+	<!-- <div class="homePage"> -->
+		<div class="header">
+			<!-- Left Section of the header -->
+			<div class="leftSection">
+				<div class="siteLogoSection">
+					<img alt="" src="assets/img/icon.png">
+				</div>
+				<div class="siteCaption">College Days</div>
+			</div>
+			<!-- Right Section of the header -->
+			<div class="rightSection">
+
+				<div class="link">
+					<button ng-click="openLoginModal()">login</button>
+				</div>
+
+				<div class="link">
+
+					<div class="btn-group" is-open="status.isopen">
+						<button id="single-button" type="button" class="btn btn-primary">
+							Admin <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu"
+							aria-labelledby="single-button">
+							<li role="menuitem"><a href="#">Register Your College</a></li>
+							<li role="menuitem"><a href="#">Update Your College Info</a></li>
+							<li class="divider"></li>
+							<li role="menuitem"><a href="#">Help</a></li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="link">
+
+					<div class="btn-group" dropdown is-open="status.isopen">
+						<button id="single-button" type="button" class="btn btn-primary">
+							Faculty <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li role="menuitem"><a href="#">Read Online FREE</a></li>
+							<li role="menuitem"><a href="#">Submit Notes</a></li>
+							<li role="menuitem"><a href="#">Review Your College</a></li>
+							<li class="divider"></li>
+							<li role="menuitem"><a href="#">Help</a></li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="link">
+
+					<div class="btn-group" dropdown is-open="status.isopen">
+						<button id="single-button" type="button" class="btn btn-primary">
+							Student <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li role="menuitem"><a href="#">Read Online FREE</a></li>
+							<li role="menuitem"><a href="#">Get Notes</a></li>
+							<li role="menuitem"><a href="#">Review Your College</a></li>
+							<li class="divider"></li>
+							<li role="menuitem"><a href="#">Help</a></li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<!-- Crousel section -->
+		<div class="contentArea">
+			<div class="crouselSection">
+				<carousel interval="myInterval" no-wrap="noWrapSlides"> <slide
+					ng-repeat="slide in slides" active="slide.active"> <img
+					ng-src="{{slide.image}}" style="margin: auto;"> <!--  <div class="carousel-caption">
+          <h4>Slide {{$index}}</h4>
+          <p>{{slide.text}}</p>
+        </div> --> </slide> </carousel>
+			</div>
+
+			<div class="infoSection">
+				<div class="studentInfo">
+					<div class="banner">Get Started NOW</div>
+
+					<div class="product-content">
+						<div class="helpSection">
+							<a href="#">Quick View</a>
+						</div>
+						<div class="icon">
+							<img alt="" src="assets/img/open-books/open-book.jpg">
+						</div>
+						<div class="title">OnLine Book Reading</div>
+						<div class="desc">Read Online Books Free</div>
+					</div>
+
+					<div class="product-content">
+						<div class="helpSection">
+							<a href="#">Quick View</a>
+						</div>
+						<div class="icon">
+							<img alt="" src="assets/img/notes/note1.jpg">
+						</div>
+						<div class="title">Get Notes</div>
+						<div class="desc">
+							Read or Submit Notes and <strong>Earn Reward</strong>
+						</div>
+					</div>
+
+					<div class="product-content">
+						<div class="helpSection">
+							<a href="#">Quick View</a>
+						</div>
+						<div class="icon">
+							<img alt="" src="assets/img/collegeinfo/college_info1.jpg">
+						</div>
+						<div class="title">Browse College</div>
+						<div class="desc">Get Information about a college and the
+							reviews</div>
+					</div>
+
+					<div class="product-content">
+						<div class="helpSection">
+							<a href="#">Quick View</a>
+						</div>
+						<div class="icon">
+							<img alt="" src="assets/img/submit-review/submit_review1.jpg">
+						</div>
+						<div class="title">Review Your College</div>
+						<div class="desc">Submit Review of college to help others
+							choose correct one</div>
+					</div>
+
+					<div class="product-content">
+						<div class="helpSection">
+							<a href="#">Quick View</a>
+						</div>
+						<div class="icon">
+							<img alt="" src="assets/img/register_college.jpg">
+						</div>
+						<div class="title">Register Your College</div>
+						<div class="desc">Register Your College and Let the world
+							know about You.</div>
+					</div>
+
+
+				</div>
+				<hr>
+				<div class="ourVisionSection">
+					<div class="visionTitle">Our Vision</div>
+					<div class="visionBody">
+						<div class="visionBodyText">
+							<ul>
+								<li>Make Student Life Easy</li>
+								<li>Automate College Activities</li>
+								<li>Make the hunt for searching college for Aispirants Easy</li>
+								<li>Student can communicate to Rest of the Students</li>
+								<li>Make read easy by providing FREE Online Books And Notes</li>
+								<li>Sell/Buy Goods At Your Campus</li>
+								<li>Earn Points By Submitting Notes's likes</li>
+							</ul>
+						</div>
+						<div class="visionBodyImage">
+							<img alt="" src="assets/img/vision_pic.jpg">
+						</div>
+					</div>
+				</div>
+				<!--  <div class="anonymousUserInfo">Anonymous User</div>
+			   <hr>
+			   <div class="adminInfo">Admin info</div>
+			   <hr>
+			   <div class="facultyInfo">Faculty Info</div>  -->
+			</div>
+		</div>
+	<!-- </div> -->
+	<!-- footer section -->
+	<div class="footerSection">
+		<div class="footerSectionLink">
+			<a href="#">About Us</a>
+		</div>
+		<div class="footerSectionLink">
+			<a href="#">contact Us</a>
+		</div>
+		<div class="footerSectionLink">
+			<a href="#">Help</a>
+		</div>
+	</div>
+
+	<script type="text/ng-template" id="loginModalContent.html">
+      
+  <div class="modal-body">
+
+<div class="rightIcon"> <img src="assets/img/cancelButton/cancel.png" ng-click="closeModal()"></img> </div>
+<div class="leftHalf">
+<div class="loginImage">
+<img src="assets/img/degree1.jpg">
+<div class="whySignUpTitle">Why SignUp Required?
+<hr>
+</div>
+<div class="whySignUpBody">
+<ul>
+<li>FREE Online Book Reading</li>
+<li>Get Notes</li>
+<li>Get College Events</li>
+<li>Post Q&A to other Students</li>
+</ul>
+</div>
+ </div>
+</div>
+
+ <div class="rightHalf">
+<div class="email-password-not-match-msg" ng-show = "emailPwdNotMatchModel">Email/password combination doesn't match </div>
+  <div class="loginForm">
+	<div class="signInTitle" ng-show = "showSignInTitle">Please Sign In</div>
+	<div class="signUpTitle" ng-show = "showSignUpTitle">Please Sign Up</div>
+    <div class="loginFormInputBox form-group" ng-class="{'has-error' : !emailIdModel}">
+        <input type="text" ng-model="emailIdModel" class="form-control"
+          placeholder="Email Id"
+          tooltip="Enter Email Id"
+          tooltip-placement="right"
+          tooltip-trigger="mouseenter"
+          tooltip-enable="!emailIdModel" />
+      </div>
+      
+       <div class="loginFormInputBox form-group" ng-class="{'has-error' : !passwordModel}">
+        <input type="password" ng-model="passwordModel" class="form-control"
+          placeholder="Password"
+          tooltip="Enter Password"
+          tooltip-placement="right"
+          tooltip-trigger="mouseenter"
+          tooltip-enable="!passwordModel" />
+      </div>
+
+		<div class="loginFormInputBox form-group" ng-class="{'has-error' : !cnfPasswordModel}"
+			ng-show="showCnfPwdInputBox">
+        <input type="password" ng-model="cnfPasswordModel" class="form-control"
+          placeholder="Confirm Password"
+          tooltip="Confirm Password"
+          tooltip-placement="right"
+          tooltip-trigger="mouseenter"
+          tooltip-enable="!cnfPasswordModel" />
+      </div>
+
+	<div class="loginFormInputBox form-group" ng-class="{'has-error' : !collegeNameModel}"
+      ng-show="showCollegeInputBox">
+        <input type="text" ng-model="collegeNameModel" class="form-control"
+          placeholder="College Name"
+          tooltip="Enter College Name"
+          tooltip-placement="right"
+          tooltip-trigger="mouseenter"
+          tooltip-enable="!collegeNameModel" />
+      </div>
+
+	<div class="loginFormInputBox form-group" ng-class="{'has-error' : !passwordModel}" 
+       ng-show="showSemInputBox">
+        <input type="text" ng-model="semesterModel" class="form-control"
+          placeholder="Semester"
+          tooltip="Enetr Your Semester"
+          tooltip-placement="right"
+          tooltip-trigger="mouseenter"
+          tooltip-enable="!semesterModel" />
+      </div>
+
+      
+<button class="signInButton" ng-show ="showSignInButton" ng-click="login()">Log IN</button>
+<button class="signUpButton" ng-show = "showSignUpButton" ng-click="signUp()">Sign UP</button>
+<div class="forgotPassword">
+<a href="#">forgot Password</a>
+</div>
+
+<div class="backToSignIN" ng-show="showBackToSignIn" ng-click = "backToSignIn()">
+<a href="#/home">Back To Sign IN</a>
+</div>
+
+      </div>
+  </div>
+
+
+
+
+           
+        </div>
+       
+<div class="test">
+<div class="modal-footer"></div>
+</div>
+
+    </script>
+
+<!-- </body> -->
+<!-- </html> -->

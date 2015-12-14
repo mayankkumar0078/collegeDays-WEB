@@ -1,0 +1,41 @@
+<div class="booksDisplayArea" infinite-scroll-distance="15"
+	infinite-scroll="addBooksInPage('borrowableTab')">
+	<ul class="book-content-ul">
+		<li class="full-book-content" ng-repeat="record in borrowableBooks">
+			<div class="book-quick-view">
+				<div ng-click="openBookDetailsModal(record)">
+					<a href="">Details view </a>
+				</div>
+			</div> <!-- <div class="rate-Book-Section">Rate Book</div> -->
+			<div class="book-image-container">
+				<img ng-if="record.cover_i"
+					src="http://covers.openlibrary.org/b/id/{{record.cover_i}}-M.jpg">
+
+				<img ng-if="!record.cover_i && record.isbn[0]"
+					src="http://covers.openlibrary.org/b/isbn/{{record.isbn[0]}}-M.jpg">
+
+				<img ng-if="!record.cover_i && !record.isbn[0]"
+					src="assets/img/no_books_preview/no_image.jpg">
+			</div>
+			<div class="book-info-section">
+				<ul class="book-info-section-ul">
+					<li class="book-title-section"><strong>Title:</strong>
+						{{record.title}}</li>
+					<!-- <li><strong>ISBN:</strong> {{record.isbn[0]}}</li>
+					<li class="goodReadRating-section"><strong>GoodRead
+							Rating:</strong>
+						<div ng-if="record.goodReadReviewRating">
+							<div class="star-rating-section"
+								awesome-rating="record.goodReadReviewRating.averageRating"
+								awesome-rating-options="options"></div>
+							<span class="rating-num">{{record.goodReadReviewRating.averageRating}}
+								({{record.goodReadReviewRating.workRatingsCount}} People) </span>
+						</div>
+						<div ng-if="!record.goodReadReviewRating">NAL</div></li> -->
+					<li class="readableLink-li"><a href="{{record.iaUrl">Borrow
+							Books FREE</a></li>
+				</ul>
+			</div>
+		</li>
+		<li><div class="endScrollingSec" ng-show="borrowablePageScrollEnded"><strong>That's All Buddy !  </strong></div></li>
+</div>

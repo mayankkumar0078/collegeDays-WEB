@@ -1,0 +1,43 @@
+.book-shelf-area{
+width: 100%;	
+}
+#book-shelf-first-line{
+	width: 100%;
+	height: 30px;
+	
+}
+.book-shelf-sec{
+	width: 100%;
+	margin:20px 20px 20px 20px;
+}
+.book-shelf{
+	width: 220px;
+	height: 260px;
+	margin:10px 10px 5px 20px;
+	/* background-color: red; */
+	float: left;
+}
+.book-shelf:HOVER{
+	border: solid 1px;
+	border-color: blue;
+}
+.shelf-cover-photo{
+	width: 100%;
+	height: 60%;
+	float: left;
+	clear: both;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 20px;
+}
+.shelf-cover-photo img{
+	width: 100px;
+}
+.shelf-info{
+	width: 100%;
+	height: 40%;
+	float: left;
+}
+.shelf-info ul{
+	margin-left: -35px;
+}

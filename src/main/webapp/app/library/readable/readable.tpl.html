@@ -1,0 +1,50 @@
+<div class="booksDisplayArea" infinite-scroll="addBooksInPage('readableTab')" infinite-scroll-distance="10">
+	<ul class="book-content-ul">
+		<li class="full-book-content" ng-repeat="record in readableBooks">
+			<div ng-bind="record" ng-show="false"></div>
+			<div class="book-quick-view">
+				<div ng-click="openBookDetailsModal(record)">
+					<a href="">Details view </a>
+				</div>
+				
+			</div> <!-- <div class="rate-Book-Section">Rate Book</div> -->
+			<div class="book-image-container">
+				<img ng-if="record.cover_i"
+					src="http://covers.openlibrary.org/b/id/{{record.cover_i}}-M.jpg">
+
+				<img ng-if="!record.cover_i && record.isbn[0]"
+					src="http://covers.openlibrary.org/b/isbn/{{record.isbn[0]}}-M.jpg">
+
+				<img ng-if="!record.cover_i && !record.isbn[0]"
+					src="assets/img/no_books_preview/no_image.jpg">
+			</div>
+			<div class="book-info-section">
+				<ul class="book-info-section-ul">
+					<li class="book-title-section"><strong>Title:</strong>{{record.title}}</li>
+					<li><strong>Author </strong> {{record.author_name[0]}}</li>
+					<li><strong>Publish Year </strong> {{record.publish_date[0]}}</li>
+					<li class="readableLink-li"><a href="{{record.iaUrl}}">Read BOOK FREE</a></li>
+</ul>
+</div>
+		</li>
+		<li><div class="endScrollingSec" ng-show="readablePageScrollEnded"><strong>That's All Buddy !  </strong></div></li>
+	</ul>
+	
+</div>
+
+<div ui-view="bookDetailsModalView"></div>
+
+   <script type="text/ng-template" id="bookDetailModal.html"> 
+					<div class="modal-body modal-xl">
+						<div class="bookDetailsDisplay">
+						
+						<div class="bookDetailsLeftSection">
+							<ng-include src="'app/library/books/bookInfoPartialModal.tpl.html'"></ng-include>
+						</div>
+						<div class="bookDetailsRightSection">
+							<ng-include src="rightTemplate" class="view-slide-in"></ng-include>
+						</div>
+
+						</div>
+					</div>
+					</script>

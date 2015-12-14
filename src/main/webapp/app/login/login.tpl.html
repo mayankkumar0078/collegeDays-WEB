@@ -1,0 +1,105 @@
+<div>
+    <script type="text/ng-template" id="loginModalContent.html">
+      
+        <div class="modal-body">
+<div class="rightIcon"> <img src="assets/img/cancelButton/cancel.png" ng-click="closeModal()"></img> </div>
+<div class="leftHalf">
+<div class="loginImage">
+<img src="assets/img/degree1.jpg">
+<div class="whySignUpTitle">Why SignUp Required?
+<hr>
+</div>
+<div class="whySignUpBody">
+<ul>
+<li>FREE Online Book Reading</li>
+<li>Get Notes</li>
+<li>Get College Events</li>
+<li>Post Q&A to other Students</li>
+</ul>
+</div>
+ </div>
+</div>
+
+ <div class="rightHalf">
+  <div class="loginForm">
+	<div class="signInTitle" ng-show = "showSignInTitle">Please Sign In</div>
+	<div class="signUpTitle" ng-show = "showSignUpTitle">Please Sign Up</div>
+    <div class="loginFormInputBox form-group" ng-class="{'has-error' : !emailIdModel}">
+        <input type="text" ng-model="emailIdModel" class="form-control"
+          placeholder="Email Id"
+          tooltip="Enter Email Id"
+          tooltip-placement="right"
+          tooltip-trigger="mouseenter"
+          tooltip-enable="!emailIdModel" />
+      </div>
+      
+       <div class="loginFormInputBox form-group" ng-class="{'has-error' : !passwordModel}">
+        <input type="password" ng-model="passwordModel" class="form-control"
+          placeholder="Password"
+          tooltip="Enter Password"
+          tooltip-placement="right"
+          tooltip-trigger="mouseenter"
+          tooltip-enable="!passwordModel" />
+      </div>
+
+		<div class="loginFormInputBox form-group" ng-class="{'has-error' : !cnfPasswordModel}"
+			ng-show="showCnfPwdInputBox">
+        <input type="password" ng-model="cnfPasswordModel" class="form-control"
+          placeholder="Confirm Password"
+          tooltip="Confirm Password"
+          tooltip-placement="right"
+          tooltip-trigger="mouseenter"
+          tooltip-enable="!cnfPasswordModel" />
+      </div>
+
+	<div class="loginFormInputBox form-group" ng-class="{'has-error' : !collegeNameModel}"
+      ng-show="showCollegeInputBox">
+        <input type="text" ng-model="collegeNameModel" class="form-control"
+          placeholder="College Name"
+          tooltip="Enter College Name"
+          tooltip-placement="right"
+          tooltip-trigger="mouseenter"
+          tooltip-enable="!collegeNameModel" />
+      </div>
+
+	<div class="loginFormInputBox form-group" ng-class="{'has-error' : !passwordModel}" 
+       ng-show="showSemInputBox">
+        <input type="text" ng-model="semesterModel" class="form-control"
+          placeholder="Semester"
+          tooltip="Enetr Your Semester"
+          tooltip-placement="right"
+          tooltip-trigger="mouseenter"
+          tooltip-enable="!semesterModel" />
+      </div>
+
+      
+<button class="signInButton" ng-show ="showSignInButton" ng-click="login()">Log IN</button>
+<button class="signUpButton" ng-show = "showSignUpButton" ng-click="signUp()">Sign UP</button>
+<div class="forgotPassword">
+<a href="#">forgot Password</a>
+</div>
+
+<div class="backToSignIN" ng-show="showBackToSignIn" ng-click = "backToSignIn()">
+<a href="#">Back To Sign IN</a>
+</div>
+
+      </div>
+  </div>
+
+
+
+
+           
+        </div>
+       
+<div class="test">
+<div class="modal-footer"></div>
+</div>
+
+    </script>
+
+    <!-- <button type="button" class="btn btn-default" ng-click="open()">Open me!</button> -->
+   <!--  <button type="button" class="btn btn-default" ng-click="open('sm')">Small modal</button> -->
+   <!--  <button type="button" class="btn btn-default" ng-click="toggleAnimation()">Toggle Animation ({{ animationsEnabled }})</button> -->
+    <!-- <div ng-show="selected">Selection from a modal: {{ selected }}</div> -->
+</div>

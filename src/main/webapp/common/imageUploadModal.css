@@ -1,0 +1,39 @@
+.image-upload-content-modal{
+	width: 100%;
+}
+
+.cropArea {
+    background: #E4E4E4;
+    overflow: hidden;
+    width:300px;
+    height:200px;
+}
+.img-croped-area{
+	width: 300px;
+	height: 110px;
+	background: #E4E4E4;
+	margin-top: 8px;
+}
+.select-picture-div{
+margin-bottom: 8px;
+}
+.border-section{
+	float: right;
+	margin-bottom: 10px;
+	margin-top: -10px;
+	
+}
+
+form .progress {
+    line-height: 15px;
+}
+.progress {
+    display: inline-block;
+    width: 100px;
+    border: 3px groove #CCC;
+}
+.progress div {
+    font-size: smaller;
+    background: orange;
+    width: 0;
+}

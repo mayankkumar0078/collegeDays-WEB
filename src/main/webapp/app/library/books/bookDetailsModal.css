@@ -1,0 +1,130 @@
+.bookDetailsDisplay{
+	height: 620px;
+}
+.bookDetailsLeftSection{
+	height: 100%;
+	width: 45%;
+	float: left;
+	border-right: solid;
+}
+.bookDetailsRightSection{
+	height: 100%;
+	width: 50%;
+	float: right;
+}
+.bookInfoSection{
+	width: 100%;
+	height: 40%;
+	clear: both;
+}
+.infoSection li{
+	height: 26px;
+}
+.imageSection{
+	width:  40%;
+	float: left;
+	border:solid;
+	border-color: black;
+}
+.imageSection img{
+	object-fit: contain;
+	max-width:100%; 
+	max-height:100%;
+	margin:auto;
+	display:block;
+}
+
+.infoSection{
+	width: 60%;
+	height: 100%;
+	float: right;
+}
+.bookEditionSection{
+height: 100px;	
+}
+.editionImageSection{
+	margin: 5px;5px;5px;5px;
+	height: 120px;
+}
+.editionBookImage{
+	margin-left:20px;
+	float:left;
+	background-color: aqua;
+}
+.editionBookImage img{
+	width: 120px;
+	height: 100%;
+	object-fit: contain;
+}
+.editionLabel{
+	clear: both;
+	padding-top: 30px;
+}
+.image{
+	float:left;
+margin-left:10px; 
+object-fit: contain;
+height: 110px;
+}
+.image:visited{
+	border: solid;
+}
+.editionCarouselSection{
+	height:100px;
+	margin: 10px;
+	margin-left: 60px;
+}
+.editionCarouselSection img{
+	width: 100px;
+	object-fit:contain
+}
+.editionCarouselSection .carousel-control.right{
+	background-image: none;
+}
+
+.editionCarouselSection .carousel-control.left{
+	background-image: none;
+	margin-left: -60px;
+}
+
+.editionCarouselSection .carousel-indicators{
+	z-index: 0;
+	visibility: hidden;
+}
+.editionbookInfoLabel{
+	margin-top:5px;
+	clear: both;
+	height: 80px;
+}
+.bookReviewSection{
+	clear: both;
+	height: 110px;
+}
+.textareaReview{
+	margin-top: 30px;
+}
+.submitButton{
+	float: right;
+	margin-right: 30px;
+}
+.readBookLinkSection{
+	width: 100%;
+	height: 50px;
+	margin-top: 10px;
+}
+.readBookLink{
+	width: 50%;
+	float: left;
+	margin-top: -15px;
+}
+.addToShelfButton{
+	width: 50%;
+	float:left;
+}
+.readOnlineButton{
+	width: 80%;
+	color: blue;
+}
+.readBookLink .md-button{
+	width: 78%;
+} 

@@ -1,0 +1,244 @@
+.readableBooksDisplayArea{
+	width: 100%;
+	 height: 100%; 
+}
+
+.my-col-width-30 {
+	float: left;
+	width: 30%;
+}
+
+.my-col-height-100px {
+	clear: both;
+	height: 100px
+}
+.booksDisplayArea{
+	/* overflow: hidden; */
+	width: 100%;
+	position: relative;
+}
+
+
+/* .booksDisplayArea table{
+	width: 100%; 
+	height: 100%
+}
+.booksDisplayArea tr{
+	margin-top: 20px;
+}
+
+.booksDisplayArea td{
+	float: left; 
+	clear: both;
+}
+.booksDisplayArea img{
+	width: 150px;
+	height: 200px;
+	object-fit: contain;
+}
+.booksDisplayArea td{
+	clear: both;
+	float: left;
+	margin-top: 5px;
+	margin-left: 3px;
+	font: bold;
+}
+
+.booksDisplayArea a{
+	background-color: blue;
+	color: white;
+	font: 900;
+}
+.booksDisplayArea a:HOVER{
+	background-color: green;
+	color: white;
+	font: 900;
+} */
+
+ul{
+	list-style-type: none;
+}
+.book-content-ul{
+	list-style-type: none;
+	margin-top: 20px;
+}
+.full-book-content{
+	float: left;
+	width: 210px;
+	height: 390px;
+	border: 1px solid white;
+}
+
+.full-book-content:HOVER {
+	border: 1px solid blue;
+}
+.full-book-content:HOVER .book-quick-view{
+	display:inline;
+	float:left;
+	height:30px;
+	width: 100px;
+	background-color: red;
+}
+.book-image-container img{
+	width: 170px;
+	height: 200px;
+	object-fit: contain;
+	margin:10px 10px 10px 10px;
+	clear: both;
+}
+.book-info-section{
+	width: 200px;
+	height: 50px;
+}
+.book-info-section-ul{
+	margin:2px 3px 0px -20px
+}
+.readableLink-li{
+	background-color: blue;
+	color: white;
+	width: 150px;
+}
+.readableLink-li:HOVER{
+	background-color: green;
+}
+.readableLink-li a{
+	text-decoration: none
+}
+.book-title-section{
+	width: 180px;
+}
+.book-quick-view{
+	display:inline;
+	float:left;
+	height:30px;
+	width: 100px;
+	background-color: white;
+}
+.book-quick-view a{
+	height:25px;
+	width: 6px;
+}
+
+.rate-Book-Section{
+	width:180px;
+	height:40px;
+	position:fixed;
+	z-index:1000;
+	margin: 90px 10px 0px 10px;
+	background-color: grey;
+	color: white;
+	margin-left: 10px;
+	display: none;
+}
+.full-book-content:HOVER .rate-Book-Section{
+	display: block;
+	position: fixed;
+	z-index: 1000;
+}
+.goodReadRating-section{
+	float: left;
+	width: 180px;
+	height: 40px;
+	background-color: white;
+}
+.rating-num{
+	float: left;
+}
+.star-rating-section{
+	width: 70px;
+	float: left;
+}
+.booksTypesSection{
+	width: 200px;
+	height: 50px;
+	background-color: red;
+}
+.nav-tabs>li>a{
+	/* background-color: gray; */
+}
+.nav-tabs>li>a:HOVER{
+	/* background-color: green; */
+}
+
+
+
+.view-slide-in.ng-enter {
+  transition: all 1s ease;
+  -webkit-transition:all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  
+  opacity:0.5;
+  position:relative;
+  opacity:0;
+  top:10px;
+  left:20px;
+}
+.view-slide-in.ng-enter {
+  opacity: 0;
+}
+.view-slide-in.ng-enter.ng-enter-active {
+  top:0;
+  left:0;
+  opacity: 1;
+}
+.view-slide-in.ng-leave.ng-leave-active{
+  top:5px;
+  left:5px;
+  opacity:1;
+}
+.view-slide-in.ng-leave{
+  top:0;
+  left:0;
+  opacity:0;
+}
+
+
+
+
+.right-to-left-animation.ng-enter {
+    left: 100%;
+}
+.right-to-left-animation.ng-enter.ng-enter-active {
+    left: 0;
+}
+ 
+.right-to-left-animation.ng-leave {
+    left: 0;
+}
+.right-to-left-animation.ng-leave.ng-leave-active{
+    left: -100%;
+}
+
+.endScrollingSec{
+	text-align:center;
+	clear: both;
+	width: 90%;
+	height:50px;
+	margin:0px 20px 20px 10px;
+	background-color: red;
+	border: solid 1px;
+}
+md-tab-content.md-no-scroll{
+	overflow : hidden;
+}
+
+md-tabs > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]).md-active{
+	font: bold;
+	color: black;
+}
+
+md-tabs > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]){
+	font: normal;
+	color: black
+}
+
+ .book-quick-view a{
+color: white;
+}
+ .book-quick-view a:HOVER{
+
+border: none;
+color:white;
+text-decoration: none
+}

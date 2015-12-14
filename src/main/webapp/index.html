@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="en" id="ng-app" ng-app="collegeDays"
+	ng-controller="AppCtrl">
+
+
+<head>
+
+<title ng-bind="pageTitle">College Days</title>
+<style type="text/css">
+/* ::-webkit-scrollbar 
+{ 
+width: 0 !important 
+}  */
+
+ .ui-view-content-area{
+    /* position:fixed;  */
+    overflow: auto;
+} 
+</style>
+<!-- CSS files.. -->
+
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link href="app/home/home.css" rel="stylesheet" type="text/css">
+<link href="app/login/login.css" rel="stylesheet" type="text/css">
+<link href="app/studentDashboard/studentDashboard.css" rel="stylesheet"
+	type="text/css">
+<link href="app/library/library.css" rel="stylesheet" type="text/css">
+<link href="app/library/books/bookDetailsModal.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet"
+	href="vendor/angular-block-ui/dist/angular-block-ui.css" />
+	
+	<link rel="stylesheet"
+	href="vendor/owl-crousel/owl-carousel/owl.carousel.css" />
+	
+	<link rel="stylesheet"
+	href="vendor/owl-crousel/owl-carousel/owl.theme.css" />
+	
+	<link rel="stylesheet"
+	href="vendor/owl-crousel/owl-carousel/owl.transitions.css" />
+
+ <link rel="stylesheet" 
+ href="vendor/font-awesome/css/font-awesome.css" />
+<link rel="stylesheet" href="vendor/awesome-rating/awesomeRating.css" />
+
+<link rel="stylesheet" href="vendor/angular-material/angular-material.css">
+
+<link rel="stylesheet" href="vendor/ng-img-crop/ng-img-crop.css">
+
+<link rel="stylesheet" href="app/library/books/addBookToShelfPartial.css"/>
+
+<link rel="stylesheet" href="app/library/advanceBookSearch/advanceBookSearchModal.css">
+<link rel="stylesheet" href="app/shelf/shelf.css">
+<link rel="stylesheet" href="common/imageUploadModal.css">
+
+
+<!-- libraries for angular and other dependent CDN files -->
+
+
+ <!-- <link rel="stylesheet" type="text/css" href="vendor/angular-imagefit/stylesheets/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="vendor/angular-imagefit/stylesheets/github-light.css">
+    <link rel="stylesheet" type="text/css" href="vendor/angular-imagefit/stylesheets/print.css" >
+    <link rel="stylesheet" type="text/css" href="vendor/angular-imagefit/whirl.min.css"> -->
+
+
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+<!-- <script type="text/javascript" src="vendor/angular-route/angular-route.js"></script> -->
+<script type="text/javascript"
+	src="vendor/angular-resource/angular-resource.js"></script>
+
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
+
+<script type="text/javascript"
+	src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.3.js">
+	    </script>
+<script type="text/javascript"
+	src="vendor/angular-ui-router/release/angular-ui-router.js"></script>
+
+<script
+	src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.js"></script>
+<script type="text/javascript"
+	src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.3.js"></script>
+
+<script type="text/javascript"
+	src="vendor/awesome-rating/awesomeRating.angular.js"></script>
+	
+	<!-- cousels  -->
+	
+	<script type="text/javascript"
+	src="vendor/owl-crousel/owl-carousel/owl.carousel.js"></script>
+	
+	<script type="text/javascript"
+	src="vendor/angular-block-ui/dist/angular-block-ui.min.js"></script>
+	
+	<script type="text/javascript"
+	src="vendor/angular-aria/angular-aria.js"></script>
+	
+	<script type="text/javascript"
+	src="vendor/angular-material/angular-material.js"></script>
+	
+	<script type="text/javascript" src="vendor/ng-infinite-scroll/ng-infinite-scroll.min.js"></script>
+	
+	<script type="text/javascript" src="vendor/ng-img-crop/ng-img-crop.js"></script>
+	
+	<script type="text/javascript" src="vendor/ng-file-upload/ng-file-upload.js"></script>
+	
+	<script type="text/javascript" src="vendor/ng-file-upload/ng-file-upload-shim.js"></script>
+	
+	<!-- <script type="text/javascript" src="vendor/angular-imagefit/angular-imagefit.js"></script>
+	<script type="text/javascript" src="vendor/angular-imagefit/image-scale.js"></script> -->
+
+<!-- user defined js files like appConfig, controller etc -->
+
+<script type="text/javascript" src="app/app.config.js"></script>
+<script type="text/javascript" src="app/app.controller.js"></script>
+
+<script type="text/javascript" src="app/home/home.config.js"></script>
+<script type="text/javascript" src="app/home/home.controller.js"></script>
+
+
+<script type="text/javascript" src="app/login/login.controller.js"></script>
+<script type="text/javascript" src="app/login/login.service.js"></script>
+<script type="text/javascript" src="app/library/library.service.js"></script>
+<script type="text/javascript"
+	src="app/studentDashboard/studentDashboard.config.js"></script>
+<script type="text/javascript"
+	src="app/studentDashboard/studentDashboard.controller.js"></script>
+
+<!-- <script type="text/javascript" src="app/common/infiniteScroll/infiniteScroll.config.js"></script> -->
+
+
+<script type="text/javascript" src="app/library/library.config.js"></script>
+<script type="text/javascript" src="app/library/library.controller.js"></script>
+
+<script type="text/javascript" src="app/library/books/booksDetailsModal.controller.js"></script>
+<script type="text/javascript" src="app/library/advanceBookSearch/advanceBookSearchModal.controller.js"></script>
+
+<script type="text/javascript" src="app/shelf/bookShelf.controller.js"></script>
+
+
+
+
+
+<!-- compiled CSS -->
+<!-- <% styles.forEach( function ( file ) { %>
+    <link rel="stylesheet" type="text/css" href="<%= file %>"/>
+    <% }); %>
+ -->
+</head>
+
+<body>
+	<!-- <div class="ui-view-content-area"> -->
+
+		<div ui-view="main"></div>
+	<!-- </div> -->
+
+	<!--  <div class="content_exp">
+        <div class="white" style="height: 500px">
+            <div ui-view="main"></div>
+        </div>
+    </div> -->
+
+	<!-- END CONTENT -->
+	<!--  <div class="clear"></div> -->
+
+	<!-- compiled JavaScript -->
+	<!--  <% scripts.forEach( function ( file ) { %>
+    <script type="text/javascript" src="<%= file %>"></script>
+    <% });
+    %>
+    
+    <% controller_scripts.forEach( function ( file ) { %>
+    <script type="text/javascript" src="<%= file %>"></script>
+    <% });
+    %> -->
+</body>
+</html>

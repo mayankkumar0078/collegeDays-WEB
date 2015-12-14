@@ -1,0 +1,99 @@
+
+<div class="bookInfoSection">
+
+
+	<div class="imageSection">
+		<img alt=""
+			src="http://covers.openlibrary.org/b/id/{{$parent.record.cover_i}}-L.jpg">
+	</div>
+	
+	<div class="infoSection">
+		<ul>
+			<li><strong>Title : </strong> {{$parent.record.title}}</li>
+			<li><strong>Author : </strong>{{$parent.record.author_name[0]}}</li>
+			<li><strong>Publish Year : </strong>{{$parent.record.publish_date[0]}}</li>
+			<li><strong>Publisher : </strong>{{$parent.record.publisher[0]}}</li>
+			<li><strong>Publish Place : </strong>{{$parent.record.publish_place[0]}}</li>
+			<li><strong>ISBN : </strong>{{$parent.record.isbn[0]}}</li>
+			<li><strong>First Publish Year : </strong>{{$parent.record.first_publish_year}}</li>
+		</ul>
+	</div>
+</div>
+
+<div class="readBookLinkSection">
+	<div class="readBookLink"><md-button class="md-raised md-primary">Read Online</md-button> </div>
+	<div class="addToShelfButton"> <button class="readOnlineButton"> Add To Shelf</button> </div>
+	</div>
+	
+
+<div class="editionLabel">
+	<strong>Editions</strong>
+</div>
+<div class="bookEditionSection">
+	<div class="editionImageSection">
+
+
+		<div class="editionCarouselSection">
+			<carousel interval="myInterval" no-wrap="noWrapSlides"> <slide
+				ng-repeat="slide in slides" active="slide.active">
+			<div class="image">
+				<div class="editionbookInfoLabel">
+					<a href=""> <img ng-src="{{slide.image}}"
+						ng-click="showEditionBookInfo(slide.record)">
+					</a>
+				</div>
+				<div class="editionbookInfoLabel">
+					<span ng-if="slide.record.publish_date[0]">{{slide.record.publish_date[0]}}</span>
+					<span ng-if="!slide.record.publish_date[0]">NA</span>
+				</div>
+			</div>
+			<div ng-if="slides.length>1">
+				<div class="image">
+					<div class="editionbookInfoLabel">
+						<a href=""> <img
+							ng-click="showEditionBookInfo(slides[getSecondIndex($index+1)].record)"
+							ng-src="{{slides[getSecondIndex($index+1)].image}}">
+						</a>
+					</div>
+					<div class="editionbookInfoLabel">
+						<span
+							ng-if="slides[getSecondIndex($index+1)].record.publish_date[0]">{{slides[getSecondIndex($index+1)].record.publish_date[0]}}</span>
+						<span
+							ng-if="!slides[getSecondIndex($index+1)].record.publish_date[0]">NA</span>
+					</div>
+				</div>
+			</div>
+			<div class="image" ng-if="slides.length>2">
+				<div class="editionbookInfoLabel">
+					<a href="#"> <img
+						ng-click="showEditionBookInfo(slides[getSecondIndex($index+2)].record)"
+						ng-src="{{slides[getSecondIndex($index+2)].image}}">
+					</a>
+				</div>
+				<div class="editionbookInfoLabel">
+					<span
+						ng-if="slides[getSecondIndex($index+2)].record.publish_date[0]">{{slides[getSecondIndex($index+2)].record.publish_date[0]}}</span>
+					<span
+						ng-if="!slides[getSecondIndex($index+2)].record.publish_date[0]">NA</span>
+				</div>
+			</div>
+
+			<!--  <div class="carousel-caption">
+          <h4>Slide {{$index}}</h4>
+          <p>{{slide.text}}</p>
+        </div> --> </slide> </carousel>
+		</div>
+
+
+	</div>
+</div>
+
+
+<div class="bookReviewSection">
+	<div class="textareaReview">
+		<textarea placeholder="Submit your review" cols="48" rows="4"></textarea>
+	</div>
+	<div class="submitButton">
+	<md-button class="md-raised md-primary" ng-click="showAddToShelfPage()">Submit</md-button>
+	</div>
+</div>

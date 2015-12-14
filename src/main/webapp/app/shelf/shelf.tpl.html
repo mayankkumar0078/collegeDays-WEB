@@ -1,0 +1,165 @@
+<div class="book-shelf-area">
+	<div id="book-shelf-first-line">
+	<md-button class="md-raised md-primary add-new-shelf-button">Add New Shelf</md-button>
+	</div>
+
+<div id="second-line-shelf-area">
+<div id="shelf-label-caption-left">
+<strong>Shelf</strong>
+</div>
+<div id="book-label-caption-right">
+<strong>Books</strong>
+</div>
+</div>
+<div>
+
+
+
+</div>
+	<div class="book-shelf-area-left">
+		<div ng-repeat="bookShelf in bookShelves">
+
+				<a href="" ng-click="showShelfBooks(bookShelf,$index)">
+					<div class="book-shelf">
+					<div class="book-shelf-hover"> 
+					<div class="first-line">
+					<div class="right-section">
+					
+					
+					<md-menu md-offset="0 -5">
+          <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+            <md-icon md-menu-origin>
+            <img alt="" src="assets/img/cancelButton/cancel.png">
+            </md-icon>
+          </md-button>
+          <md-menu-content width="3">
+            <md-menu-item>
+              <md-button ng-click="renameShelf($event)"> 
+              <span md-menu-align-target>Rename Shelf</span>
+              </md-button>
+            </md-menu-item>
+          
+            <md-menu-item>
+              <md-button ng-click="deleteShelf($event)"> 
+              <span md-menu-align-target>Delete Shelf</span>
+              </md-button>
+            </md-menu-item>
+            
+             <md-menu-item>
+              <md-button ng-click="uploadShelfImage($event, bookShelf)"> 
+              <span md-menu-align-target>Change Shelf Photo</span>
+              </md-button>
+            </md-menu-item>
+            
+          </md-menu-content>
+          
+        </md-menu>
+					
+					
+					
+					
+					<!-- <img alt="" src="assets/img/cancelButton/cancel.png"> -->
+					</div>
+					</div>
+					</div>
+					<div class="shelf-name-sec">
+						<h4><strong>{{bookShelf.shelfName}}</strong></h4>
+						</div>
+						<div class="shelf-cover-photo">
+							<img alt="" ng-if='bookShelf.cover' src="{{bookShelf.cover}}">
+							<img alt="" ng-if='!bookShelf.cover' src="assets/img/cancelButton/cancel.png">
+							
+						</div>
+						<div class="shelf-info">
+							<ul>
+								<li><strong>Created On</strong> 12/16/2015</li>
+								<li><strong>Last Updated On</strong> 12/16/2015</li>
+								<li><strong>Total Books</strong> 10</li>
+							</ul>
+						</div>
+					</div>
+				</a>
+
+				
+		</div>
+	</div>
+	
+	<div class="book-shelf-area-right">
+	
+	
+	
+
+	
+	<div class="book-display-area" ng-init="showBooksInFirstRow(0)">
+
+							<div ng-repeat="book in booksInShelfSlides">
+								<div class="book-slide-sec" ng-click="openBookDetailsModal(book)">
+									
+									<div class="book-slide-image-sec">
+										<a href=""> 
+										<div class="hover-on-book-in-shelf">
+										
+										<div class="first-line">
+										<div class="left-section">
+										<a href="">
+										Details
+										</a>
+										</div>
+										
+										
+										<div class="right-section">
+										<img alt="" src="assets/img/cancelButton/cancel.png">
+										</div>
+										</div>
+										
+										</div>
+										<img ng-src="{{book.cover}}"
+											ng-click="showEditionBookInfo(slide.record)">
+											
+										</a>
+										
+									</div>
+									
+									<div class="book-info-sec">
+									<div class="label-info"> <strong>Title:</strong> title</div>
+									
+									<div class="label-info"> <strong>Author:</strong> author</div>
+									
+									<div class="label-info"> <strong>Published In:</strong> 1970</div>
+									</div>
+									
+								</div>
+								
+							</div>
+				</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	</div>
+<div ui-view="bookDetailsModalView"></div>
+
+   <script type="text/ng-template" id="bookDetailModal.html"> 
+					<div class="modal-body modal-xl">
+						<div class="bookDetailsDisplay">
+						
+						<div class="bookDetailsLeftSection">
+							<ng-include src="'app/library/books/bookInfoPartialModal.tpl.html'"></ng-include>
+						</div>
+						<div class="bookDetailsRightSection">
+							<ng-include src="rightTemplate" class="view-slide-in"></ng-include>
+						</div>
+
+						</div>
+					</div>
+					</script>
+</div>

@@ -1,0 +1,72 @@
+
+  <div class="contentArea">   
+	<div class="leftSection">
+
+		<!-- <div class="sortSection"> -->
+		<!-- <div class="sortBooksTitle">Sort BY</div> -->
+
+		<!-- <input type="checkbox" title="Student Reviews"> 
+								<input type="checkbox" title="Global Reviews">  -->
+	</div>
+	<div class="rightSection">
+		<div class="searchSection">
+			<div class="typeAheadBox">
+				<input type="text" ng-model="searchBookText"
+					typeahead="state for state in states | filter:$viewValue | limitTo:8"
+					class="form-control">
+			</div>
+			<div class="searchBooksButton">
+				<md-button class="md-raised md-primary"
+					ng-click="searchBooks('wildCardSearch', null, true)">Search Books</md-button>
+				<!-- <button ng-click="searchBooks()">Search Books</button> -->
+			</div>
+			<div class="advanceSearchLink">
+				<a href="" ng-click="showAdvanceSearchModal()">advance Search</a>
+			</div>
+		</div>
+
+		<!-- <div class="readableBooksDisplayArea"> -->
+
+
+			<tabset> 
+			<tab ng-repeat="tab in tabs" ng-click="tabClicked(tab.title)"
+				heading="{{tab.title}}" active="tab.active" disable="tab.disabled">
+			{{tab.content}}
+			<div ng-include src="tab.page"></div>
+			<tab-heading><div class="tabIcon"><img src="{{tab.icon}}"></div> {{tab.title}}</tab-heading>
+			</tab> 
+			
+			</tabset>
+		</div>
+
+	<!-- </div> -->
+
+<div class="notificationArea">
+<h2><strong>Books Notification</strong></h2>
+</div>
+	<script type="text/ng-template" id="advanceBookSearchModal.html"> 
+		<div class="advBookSearchModalDisplay">
+		<div class="cancelButtonSec"><a href="">
+ <img alt="" src="assets/img/cancelButton/cancel.png"> </a> </div>
+<div class="bookSearchCaption"><h4>Advance Book Search</h4></div>
+<div class="bookSearchBySec"><input type="text" ng-model="title" placeholder="Title" class="form-control"></div>
+
+<div class="bookSearchBySec"><input type="text" ng-model="author" placeholder="Author" class="form-control"></div>
+
+<div class="bookSearchBySec"><input type="text" ng-model="isbn" placeholder="ISBN" class="form-control"></div>
+
+<div class="bookSearchBySec"><input type="text" ng-model="subject" placeholder="Subject" class="form-control"></div>
+
+<div class="bookSearchBySec"><input type="text" ng-model="place" placeholder="Place" class="form-control"></div>
+
+<div class="bookSearchBySec"><input type="text" ng-model="publisher" placeholder="publisher" class="form-control"></div>
+
+<div class="bookSearchBySec"><input type="text" ng-model="publishYearStartLimit" placeholder="Start publish date" class="form-control" ></div>
+<div class="bookSearchBySec"><input type="text" ng-model="publishYearEndLimit" placeholder="End publish date" class="form-control"></div>
+
+<div class="advSearchButtonSec"><md-button class="md-raised md-primary" ng-click="advanceBookSearch()">Search</md-button></div>
+
+
+</div>
+</script>
+ </div>  
