@@ -1,6 +1,6 @@
 // Declare app level module which depends on controllers, services, directives and filters module.
 var module = angular.module('collegeDays',['home','studentDashboard', 'ui.router','blockUI',
-                                           'ui.bootstrap','ngResource','awesome-rating']);
+                                           'ui.bootstrap','ngResource','awesome-rating','ngDialog']);
 
 module.config(function(blockUIConfig,$stateProvider, $urlRouterProvider){
 	blockUIConfig.message = 'Please wait.. !';

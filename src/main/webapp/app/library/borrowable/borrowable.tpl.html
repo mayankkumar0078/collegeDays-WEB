@@ -1,5 +1,6 @@
-<div class="booksDisplayArea" infinite-scroll-distance="15"
+<div infinite-scroll-distance="15"
 	infinite-scroll="addBooksInPage('borrowableTab')">
+	<div>
 	<ul class="book-content-ul">
 		<li class="full-book-content" ng-repeat="record in borrowableBooks">
 			<div class="book-quick-view">
@@ -38,4 +39,6 @@
 			</div>
 		</li>
 		<li><div class="endScrollingSec" ng-show="borrowablePageScrollEnded"><strong>That's All Buddy !  </strong></div></li>
+		</ul>
+		</div>
 </div>

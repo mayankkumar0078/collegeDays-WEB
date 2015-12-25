@@ -1,50 +1,21 @@
 var homeModule = angular.module('home');
 
-homeModule.controller('HomeCtrl', function HomeCtrl($scope, $parse, $modal, loginService, $location) {
+homeModule.controller('HomeCtrl', function HomeCtrl($scope, $parse, $modal, loginService, 
+		$location, ngDialog) {
 
-	$scope.openLoginModal = function(){
+	$scope.openLoginDialog = function(){
 		//open the login modal
-		$scope.animationsEnabled = true;
+		//$scope.animationsEnabled = true;
 
-		//$scope.open = function (size) {
-
-		var modalInstance = $modal.open({
-			animation: $scope.animationsEnabled,
-			templateUrl: 'loginModalContent.html',
-			controller: 'loginModalCtrl',
-			size: 'lg',
-			resolve: {
-				items: function () {
-					return $scope.items;
-				}
-			}
-		});
-
-		modalInstance.result.then(function (selectedItem) {
-			$scope.selected = selectedItem;
-		}, function () {
-			// $log.info('Modal dismissed at: ' + new Date());
-		});
-		// };
-
-
-		/* $scope.verifyLogin = function(){
-
-    	            var username = $scope.username;
-    	            var password = $scope.password;
-
-    	            var result = loginService.verify(username, password);
-    	            if (result) {
-    	                $location.path('/userDashboard');
-    	            }
-    	        }*/
+		ngDialog.open({template: 'loginDialogContent.html',
+					   controller: 'loginDialogCtrl'});
 	};
 
-	$scope.items = [
+	/*$scope.items = [
 	                'The first choice!',
 	                'And another choice for you.',
 	                'but wait! A third!'
-	                ];
+	                ];*/
 
 	$scope.status = {
 			isopen: false

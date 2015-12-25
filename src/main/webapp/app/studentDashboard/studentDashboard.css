@@ -1,283 +1,67 @@
- .studentPage{
-    width: 100%;
-    height: 100%;
-    }
-    
-.header .rightSection-studentInfo{
-float:right;
-width: 700px;
-margin: 10px;
-color: white;
-
-}
-    .studentPage.leftSection{
-    width: 25%;
-    height:50px;
-    float: left;
-    background-color: white;
-    }
-     .studentPage .rightSection{
-    width: 70%;
-    height:50px;
-    float: right;
-    background-color: white;
-    }
-     .rightSection .searchSection{
-    width: 80%;
-    height: 60px;
-    clear: both;
-    margin-left: 200px;
-    
-    }
-    
-     .studentDashBoardTabsSec{
-    /* width: 100%;
-    height:100%;
-    clear: both;
-    border-bottom:solid 1px; 
-    margin-top: 10px;
-    margin-bottom: 10px; */
-    }
-    .studentDashBoardTabsSec a:VISITED{
-    background-color: black
-    }
-    .dashBoardTabSec{
-    width: 110px;
-    height: 30px;
-    margin-top: 10px;
-    float: left;
-    margin-left: 20px;
-    
-    }
-    .dashBoardTabSec .tabContainer{
-    width:100%;
-    height: 20px;
-    border-right: solid 1px;
-    border-right-color: brown; 
-    margin-top: 6px;
-    }
-    .dashBoardTabSec:HOVER{
-   background-color: green;
-    }
-     .dashBoardTabSec .icon {
-     width:30px;
-    float: left;
-    margin-left: 7px;
-    height: 20px;
-    }
-    .dashBoardTabSec .icon img{
-    width: 25px;
-    float: right;
-    }
-    .dashBoardTabSec .labelSec{
-    width: 60px;
-    color: black;
-    display: block;
-    float: right;
-    }
-     .dashBoardLink{
-   font-size: large;
-   text-align: center;
-   float: left;
-   width:150px;
-   margin: 60px 20px 20px 20px;
-    border-right-width: medium;
-   border-right-style: solid;
-   
-   border-color: white;
-   border-style: solid;
-    }
-    .dashBoardLink a{
-   text-decoration: none;
-   font-family: serif;
-  	color: black;
-  	width: :150px;
-    }
-     .dashBoardLink:HOVER{
-     width:150px;
-   text-decoration: none;
-   border-color: gray;
-   border-style: solid;
-   
-    }
-   
-      .dashBoardLink:VISITED{
-    border-color: gray;
-   border-style: solid;
-   background-color: green;
-    }
-    .searchSection .typeAheadBox{
-    width: 50%;
-    float: left;
-    }
-    .typeAheadBox .form-control{
-    width: 92%;
-    }
-    .searchSection .searchBooksButton{
-    height:30px;
-    }
-    
-    .searchSection .advanceSearchLink{
-    height:30px;
-    float: right;
-    width: 30%;
-    margin-top: -15px;
-    }
-     .searchSection .advanceSearchLink a{
-   color: blue;
-    }
-      .searchSection .advanceSearchLink a:HOVER{
-   color: aqua;
-    }
-    .contentArea{
-    width: 100%;
-     overflow: hidden; 
-     margin-top: 23px;
-    }
-    .contentArea .leftSection{
-    float: left;
-    width: 2%;
-    height : 800px;
-    clear: both;
-    border-right-style:solid 1px;
-    }
-    
-     .contentArea .rightSection{
-     float:left;
-    width: 73%;
-    /* height:900px; */
-    }
-       .contentArea .notificationArea{
-       float:right;
-    width: 23%;
-    height:400px;
-    border: solid 1px;
-    margin-right: 10px
-    }
-    .searchSection{
-    width: 100%;
-    height: 280px;
-    }
-    .sortSection{
-    width: 100%;
-    height: 200px;
-    }
-    .nameSection{
-    float: right;
-    width: 120px;
-    font-weight: bold;
-    height: 20px;
-    color: white;
-    }
-    .studentPicSection{
-    float: right;
-    width: 50px;
-    height: 40px;
-    margin-top: -10px;
-    margin-right: 20px;
-    }
-    .editProfileSection{
-    float: right;
-    width: 100px;
-    margin-right: 100px
-    }
-    .searchBooksTitle{
-    height: 30px;
-    font-size: large;
-    text-align: center;
-    clear: both;
-    }
-    .sortBooksTitle{
-     height: 30px;
-    font-size: large;
-    text-align: center;
-    clear: both;
-    }
-    .branch-section{
-    width: 100%;
-    margin: 10px 10px 10px 10px;
-    height: 30px;
-    clear: both;
-    }
-    .sem-section{
-     width: 100%;
-    margin: 10px 10px 10px 10px;
-    height: 30px;
-    clear: both;
-    }
-    .subject-section{
-     width: 100%;
-    margin: 10px 10px 10px 10px;
-    height: 30px;
-    clear: both;
-    }
-    .searchLabel{
-    height: 20px;
-    float: left;
-    font-family: sans-serif;
-    font-size: small;
-    font-weight: 900;
-    }
-    
-    .searchDropDown{
-    width: 70%;
-    height: 30px;
-    float: right;
-    margin-right: 10px;
-    }
-    #wrapper {
-    margin-left:auto;
-    margin-right:auto;
-   /*  width:100%;
-    height: 100%; */
-}
-.btn-group>.btn:first-child{
-background-color: green;
-}
-.searchButtonSection{
-width: 250px;
-height: 20px;
-font-size: medium;
-clear: both;
-float: right;
-}
-.wildcardSearch{
-width: 100%;
-height: 200px;
-clear: both;
-}
-.searchButton{
-float:right;
-margin-right:20px;
-width:200px;
-background-color: black;
-color: white;
-}
-img{
-width: 100%;
-height: 100%;
-object-fit: contain;
+.type-ahead-box {
+width: 50%;
+float: left;
+padding-top: 8px;
 }
 
-.tabIcon{
-	width: 20px;
+.type-ahead-box .form-control {
+	width: 100%;
+}
+
+.search-section .search-button {
+width: 20%;
+float: left;
+}
+
+.search-section .advance-search-link {
 	float: left;
-	margin-right: 10px;
+	width: 30%;
+	padding-top: 10px;
 }
-.tabIcon img{
-	width: 20px;
+
+.advance-search-link a {
+	color: #7323dc;
 }
-.spanHeading{
+
+.advance-search-link a:HOVER {
+	color: #7323dc;
+}
+
+.search-section {
+	width: 100%;
+	float: left;
+	min-height: 100px;
+	padding-left: 25%;
+}
+
+.nameSection {
+	float: right;
+	width: 120px;
+	font-weight: bold;
+	height: 20px;
+	color: white;
+}
+
+.studentPicSection {
+	float: right;
+	width: 50px;
+	height: 40px;
+	margin-top: -10px;
+	margin-right: 20px;
+}
+
+.btn-group>.btn:first-child {
+	background-color: green;
+}
+
+.spanHeading {
 	float: right;
 }
 
-.studentdashBoardTabsSec{
-	height: 600px;
-}
-.studentdashBoardTabsSec md-tabs{
-	height: 600px;
+.nav-bar-second {
+	padding: 50px 10px 10px 10px;
 }
 
-md-tabs{
+md-tabs {
 	width: 100%;
 }

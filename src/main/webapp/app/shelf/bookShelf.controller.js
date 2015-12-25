@@ -111,7 +111,7 @@ angular.module('studentDashboard').controller('shelfCtrl', function shelfCtrl($s
 	  $scope.uploadShelfImage = function(event, bookShelf) {
 		    $mdDialog.show({
 		      controller: DialogController,
-		      templateUrl: 'shelf/imageUpload.tpl.html',
+		      templateUrl: 'app/shelf/imageUpload.tpl.html',
 		      parent: angular.element(document.body),
 		      targetEvent: event,
 		      clickOutsideToClose:true,

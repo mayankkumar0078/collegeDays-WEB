@@ -1,30 +1,42 @@
-<!-- <div id="wrapper"> -->
-	 <!-- <div class="studentPage" infinite-scroll="addBooksInPage('readableTab')" can-load="true">  -->
+<!--START Header -->
+<div class="navbar-darkblue">
+	<div class="navbar-header">
+		<a class="navbar-brand"> <img alt="" src="" class="header-image">
+			<span class="header-title">College Days</span>
+		</a>
 
-		<div class="header">
-			<div class="leftSection">
-				<div class="siteLogoSection">
-					<img alt="" src="assets/img/icon.png">
-				</div>
-				<div class="siteCaption">College Days</div>
+	</div>
+
+	<div class="navbar-right">
+		<a class="navbar-right-link">logout </a>
+	</div>
+
+	<div class="navbar-right" ng-hide=true>
+		<a class="navbar-right-link">login </a>
+	</div>
+
+	<div class="navbar-right">
+		<a class="navbar-right-link">
+			<div class="nameSection">Abhishek</div>
+			<div class="studentPicSection">
+				<a href=""> <img alt="" src="assets/img/bhabhi.jpg">
+				</a>
 			</div>
-			<div class="rightSection-studentInfo">
-				<div class="editProfileSection">
-					<a href="#">edit Profile</a>
-				</div>
-				<div class="studentPicSection">
-					<img alt="" src="assets/img/bhabhi.jpg">
-				</div>
-				<div class="nameSection">Abhishek</div>
-			</div>
-		</div>
-		
-		<!-- <div class="studentdashBoardTabsSec"> -->
-		 <md-tabs md-selected="selectedIndex" md-dynamic-height md-border-bottom md-autoselect>
+	</div>
+
+	<div class="collapse navbar-collapse"></div>
+</div>
+<!--End Header -->
+
+<!-- START tabs  -->
+ <div class="nav-bar-second">
+ <md-tabs md-selected="selectedIndex" md-dynamic-height md-border-bottom md-autoselect>
 		 
 		  <md-tab label="Library" ui-sref=".library">
 		  <md-content>
+		
 		  <div ui-view></div>
+		 
 		  </md-content>
               </md-tab>
               
@@ -35,5 +47,5 @@
               </md-tab>
               
 		 </md-tabs>
-		 <!-- </div> -->
-	<!-- </div> -->
+ </div>
+ <!-- END Tabs -->
