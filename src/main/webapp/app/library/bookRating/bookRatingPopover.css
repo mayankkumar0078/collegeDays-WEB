@@ -1,0 +1,126 @@
+.book-rating-popover-sec{
+	min-width: 330px;
+	max-width:350px;
+	min-height: 150px;
+	float: left;
+	background-color: white;
+	position: relative;
+	z-index: 100;
+	border: 1px solid;
+}
+.book-rating-popover-sec .first-line{
+	width: 100%;
+	float: left;
+	color: black;
+	font-size: medium;
+	font-weight: bold;
+}
+.book-rating-popover-sec .content-area{
+	padding: 10px;
+	width: 100%;
+	height: 100%;
+	float: left;
+}
+.book-rating-popover-sec .content-area .display-overall-rating-section .left{
+	width: 50%;
+	float: left;
+	background-color: green;
+	margin-bottom: 5px;
+	height: 102px;
+	margin-top: 3px;
+}
+.book-rating-popover-sec .content-area .left .average-rating-pic{
+	width: 80px;
+	height:80px;
+	background-repeat: round;
+    padding-top: 33px;
+    text-align: center;
+    font-weight: bold;
+	float: left;
+	background-image: url("http://localhost:8085/collegedays/assets/big-yellow-star.png");
+}
+.book-rating-popover-sec .content-area .left .average-rating-caption{
+	width: 100%;
+    float: left;
+    padding-left: 10px;
+}
+   
+.book-rating-popover-sec .content-area .display-overall-rating-section .right{
+	float: right;
+	width: 50%;
+	margin-bottom: 5px;
+	height: 102px;
+	padding-left: 20px;
+}
+.book-rating-popover-sec .content-area .right .rating-bar-item{
+	margin-bottom: 4px;
+}
+.book-rating-popover-sec .content-area .right .rating-link a{
+	float: left;
+	color: black;
+	margin-right: 5px;
+}
+.book-rating-popover-sec .content-area .right .background-div{
+	width: 80px;
+	height: 13px;
+	float: left;
+	background-color: whitesmoke;
+	position: relative;
+}
+.book-rating-popover-sec .content-area .right .progress-bar-yellow-dynamic{
+	width: 30px;
+	height: 13px;
+	float: left;
+	background-color: yellow;
+	position: absolute;
+	left: 0;
+}
+.submit-review-caption{
+	float: left;
+    font-size: small;
+    letter-spacing: .5px;
+    text-align: center;
+    margin-top: 5px;
+    width: 100%;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.full-width{
+	width: 100%;
+	margin: auto;
+}
+.book-rating-popover-sec .submit-review-section{
+	width: 100%;
+	height: 100%;
+}
+.submit-review-section .first-line{
+	width: 100%;
+	text-align: center;
+	font-weight: bold;
+	font-size: medium;
+}
+.submit-review-section .your-star-rating-section{
+	height: 40px;
+	width: 100%;
+	text-align: center;
+	margin-top: 10px;
+	float: left;
+}
+.submit-review-section .submit-review-text-area{
+	margin: auto;
+	width: 100%;
+}
+.submit-review-section .last-section{
+	margin-top: 10px;
+	width: 100%;
+}
+.submit-review-section .last-section .left{
+	float: left;
+}
+.submit-review-section .last-section .right{
+	float: right;
+}
+.your-star-rating-section .fa{
+	font-size: large;
+	margin-left: 5px;
+}

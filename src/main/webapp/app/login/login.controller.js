@@ -1,6 +1,7 @@
 var homeModule1 = angular.module('home');
 homeModule1.controller('loginDialogCtrl', function ($scope, $rootScope, $location, loginService) {
-
+	
+	initialiseModels();
 	//make the login home page visible when the login page is landed
 	$scope.loginHomePage = true;
 	
@@ -25,6 +26,18 @@ homeModule1.controller('loginDialogCtrl', function ($scope, $rootScope, $locatio
 		$scope.loginHomePage = false;
 	};
 
+	function initialiseModels(){
+		//declare model variables for sign in
+		$scope.signInEmail = "";
+		$scope.signInPpassword="";
+		//declare model variables for sign up
+		$scope.signUpName = "";
+		$scope.signUpEmail = "";
+		$scope.signUpPassword = "";
+		$scope.signUpCollege = "";
+		//declare the model for forgot password
+		$scope.forgotPasswordEmail="";
+	}
 	$scope.verifyLogin = function(){
 		
 		var loginCredential = {
@@ -57,7 +70,6 @@ homeModule1.controller('loginDialogCtrl', function ($scope, $rootScope, $locatio
 	
 	/*registers a new user*/
 	$scope.registerUser = function(){
-		
 	};
 	
 	/*retrieves the password for the email*/
