@@ -75,13 +75,14 @@ line-height: 20px;
 }
 .header-image{
 	position: relative;
-	width: 50px;
+	width: 30px;
 }
 .header-title{
 	color: white;
 	font-size: large;
 	font-weight: bold;
 	margin-left: 5px;
+	letter-spacing: .1px;
 }
 .navbar-collapse.collapse {
 display: block!important;
@@ -93,20 +94,22 @@ overflow: visible!important;
 margin: 5px;
 margin-right: 30px;
 margin-top: 10px;
+float: right;
 }
-.navbar-right-link{
-	color: white;
+.navbar-right .header-item{
+	float: left;
+	color:white;
 	font-size: medium;
 	font-weight: bold;
-	float: right;
+	float: left;
 }
 .content-container{
 width: 100%;
-padding: 15px 20px 0;
+/* padding: 15px 20px 0; */
 float: left;
 }
 .panel{
-	width: 80%;
+	width: 100%;
 	height: auto!important;
 	margin: auto;
 	border: none;
@@ -181,4 +184,75 @@ ul>li{
 	width: 100%;
 	margin-top: 30px!important;
 	margin-left: -1px!important;
+}
+
+/* menu */
+.header-menu md-sidenav{
+	width: 250px;
+	min-width: 250px;
+}
+.header-menu .md-sidenav-right{
+	margin-top: 59px;
+	background-color: black;
+}
+#sidemenu-container {
+    position: relative;
+    z-index: 1006;
+}
+#side-backdrop{
+	display: block;
+}
+#side-nav-menu {
+    background: #191919;
+    color: #999;
+    width: 248px;
+    top: 0;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: fixed;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#sidemenu-container .side-menu-list {
+    margin: 0;
+    padding: 0;
+}
+
+#sidemenu-container .menu-list-item.full-link.uppercase {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#sidemenu-container .menu-list-item.full-link {
+    padding: 0 0 0 20px;
+    cursor: pointer;
+    position: relative;
+}
+#sidemenu-container .menu-list-item {
+    padding: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    list-style: none;
+    margin-top: 10px;
+}
+#sidemenu-container .menu-list-item.full-link .link {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px;
+    font-size: 14px;
+    width: 100%;
+    color: #b3b3b3;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all .15s ease-in-out;
+    -o-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out;
+}
+.menu-list-item .connect-section{
+	margin-left: 8px;
+	float: left;
 }

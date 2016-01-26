@@ -1,42 +1,49 @@
-<div class="navbar-darkblue">
-	<div class="navbar-header">
-		<a class="navbar-brand"> <img alt="" src="" class="header-image">
-			<span class="header-title">College Days</span>
-		</a>
 
-	</div>
-<div class="navbar-right"><a class="navbar-right-link" ng-click="openLoginDialog()">login </a></div>
-	<div class="collapse navbar-collapse"></div>
-</div>
 
 <!-- Crousel section -->
 <div class="content-container">
 	<div class="carousel-panel">
-		<carousel interval="myInterval" no-wrap="noWrapSlides"> <slide
-			ng-repeat="slide in slides" active="slide.active"> <img
-			ng-src="{{slide.image}}" style="margin: auto;"> 
-			 </slide> </carousel>
+		<carousel interval="myInterval" no-wrap="noWrapSlides">
+		 <slide active="slide.active">
+		  <img ng-src="assets/book_on_beach.jpg" style="background-size:cover "> 
+		  <div class="carousel-content">
+        <p>Don't worry about study now</p>
+      	</div>
+			 </slide> 
+			 
+			 <slide>
+		  <img ng-src="assets/book_on_beach2.jpg""> 
+		  <div class="carousel-content">
+        <p>Read online Books</p>
+      	</div>
+			 </slide>
+			 
+			 <slide>
+		  <img ng-src="assets/book_on_beach.jpg""> 
+		  <div class="carousel-content">
+        <p>We are automating now College Life</p>
+      	</div>
+			 </slide>
+			 </carousel>
 	</div>
 
 	<div class="panel">
 		<div class="panel-display">
 			<div class="hp-banner">Get Started NOW</div>
 
-			<div class="hp-product-content">
-				<div class="helpSection">
-					<a href="#">Quick View</a>
-				</div>
+			<div class="hp-product-content" ng-click="redirectToLibrary()">
 				<div class="icon">
 					<img alt="" src="assets/img/open-books/open-book.jpg">
 				</div>
 				<div class="title">OnLine Book Reading</div>
 				<div class="desc">Read Online Books Free</div>
+				<div class="know-more">
+				<md-button class="md-raised md-primary"
+					ng-click="redirectToReadBookHelpPage()">Know More</md-button>
+				</div>
 			</div>
 
 			<div class="hp-product-content">
-				<div class="helpSection">
-					<a href="#">Quick View</a>
-				</div>
 				<div class="icon">
 					<img alt="" src="assets/img/notes/note1.jpg">
 				</div>
@@ -44,12 +51,13 @@
 				<div class="desc">
 					Read or Submit Notes and <strong>Earn Reward</strong>
 				</div>
+				<div class="know-more">
+				<md-button class="md-raised md-primary"
+					ng-click="">Know More</md-button>
+				</div>
 			</div>
 
 			<div class="hp-product-content">
-				<div class="helpSection">
-					<a href="#">Quick View</a>
-				</div>
 				<div class="icon">
 					<img alt="" src="assets/img/collegeinfo/college_info1.jpg">
 				</div>
@@ -59,21 +67,19 @@
 			</div>
 
 			<div class="hp-product-content">
-				<div class="helpSection">
-					<a href="#">Quick View</a>
-				</div>
 				<div class="icon">
 					<img alt="" src="assets/img/submit-review/submit_review1.jpg">
 				</div>
 				<div class="title">Review Your College</div>
 				<div class="desc">Submit Review of college to help others
 					choose correct one</div>
+					<div class="know-more">
+				<md-button class="md-raised md-primary"
+					ng-click="">Know More</md-button>
+				</div>
 			</div>
 
 			<div class="hp-product-content">
-				<div class="helpSection">
-					<a href="#">Quick View</a>
-				</div>
 				<div class="icon">
 					<img alt="" src="assets/img/register_college.jpg">
 				</div>
@@ -138,6 +144,7 @@
 			</div>
 		</div>
 	</div>
+		
 </div>
 <!-- END - footer section -->
 

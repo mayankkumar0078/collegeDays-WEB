@@ -1,87 +1,61 @@
-angular.module('ash', []).directive("ngInfiniteScroll", function ($timeout, Data, Resource) {
+/* ng-infinite-scroll - v1.0.0 - 2013-02-23 */
+var mod;
 
-  return {
-    restrict: 'A',
-    scope: {
-      options: '=',
-      items: '='
-    },
-    link: function ($scope, element) {
-      $scope.lastRemain = undefined;
-      $scope.offset = 0;
-      $scope.inProcess = false;
-      $scope.options = angular.extend({
-        limit: 10,
-        threshold: 50,
-        data: []
-      }, $scope.options);
-      $scope.hasItems = true;
+mod = angular.module('infinite-scroll', []);
 
-      if (!$scope.options.resource && !Array.isArray($scope.options.data)) {
-        $scope.options.data = [$scope.options.data];
-      }
-      $scope.strategy = $scope.options.resource ? Resource : Data;
-      $scope.strategy.addItems($scope);
-
-      element.bind('scroll', function () {
-        var remain = element[0].scrollHeight - (element[0].clientHeight + element[0].scrollTop);
-
-        if (remain < $scope.options.threshold && (!$scope.lastRemain || (remain - $scope.lastRemain) < 0) && $scope.hasItems && !$scope.inProcess) {
-          $scope.$apply(function() {
-            $scope.strategy.addItems($scope);
+mod.directive('infiniteScroll', [
+  '$rootScope', '$window', '$timeout', function($rootScope, $window, $timeout) {
+    return {
+      link: function(scope, elem, attrs) {
+        var checkWhenEnabled, handler, scrollDistance, scrollEnabled;
+        $window = angular.element($window);
+        scrollDistance = 0;
+        if (attrs.infiniteScrollDistance != null) {
+          scope.$watch(attrs.infiniteScrollDistance, function(value) {
+            return scrollDistance = parseInt(value, 10);
           });
         }
-
-        $scope.lastRemain = remain;
-      });
-    }
-  }
-
-});
-
-app.factory('Data', function() {
-  return {
-    addItems: function($scope) {
-      $scope.inProcess = true;
-
-      var from = $scope.offset * $scope.options.limit;
-      if (from < $scope.options.data.length) {
-        var to = from + $scope.options.limit;
-        to = to > $scope.options.data.length ? $scope.options.data.length : to;
-
-        for (var i = from; i < to; i++) {
-          $scope.items = $scope.items.concat($scope.options.data[i]);
-        }
-
-        $scope.offset++;
-      } else {
-        $scope.hasItems = false;
-      }
-
-      $scope.inProcess = false;
-    }
-  };
-});
-
-app.factory('Resource', function() {
-  return {
-    addItems: function($scope) {
-      $scope.inProcess = true;
-      $scope.options.resource.query(
-        { offset: $scope.offset * $scope.options.limit, limit: $scope.options.limit },
-        function (data) {
-          if (data.models.length == 0) {
-            $scope.hasItems = false;
-          } else {
-            for (var i = 0; i < data.models.length; i++) {
-              $scope.items = $scope.items.concat(data.models[i]);
+        scrollEnabled = true;
+        checkWhenEnabled = false;
+        if (attrs.infiniteScrollDisabled != null) {
+          scope.$watch(attrs.infiniteScrollDisabled, function(value) {
+            scrollEnabled = !value;
+            if (scrollEnabled && checkWhenEnabled) {
+              checkWhenEnabled = false;
+              return handler();
             }
-          }
-
-          $scope.inProcess = false;
+          });
         }
-      );
-
-    }
-  };
-});
+        handler = function() {
+          var elementBottom, remaining, shouldScroll, windowBottom;
+          windowBottom = $window.height() + $window.scrollTop();
+          elementBottom = elem.offset().top + elem.height();
+          remaining = elementBottom - windowBottom;
+          shouldScroll = remaining <= $window.height() * scrollDistance;
+          if (shouldScroll && scrollEnabled) {
+            if ($rootScope.$$phase) {
+              return scope.$eval(attrs.infiniteScroll);
+            } else {
+              return scope.$apply(attrs.infiniteScroll);
+            }
+          } else if (shouldScroll) {
+            return checkWhenEnabled = true;
+          }
+        };
+        $window.on('scroll', handler);
+        scope.$on('$destroy', function() {
+          return $window.off('scroll', handler);
+        });
+        return $timeout((function() {
+          if (attrs.infiniteScrollImmediateCheck) {
+            if (scope.$eval(attrs.infiniteScrollImmediateCheck)) {
+              return handler();
+            }
+          } else {
+            return handler();
+          }
+        }), 0);
+      }
+    };
+  }
+]);

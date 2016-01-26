@@ -147,22 +147,22 @@
 	-webkit-font-smoothing: antialiased;
 }
 
-[class^="icon-"],[class*=" icon-"] {
-	/* font-family: 'icomoon'; */
+/* [class^="icon-"],[class*=" icon-"] {
+	font-family: 'icomoon';
 	speak: none;
 	font-style: normal;
 	font-weight: normal;
 	font-variant: normal;
 	text-transform: none;
 	line-height: 1;
-	/* Better Font Rendering =========== */
+	Better Font Rendering ===========
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
 
 .icon-gplus:before {
 	content: "\f0d5";
-}
+} */
 
 #login-page .signIn-button {
 	width: 100%;

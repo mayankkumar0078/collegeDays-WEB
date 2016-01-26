@@ -30,8 +30,19 @@ homeModule.config(function config($stateProvider) {
                     templateUrl: 'app/home/home.tpl.html'
                 }
             },
-            data: {pageTitle: 'Home Page - Sample Tool'}
-        });
+            data: {pageTitle: 'College Days'}
+        })
+        .state('homePageKnowMore', {
+            url: '/bookReadHelp',
+            views: {
+                "main": {
+                    controller: 'readBookHelpCTRL',
+                    templateUrl: 'app/help/readBookHelp/readBookHelp.tpl.html'
+                }
+            },
+            data: {pageTitle: 'Online book Read Help'}
+        })
+        ;
     });
 
 

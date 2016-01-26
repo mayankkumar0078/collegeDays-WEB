@@ -9,13 +9,12 @@ padding-top: 8px;
 }
 
 .search-section .search-button {
-width: 20%;
 float: left;
 }
 
 .search-section .advance-search-link {
 	float: left;
-	width: 30%;
+	width: 100px;
 	padding-top: 10px;
 }
 
@@ -32,24 +31,20 @@ float: left;
 	float: left;
 	min-height: 100px;
 	padding-left: 25%;
+	position: relative;
 }
 
-.nameSection {
-	float: right;
+.name-section {
 	width: 120px;
 	font-weight: bold;
 	height: 20px;
 	color: white;
 }
 
-.studentPicSection {
-	float: right;
-	width: 50px;
-	height: 40px;
-	margin-top: -10px;
-	margin-right: 20px;
+.header-user-pic-section {
+	width: 30px;
+	margin-right: 8px;
 }
-
 .btn-group>.btn:first-child {
 	background-color: green;
 }

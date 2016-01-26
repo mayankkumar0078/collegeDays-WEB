@@ -41,11 +41,11 @@ libraryModule.controller('bookDetailsModalCTRL', function($scope, libraryService
 	var olids = {olids: clickedBookRecord.edition_key};
 	var BookInfoServiceResource = libraryService.getBookInfo();
 	BookInfoServiceResource.call(olids).$promise.then(function(response){
-		console.log(response);
+		//console.log(response);
 		
 		var listOfEditionBooks = response.listOfBooks;
 		for (var i=0; i<listOfEditionBooks.length ; i++) {
-			console.log('count is'+listOfEditionBooks.length +'.........'+listOfEditionBooks[i].preview);
+			//console.log('count is'+listOfEditionBooks.length +'.........'+listOfEditionBooks[i].preview);
 			if(listOfEditionBooks[i].preview=='full'){
 				
 			$scope.addSlide(listOfEditionBooks[i]);
@@ -55,13 +55,13 @@ libraryModule.controller('bookDetailsModalCTRL', function($scope, libraryService
 	function(error){
 		
 	});
-	console.log("The clicked book is : "+clickedBookRecord.title);
+	//console.log("The clicked book is : "+clickedBookRecord.title);
 	$scope.getSecondIndex = function(index)
 	  {
 	    if(index-slides.length>=0)
 	      return index-slides.length;
 	    else{
-	    	console.log("index "+index);
+	    	//console.log("index "+index);
 	      return index;
 	    }
 	  };

@@ -1,121 +1,145 @@
-.book-shelf-area-left{
+.first-line-shelf{
+	width: 100%;
+	height: 30px;
+	margin: auto;
+	padding: 5px;
+	text-align: center;
+	font-size: medium;
+	font-weight: bold;
+}
+
+.book-shelf-area-left {
 	width: 20%;
 	height: 500px;
-	border-right: solid;1px;
 	float: left;
 	overflow: auto;
 	position: relative;
 	background-color: white;
 	min-width: 100px;
 }
-.book-shelf-area-right{
+
+.book-shelf-area-right {
 	width: 80%;
 	float: right;
 	margin-top: -20px;
 }
-#shelf-label-caption-left{
-margin-left: 20px;
-float: left;
-padding-top: 10px;
-padding-left: 5%;
+
+#shelf-label-caption-left {
+	margin-left: 20px;
+	float: left;
+	padding-top: 10px;
+	padding-left: 5%;
 }
-#book-label-caption-right{
+
+#book-label-caption-right {
 	float: right;
-padding-top: 12px;
-width: 40%;
+	padding-top: 12px;
+	width: 40%;
+}
+.book-shelf {
+	width: 82%;
+	margin: 10px 10px 5px 20px;
+	float: left;
+	/* border-bottom: 1px solid #7323dc; */
 }
 
-#book-shelf-first-line{
-	width: 100%;
-	height: 50px;
-}
-
-.book-shelf{
-width: 82%;
-margin: 10px 10px 5px 20px;
-float: left;
-border-bottom: 1px solid #7323dc;
-}
-
-.book-shelf-hover{
-	width:188px;
-	height:212px;
-	visibility: hidden;
-	border: 1px solid #7323dc;
-	 position: absolute; 
-}
-.book-shelf-hover .first-line{
-	width: 100%;
+.white-background {
+	width: 30px;
 	height: 30px;
+	margin: auto;
+	background-color: white;
+	position: absolute;
+	top:0;
 }
 
-.book-shelf-hover .first-line .right-section{
-	float: right;
-	margin-right: 10px;
-	margin-top: 5px;
+ .white-background .glyphicon {
+	position: absolute;
+	top: 9%;
+	right: 9%;
+} 
+
+ .white-background md-icon {
+	height: 24px;
+	width: 24px;
+	position: absolute;
+	top: 8%;
+	left: 0;
+} 
+
+.shelf-name-sec-hover .right-section {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	top: 1%;
+	right: 1%;
+	position: absolute;
 }
 
-.book-shelf-hover .first-line .right-section img{
-	width:30px;
-	margin-top: -30px;
-	margin-right: -20px;
+.right-section .md-button.md-icon-button {
+	border-radius: 0%;
+	margin: 0; 
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
 }
-
-.book-shelf:HOVER .book-shelf-hover{
+ .shelf-name-sec-hover {
+    visibility: hidden;
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	right: 0%;
+}
+.shelf-name-sec:HOVER .shelf-name-sec-hover {
 	visibility: visible;
 }
-.shelf-cover-photo{
-height: 100%;
-float: left;
-clear: both;
-margin-top: 5px;
-margin-bottom: 5px;
-text-align: center;
-margin-left: 10px;
-}
-.shelf-cover-photo img{
-	width: 100px;
-}
-.shelf-info{
+
+.shelf-name-sec img {
 	width: 100%;
-	clear:both;
 }
-.shelf-info li{
+
+.shelf-info {
+	width: 100%;
+	clear: both;
+}
+
+.shelf-info li {
 	font-weight: lighter; */
-    font-family: -webkit-body;
-    font-size: smaller;
-}
-.shelf-info ul{
-margin-left: -39px;
-padding-top: 3px;
+	font-family: -webkit-body;
+	font-size: smaller;
 }
 
-.book-display-area{
-width: 100%;
-background-color: white;
-float: left;
-padding-left: 40px;
+.shelf-info ul {
+	margin-left: -39px;
+	padding-top: 3px;
 }
 
-.first-line .right-section{
-	float: right;
-	margin-right: 10px;
+.book-display-area {
+	width: 100%;
+	background-color: white;
+	float: left;
+	padding-left: 40px;
 }
 
-.first-line .right-section img{
-	width: 28px;
-}
-
-.add-new-shelf-button{
+.add-new-shelf-button {
 	margin-right: 30px;
 	float: right;
 	margin-bottom: 30px;
 }
-.shelf-name-sec{
-	width: 100%;
+
+.shelf-name-sec {
+	width: auto;
 	text-align: left;
-	margin-left: 10px;
+	background-color: whitesmoke;
+	height: 30px;
+	position: relative;
 }
-md-content{
+.shelf-name-sec a{
+	width: 100%;
+	float: left;
+	height:30px;
+	padding: 8px;
+}
+
+md-content {
 	display: inline;
 }

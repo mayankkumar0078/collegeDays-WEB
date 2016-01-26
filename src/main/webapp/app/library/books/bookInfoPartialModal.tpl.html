@@ -1,30 +1,56 @@
 
-<div class="bookInfoSection">
+<div class="book-display-section">
 
 
-	<div class="imageSection">
+	<div class="book-cover-section">
 		<img alt=""
 			src="http://covers.openlibrary.org/b/id/{{$parent.record.cover_i}}-L.jpg">
+		<a href="{{record.iaUrl}}" target="_blank">
+			<div class="read-book-link-section">
+				<img alt="" src="assets/read-book-icon.png">
+			</div>
+		</a>
 	</div>
-	
-	<div class="infoSection">
-		<ul>
-			<li><strong>Title : </strong> {{$parent.record.title}}</li>
-			<li><strong>Author : </strong>{{$parent.record.author_name[0]}}</li>
-			<li><strong>Publish Year : </strong>{{$parent.record.publish_date[0]}}</li>
-			<li><strong>Publisher : </strong>{{$parent.record.publisher[0]}}</li>
-			<li><strong>Publish Place : </strong>{{$parent.record.publish_place[0]}}</li>
-			<li><strong>ISBN : </strong>{{$parent.record.isbn[0]}}</li>
-			<li><strong>First Publish Year : </strong>{{$parent.record.first_publish_year}}</li>
-		</ul>
-	</div>
-</div>
 
-<div class="readBookLinkSection">
-	<div class="readBookLink"><md-button class="md-raised md-primary">Read Online</md-button> </div>
-	<div class="addToShelfButton"> <button class="readOnlineButton"> Add To Shelf</button> </div>
+	<div class="book-info-section">
+		<div class="book-info-row">
+			<div class="book-info-title" style="width: 31px">Title</div>
+			<div class="book-info-value">{{record.title}}</div>
+		</div>
+
+		<div class="book-info-row">
+			<div class="book-info-title" style="width: 45px">Author</div>
+			<div class="book-info-value">{{$parent.record.author_name[0]}}</div>
+		</div>
+
+		<div class="book-info-row">
+			<div class="book-info-title" style="width: 85px">Publish Year</div>
+			<div class="book-info-value">{{$parent.record.publish_date[0]}}</div>
+		</div>
+
+		<div class="book-info-row">
+			<div class="book-info-title" style="width: 59px">Publisher</div>
+			<div class="book-info-value">{{$parent.record.publisher[0]}}</div>
+		</div>
+
+		<div class="book-info-row">
+			<div class="book-info-title" style="width: 92px">Publish Place</div>
+			<div class="book-info-value">{{$parent.record.publish_place[0]}}</div>
+		</div>
+
+		<div class="book-info-row">
+			<div class="book-info-title" style="width: 34px">ISBN</div>
+			<div class="book-info-value">{{$parent.record.isbn[0]}}</div>
+		</div>
+
+		<div class="book-info-row">
+			<div class="book-info-title" style="width: 116px">First Publish
+				year</div>
+			<div class="book-info-value">{{$parent.record.first_publish_year}}</div>
+		</div>
 	</div>
-	
+
+</div>
 
 <div class="editionLabel">
 	<strong>Editions</strong>
@@ -91,9 +117,10 @@
 
 <div class="bookReviewSection">
 	<div class="textareaReview">
-		<textarea placeholder="Submit your review" cols="48" rows="4"></textarea>
+		<textarea placeholder="Submit your review" cols="58" rows="5"></textarea>
 	</div>
 	<div class="submitButton">
-	<md-button class="md-raised md-primary" ng-click="showAddToShelfPage()">Submit</md-button>
+		<md-button class="md-raised md-primary"
+			ng-click="">Submit</md-button>
 	</div>
 </div>
