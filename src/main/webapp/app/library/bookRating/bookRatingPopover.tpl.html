@@ -1,0 +1,88 @@
+<script type="text/ng-template" id="bookRatingPopoverId">
+
+<div class="book-rating-popover-sec" ng-controller="bookRatingPopoverCTRL">
+<div class="content-area">
+<div class="display-overall-rating-section" ng-show = "showOverAllRatingSec">
+<span class="first-line">Ratings</span>
+<div class="left">
+<div class="average-rating-pic">3.3</div>
+<div class="average-rating-caption">Average of 94 ratings</div>
+</div>
+<div class="right">
+<div class="rating-bar-item">
+<span class="rating-link"><a>5 star</a></span>
+<div class="background-div">
+<div class="progress-bar-yellow-dynamic"></div>
+</div>
+<span>&nbsp;&nbsp;23</span>
+</div>
+
+<div class="rating-bar-item">
+<span class="rating-link"><a>4 star</a></span>
+<div class="background-div">
+<div class="progress-bar-yellow-dynamic"></div>
+</div>
+<span>&nbsp;&nbsp;23</span>
+</div>
+
+<div class="rating-bar-item">
+<span class="rating-link"><a>3 star</a></span>
+<div class="background-div">
+<div class="progress-bar-yellow-dynamic"></div>
+</div>
+<span>&nbsp;&nbsp;23</span>
+</div>
+
+<div class="rating-bar-item">
+<span class="rating-link"><a>2 star</a></span>
+<div class="background-div">
+<div class="progress-bar-yellow-dynamic"></div>
+</div>
+<span>&nbsp;&nbsp;23</span>
+</div>
+
+<div class="rating-bar-item">
+<span class="rating-link"><a>1 star</a></span>
+<div class="background-div">
+<div class="progress-bar-yellow-dynamic"></div>
+</div>
+<span>&nbsp;&nbsp;23</span>
+</div>
+</div>
+
+<div class="submit-review-caption">
+Submit your review to help others
+</div>
+<md-button class="full-width md-raised md-primary" ng-click = "submitReviewButtonClicked()">Submit your review</md-button>
+</div>
+
+<!--     submit your review section    -->
+<div class="submit-review-section" ng-show = "showSubmitReviewSec">
+<div class="first-line">Your Rating</div>
+
+<div class="your-star-rating-section">
+<div awesome-rating="ratingOfUser" awesome-rating-options="optionsEditable">{{ratingOfUser}}</div>
+</div>
+<div class="submit-review-text-area">
+<textarea placeholder="Submit your review" cols="45" rows="6"></textarea>
+</div>
+<div class="last-section">
+<div class="left">
+<md-button class="md-raised md-primary" ng-click="backButtonClicked()">Back</md-button>
+</div>
+<div class="right">
+<md-button class="md-raised md-primary" ng-click="">Submit</md-button></div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+ 
+</script>

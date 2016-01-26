@@ -1,0 +1,58 @@
+.caption-background{
+	width: 100%;
+	height: 500px;
+	float:left;
+	background-image: url("http://localhost:8085/collegedays/assets/img/open-books/open-book.jpg");
+}
+.caption-info{
+	font-weight: bold;
+	letter-spacing: .1;
+	position: absolute;
+	left: 50px;
+	top: 80px;
+	width: 100%;
+}
+.caption-info .white-larger-text{
+	line-height: 3;
+	font-weight: bold;
+	text-align: center;
+	font-size: xx-large;
+}
+.caption-info>ul>li{
+	color: white;
+	font-weight: bold;
+	letter-spacing: .1;
+	line-height: 1;
+	margin-top: 5px;
+	float: left;
+	width: 100%;
+	font-size: large;
+	margin-top: 10px;
+}
+.caption-info>ul>li>ul>li{
+	text-decoration: underline;
+	margin-top: 10px;
+}
+.readbook-help-left{
+	float: left;
+	width: 50%;
+	margin-top: 50px;
+}
+.readbook-help-right{
+	float: right;
+	width: 50%;
+	margin-top: 50px;
+}
+.readbook-help-right .text-large{
+	font-size: xx-large;
+	font-weight: bold;
+	line-height: 1;
+	margin-top: 10px;
+}
+.readbook-help-right>ul li{
+	text-decoration: inherit;
+	font-size: x-large;
+	font-weight: bold;
+	letter-spacing: 1;
+	margin-top: 10px;
+}

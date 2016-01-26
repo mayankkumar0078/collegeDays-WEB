@@ -1,0 +1,64 @@
+<div class="header-menu">
+<md-sidenav class="md-sidenav-right md-whiteframe-z2"
+	md-component-id="right"> 
+	<!-- <md-content layout-padding=""> -->
+
+<div id="sidemenu-container">
+<div id="side-backdrop"></div>
+<div id="side-nav-menu">
+<ul class="side-menu-list">
+<li class="full-link menu-list-item uppercase">
+<a class="link" href="/" data-href="/">
+Home
+</a>
+</li>
+<li class="full-link menu-list-item uppercase">
+<a class="link" href="/dsl" data-bypass="true" target="_blank">
+Career
+<i class="hover-icon icon icon-arrow-diagonal"></i>
+</a>
+</li>
+<li class="full-link menu-list-item uppercase">
+<a class="link" data-bypass="true" href="/careers" target="_blank" title="We are Hiring!">
+We are Hiring!
+<i class="hover-icon icon icon-arrow-diagonal"></i>
+</a>
+</li>
+<li class="full-link menu-list-item uppercase">
+<a class="link" data-bypass="true" href="/about" target="_blank" title="Know more about Housing.com">
+About Us
+<i class="hover-icon icon icon-arrow-diagonal"></i>
+</a>
+</li>
+
+<li class="full-link menu-list-item uppercase">
+<div ng-controller="menuCtrl">
+    <md-fab-speed-dial ng-hide="hidden" md-direction="down" md-open="isOpen" 
+    class="connect-section md-scale md-fab-top-down" ng-class="{ 'md-hover-full': hover }" 
+    ng-mouseenter="isOpen=true" ng-mouseleave="isOpen=false">
+      <md-fab-trigger>
+        <span>
+          Connect
+        </span>
+      </md-fab-trigger>
+
+      <md-fab-actions>
+        <div ng-repeat="item in items">
+          <md-button aria-label="{{item.name}}" class="md-fab md-raised md-mini" ng-click="openDialog($event, item)">
+            <md-tooltip md-direction="{{item.direction}}" md-visible="tooltipVisible" md-autohide="false">
+              {{item.name}}
+            </md-tooltip>
+			<i class="{{item.icon}}"></i>
+          </md-button>
+        </div>
+      </md-fab-actions>
+    </md-fab-speed-dial>
+</div>
+</li>
+
+
+</ul>
+</div>
+</div>
+</md-sidenav>
+</div>

@@ -1,0 +1,73 @@
+#add-to-shelf-template{
+	min-width: 120px;
+	min-height: 150px;
+	background-color: white;
+	border: 1px solid;
+	height: auto;
+	float: left;
+	z-index: 100;
+}
+#add-to-shelf-template .content-area{
+	padding: 10px;
+	float: left;
+	width: 100%;
+	height: 100%;
+}
+
+#add-to-shelf-template .first-line{
+	width: 100%;
+	float: left;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 10px;
+}
+#add-to-shelf-template .shelf-search-section{
+	width: 100%;
+	height: 30px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+#add-to-shelf-template .shelf-section{
+	width: 100%;
+	height: auto;
+	float: left;
+}
+#add-to-shelf-template .form-control{
+	height: 25px;
+}
+#add-to-shelf-template .create-new-shelf-link{
+	width: 100%;
+	height: 25px;
+	text-align: center;
+	background-color: whitesmoke;
+	padding-top: 6px;
+	float: left;
+}
+#add-to-shelf-template .create-new-shelf-link a{
+	width: 100%;
+	float: left;
+	color: black;
+	height: 25px;
+}
+
+#add-to-shelf-template .button-section{
+	width: 100%;
+}
+#add-to-shelf-template .button-section .left{
+	width: 40%;
+	float: left;
+}
+#add-to-shelf-template .button-section .right{
+	width: 40%;
+	float: right;
+}
+#add-to-shelf-template md-radio-button{
+	margin:2px 6px 5px 5px;
+	background-color: transparent;
+	padding-bottom: 3px;
+}
+#add-to-shelf-template md-radio-button:HOVER{
+	margin:2px 6px 5px 5px;
+	background-color: whitesmoke;
+	padding-bottom: 3px;
+}
