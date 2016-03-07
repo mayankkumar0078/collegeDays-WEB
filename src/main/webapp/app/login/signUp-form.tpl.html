@@ -1,40 +1,30 @@
 <div class="login-form" ng-show="signUpForm">
-			<span class = "login-header">
-			Sign Up
-			</span>
-			
-			<div class="form-item">
-			<md-input-container>
-      			<label>name</label>
-      			<input ng-model="signUpName">
-    		</md-input-container>
-    		</div>
-    		
-			<div class="form-item">
-			<md-input-container>
-      			<label>email</label>
-      			<input ng-model="signUpEmail">
-    		</md-input-container>
-    		</div>
-			<div class="form-item">
-			<md-input-container>
-      			<label>password</label>
-      			<input ng-model="signUpPassword">
-    		</md-input-container>
-			</div>
-			
-			<div class="form-item">
-			<md-input-container>
-      			<label>college</label>
-      			<input ng-model="signUpCollege">
-    		</md-input-container>
-			</div>
-			
-			<md-button class="md-raised md-primary button-full-width" ng-click="registerUser()">
-					sign Up
-			</md-button>
-			
-			<div class="login-footer-section">
-			<span> Already a user? </span><a href="" class="a-text-color-purple" ng-click="showSignInForm()">Sign In</a>
-			</div>
-			</div>
+	<span class="login-header"> Sign Up </span>
+
+	<div class="form-item">
+		<md-input-container> <label>name</label> <input
+			ng-model="loginCtrl.user.firstName"> </md-input-container>
+	</div>
+
+	<div class="form-item">
+		<md-input-container> <label>email</label> <input
+			ng-model="loginCtrl.user.email"> </md-input-container>
+	</div>
+	<div class="form-item">
+		<md-input-container> <label>password</label> <input
+			type="password" ng-model="loginCtrl.user.password"> </md-input-container>
+	</div>
+
+	<div class="form-item">
+		<md-input-container> <label>college</label> <input
+			ng-model="loginCtrl.user.college"> </md-input-container>
+	</div>
+
+	<md-button class="md-raised md-primary button-full-width"
+		ng-click="loginCtrl.registerUser()"> sign Up </md-button>
+
+	<div class="login-footer-section">
+		<span> Already a user? </span><a href="" class="a-text-color-purple"
+			ng-click="showSignInForm()">Sign In</a>
+	</div>
+</div>
