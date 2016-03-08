@@ -1,0 +1,52 @@
+#bookReviewPartialSec {
+	width: 100%;
+	height: 100%;
+}
+
+#bookReviewPartialSec .review-section-area {
+	width: 100%;
+	margin: 5px;
+	float: right;
+}
+
+#bookReviewPartialSec .review-section-area .left-section {
+	margin: 5px;
+	height: 50px;
+	float: left;
+	width: 70px;
+}
+
+#bookReviewPartialSec .review-section-area .left-section .user-display-section
+	{
+	width: 100%;
+	padding: 5px;
+	height: 50px;
+}
+
+#bookReviewPartialSec .review-section {
+	padding: 5px;
+	width: 80%;
+	float: right;
+}
+
+#bookReviewPartialSec .review-section .review-text {
+	padding: 5px;
+}
+
+#bookReviewPartialSec .review-options-section {
+	width: 100%;
+	height: 30px;
+	float: left;
+}
+
+#bookReviewPartialSec .review-options-section .option {
+	padding: 0px 5px 0px;
+	float: left;
+}
+.see-all-review-sec{
+	margin-top: 10px;
+	margin-left: 34px;
+}
+.gap-5px {
+	padding-left: 5px;
+}

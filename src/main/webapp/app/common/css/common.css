@@ -25,7 +25,14 @@ a:HOVER{
 .a-text-color-purple{
 	color:#7323dc;
 }
-
+.a-text-color-blue{
+	color:blue;
+	padding-right: 2px;
+}
+.a-text-color-blue:HOVER{
+	color:blue;
+	padding-right: 2px;
+}
 .a-text-color-purple:HOVER{
 	color:#7323dc;
 }
@@ -255,4 +262,7 @@ ul>li{
 .menu-list-item .connect-section{
 	margin-left: 8px;
 	float: left;
+}
+.blue-color{
+	color: purple;
 }

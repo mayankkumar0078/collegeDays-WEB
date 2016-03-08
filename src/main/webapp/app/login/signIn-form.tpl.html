@@ -1,26 +1,21 @@
 <div class="login-form" ng-show="signInForm">
-			<span class = "login-header">
-			Login
-			</span>
-			<div class="form-item">
-			<md-input-container>
-      			<label>email</label>
-      			<input ng-model="signInEmail">
-    		</md-input-container>
-    		</div>
-			<div class="form-item">
-			<md-input-container>
-      			<label>password</label>
-      			<input ng-model="signInPassword">
-    		</md-input-container>
-			</div>
-			<md-button class="md-raised md-primary button-full-width" ng-click="verifyLogin()">
-					login 
-			</md-button>
-			<div class="form-item">
-			<a class="forgot-password a-text-color-purple" ng-click="showForgotPasswordForm()">forgot paswword? </a>
-			</div>
-			<div class="login-footer-section">
-			<span> New User? </span><a href="" class="a-text-color-purple" ng-click="showSignUpForm()">Sign Up</a>
-			</div>
-			</div>
+	<span class="login-header"> Login </span>
+	<div class="form-item">
+		<md-input-container> <label>email</label> <input
+			ng-model="loginCtrl.loginCredentials.email"> </md-input-container>
+	</div>
+	<div class="form-item">
+		<md-input-container> <label>password</label> <input
+			ng-model="loginCtrl.loginCredentials.password"> </md-input-container>
+	</div>
+	<md-button class="md-raised md-primary button-full-width"
+		ng-click="loginCtrl.login()"> login </md-button>
+	<div class="form-item">
+		<a class="forgot-password a-text-color-purple"
+			ng-click="showForgotPasswordForm()">forgot paswword? </a>
+	</div>
+	<div class="login-footer-section">
+		<span> New User? </span><a href="" class="a-text-color-purple"
+			ng-click="showSignUpForm()">Sign Up</a>
+	</div>
+</div>

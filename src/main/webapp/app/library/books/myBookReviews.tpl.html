@@ -1,0 +1,49 @@
+<div id="bookReviewPartialSec">
+
+	<div ng-repeat="bookReviewDoc in bookReviewDocList">
+		<div class="review-section-area"
+			ng-show="bookReviewDoc.user.userEmail == loggedInUser.userEmail">
+
+			<div class="left-section">
+				<div class="user-display-section">
+					<img alt="" src="">
+				</div>
+			</div>
+
+			<div class="review-section">
+
+				<div class="review-text">
+					<a class="a-text-color-blue">{{bookReviewDoc.user.userName}}</a> <span
+						editable-textarea="bookReviewDoc.userComment.comment"
+						e-form="textBtnForm" e-rows="2" e-cols="28"
+						onaftersave="updateComment(bookReviewDoc)"> {{
+						bookReviewDoc.userComment.comment || 'empty' }} </span>
+				</div>
+				<div class="review-options-section">
+
+					<div class="option">
+						<a class="a-text-color-black gap-5px"
+							ng-click="toggleThumbsUp(bookReviewDoc)"> <i
+							ng-class="{true:'fa fa-thumbs-o-up fa-5px blue-color', false:'fa fa-thumbs-o-up fa-5px'}[bookReviewDoc.likedByCurrentUser]"></i>
+							&nbsp;Like
+						</a> <span>({{bookReviewDoc.userComment.likes}} likes)</span>
+					</div>
+
+
+					<div class="option"
+						ng-show="bookReviewDoc.user.userEmail == loggedInUser.userEmail">
+						<a class="a-text-color-black gap-5px"
+							ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible">
+							<i class="fa fa-pencil-square-o"></i>&nbsp;edit
+						</a>
+					</div>
+					<div class="option">
+						<div class="your-rating-star"
+							awesome-rating="bookReviewDoc.bookRatingDocument.userRating.rating"
+							awesome-rating-options="bookRatingNonEditable"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

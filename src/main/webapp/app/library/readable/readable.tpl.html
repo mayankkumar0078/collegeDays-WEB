@@ -37,12 +37,12 @@
 			
 			<div class="book-info-section">
 		
-		<div class="book-info-row" ns-popover
+		<div class="book-info-row" ns-popover ng-mouseover="getRatingForBook(record)"
  				 ns-popover-template="bookRatingPopoverId" ns-popover-theme="ns-popover-tooltip-theme"
  				 ns-popover-trigger="mouseenter"
  				 ns-popover-placement="right">
-		<div class="book-rating-sec" awesome-rating="rating" awesome-rating-options="optionsReadOnly"></div>
-		<span>(72 ratings)&nbsp;&nbsp;<i class="fa fa-caret-right"></i></span>
+		<div class="book-rating-sec" awesome-rating="record.bookRating" awesome-rating-options="optionsReadOnly"></div>
+		<span>({{record.noOfRatings}} ratings)&nbsp;&nbsp;<i class="fa fa-caret-right"></i></span>
 		</div>
 			    <div class="book-info-row">
 					<div class="book-info-title" style="width: 31px">Title</div>
@@ -79,8 +79,9 @@
 							<img src="assets/img/cancelButton/cancel.png">
 							</div>
 							</div>
+
 						<div class="bookDetailsLeftSection">
-							<ng-include src="'app/library/books/bookInfoPartialModal.tpl.html'"></ng-include>
+							<ng-include src="leftTemplate"></ng-include>
 						</div>
 						<div class="bookDetailsRightSection">
 							<ng-include src="rightTemplate" class="view-slide-in"></ng-include>

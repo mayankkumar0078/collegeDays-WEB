@@ -68,7 +68,6 @@
 	position: relative;
 }
 .book-rating-popover-sec .content-area .right .progress-bar-yellow-dynamic{
-	width: 30px;
 	height: 13px;
 	float: left;
 	background-color: yellow;

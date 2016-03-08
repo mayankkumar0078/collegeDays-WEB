@@ -79,4 +79,27 @@ service('libraryService', function($resource) {
 		return $resource("http://localhost:8080/search/books/"+pageNo,{},{call : {method : 'POST', isArray:false}});
 	};
 
+	this.getBookReviews = function(bookId){
+		return $resource("http://localhost:8080/book/review?bookId="+bookId,{},{call : {method : 'GET', isArray:false}});
+	};
+	
+	this.insertBookReview = function(){
+		return $resource("http://localhost:8080/book/review",{},{call : {method : 'POST', isArray:false}});
+	};
+	
+	this.updateBookReview = function(){
+		return $resource("http://localhost:8080/book/review",{},{call : {method : 'PUT', isArray:false}});
+	};
+	
+	this.updateBookRating = function(){
+		return $resource("http://localhost:8080/book/rating",{},{call : {method : 'PUT', isArray:false}});
+	};
+	
+	this.getBookRatings = function(bookId){
+		return $resource("http://localhost:8080/book/rating?bookId="+bookId,{},{call : {method : 'GET', isArray:false}});
+	};
+	
+	this.insertBookRatings = function(){
+		return $resource("http://localhost:8080/book/rating/list",{},{call : {method : 'POST', isArray:false}});
+	};
 });

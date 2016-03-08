@@ -115,12 +115,78 @@
 </div>
 
 
-<div class="bookReviewSection">
-	<div class="textareaReview">
-		<textarea placeholder="Submit your review" cols="58" rows="5"></textarea>
-	</div>
-	<div class="submitButton">
-		<md-button class="md-raised md-primary"
-			ng-click="">Submit</md-button>
-	</div>
+
+
+
+
+<!-- Your Rating section -->
+<div class="your-star-rating-section" ng-controller='bookDetailsModalCTRL'>
+<span class="your-rating-label">Your Rating</span>
+<span awesome-rating="userBookRating" awesome-rating-options="bookRatingEditable"></span>
+<span ng-bind="userBookRating"></span>
 </div>
+
+<div id="bookInfo-partial-section">
+<div class="book-rating-popover-sec">
+<div class="content-area">
+<div class="display-overall-rating-section">
+<span class="first-line">Overall Rating</span>
+<div class="left">
+<div class="average-rating-pic">{{overAllBookRating}}</div>
+<div class="average-rating-caption">Average of {{totalRatings}} ratings</div>
+</div>
+
+<!-- Rating bars  -->
+<div class="right">
+<div class="rating-bar-item">
+<span class="rating-link"><a ng-click="filterReviewsByStar(5)">5 star</a></span>
+<div class="background-div">
+<div class="progress-bar-yellow-dynamic" ng-style="width_5_star"></div>
+</div>
+<span>&nbsp;&nbsp;{{fiveStarCount}}</span>
+</div>
+
+<div class="rating-bar-item">
+<span class="rating-link"><a ng-click="filterReviewsByStar(4)">4 star</a></span>
+<div class="background-div">
+<div class="progress-bar-yellow-dynamic" ng-style="width_4_star"></div>
+</div>
+<span>&nbsp;&nbsp;{{fourStarCount}}</span>
+</div>
+
+<div class="rating-bar-item">
+<span class="rating-link"><a ng-click="filterReviewsByStar(3)">3 star</a></span>
+<div class="background-div">
+<div class="progress-bar-yellow-dynamic" ng-style="width_3_star"></div>
+</div>
+<span>&nbsp;&nbsp;{{threeStarCount}}</span>
+</div>
+
+<div class="rating-bar-item">
+<span class="rating-link"><a ng-click="filterReviewsByStar(2)">2 star</a></span>
+<div class="background-div">
+<div class="progress-bar-yellow-dynamic" ng-style="width_2_star"></div>
+</div>
+<span>&nbsp;&nbsp;{{twoStarCount}}</span>
+</div>
+
+<div class="rating-bar-item">
+<span class="rating-link"><a ng-click="filterReviewsByStar(1)">1 star</a></span>
+<div class="background-div">
+<div class="progress-bar-yellow-dynamic" ng-style="width_1_star"></div>
+</div>
+<span>&nbsp;&nbsp;{{oneStarCount}}</span>
+</div>
+<!-- END Rating Bar -->
+<div class="see-all-review-sec"><a ng-click="seeAllReviews()">see All Reviews</a></div>
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+

@@ -1,6 +1,6 @@
 angular.module('library')
 
-.controller('libraryCtrl', function libraryCtrl($scope, libraryService, blockUI,  $modal) {
+.controller('libraryCtrl', function libraryCtrl($scope, libraryService, blockUI,  $modal, $rootScope) {
 
 	$scope.shelfRadioButtonGroup = "";
 	var isBookShelfClicked = false;
@@ -12,7 +12,6 @@ angular.module('library')
 			        if (newValue !== oldValue) {
 			        	resetVariables();
 			        	$scope.readable_infinite_scroll_in_progress = false;
-			        	console.log('Changed value reflected in other controller');
 			        	//break the books into readable and borrowable 
 			        	//then set into scope variable
 			        	$scope.readableBooks = newValue.books;
@@ -63,10 +62,31 @@ angular.module('library')
 	var toggleReadableBooks = true;
 	var toggleBorrowableBooks = false;
 	
+	$scope.library = {};
+	$scope.hoveredBook = {};
+	//hover event on book rating section
+	$scope.getRatingForBook = function(record){
+		var bookId = record.ia[0];
+		$scope.hoveredBook = record;
+		$rootScope.activeBookRecord = record;
+		//check if the book is having the default rating then don't call the service
+		if(record.noOfRatings == 1){
+			$scope.hoveredBook.overAllRatingPopUp = 3;
+			$scope.hoveredBook.noOfRatingsPopUp = 1;
+			//$scope.hoveredBook.ratingOfUser = 0;
+		}
+		
+		else{
+		//call the book rating service to get the book rating data
+			$scope.library.refreshBookRating(bookId);
+		}
+	};
+	
 	//open book details modal...............................................................
 		$scope.openBookDetailsModal = function(record){
 			$scope.animationsEnabled = true;
 			$scope.record=record;
+			$rootScope.activeBookRecord = record;
 			var modalInstance = $modal.open({
 				animation: $scope.animationsEnabled,
 				templateUrl: 'bookDetailModal.html',
@@ -119,9 +139,7 @@ angular.module('library')
 			applyHoverCss	: false
 			
 	};
-	$scope.rating= 3.5;
-
-	//$scope.ratingOfUser = 2;
+	
 	$scope.enterEvent = function(event){
 		if(event.keyCode == 13){
 			$scope.searchBooks();
@@ -220,8 +238,6 @@ angular.module('library')
 	$scope.addBooksInPage = function (bookType) {
 		//infinite scroll only if we have clicked on the scearch button
 		if(searchBookButtonClicked) {
-		console.log('infinite scroll called');
-		//blockUI.start();
 		//add the books if the tab is readable
 		if(bookType == 'readableTab' && toggleReadableBooks){
 			if(!$scope.readable_infinite_scroll_in_progress){
@@ -264,7 +280,6 @@ angular.module('library')
 		libraryService.setBookShelfClicked(false);
 		searchBookButtonClicked = true;
 		$scope.bookShelves = libraryService.getUserBookShelves();
-		console.log("the shelves are : "+$scope.bookShelves);
 		bookSearchType = searchType;
 		if(searchType == 'wildCardSearch') {
 			//check if the search call is through recursion.. or it's a new search
@@ -294,7 +309,6 @@ angular.module('library')
 		}
 		);
 
-		console.log("In the search books method last ");
 	}else if(searchType == 'advanceSearch'){
 		
 		// if(!recursionInProgress){	

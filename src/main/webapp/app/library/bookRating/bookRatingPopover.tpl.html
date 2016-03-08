@@ -5,48 +5,49 @@
 <div class="display-overall-rating-section" ng-show = "showOverAllRatingSec">
 <span class="first-line">Ratings</span>
 <div class="left">
-<div class="average-rating-pic">3.3</div>
-<div class="average-rating-caption">Average of 94 ratings</div>
+<div class="average-rating-pic">{{hoveredBook.overAllRatingPopUp}}</div>
+<div class="average-rating-caption">Average of {{hoveredBook.noOfRatingsPopUp}} ratings</div>
 </div>
+<!-- Rating bar -->
 <div class="right">
 <div class="rating-bar-item">
-<span class="rating-link"><a>5 star</a></span>
+<span class="rating-link"><a ng-click="openBookDetailsModal(record)">5 star</a></span>
 <div class="background-div">
-<div class="progress-bar-yellow-dynamic"></div>
+<div class="progress-bar-yellow-dynamic" ng-style="hoveredBook.width_5_star"></div>
 </div>
-<span>&nbsp;&nbsp;23</span>
+<span>&nbsp;&nbsp;{{hoveredBook.fiveStarCount}}</span>
 </div>
 
 <div class="rating-bar-item">
-<span class="rating-link"><a>4 star</a></span>
+<span class="rating-link"><a ng-click="openBookDetailsModal(record)">4 star</a></span>
 <div class="background-div">
-<div class="progress-bar-yellow-dynamic"></div>
+<div class="progress-bar-yellow-dynamic" ng-style="hoveredBook.width_4_star"></div>
 </div>
-<span>&nbsp;&nbsp;23</span>
+<span>&nbsp;&nbsp;{{hoveredBook.fourStarCount}}</span>
 </div>
 
 <div class="rating-bar-item">
-<span class="rating-link"><a>3 star</a></span>
+<span class="rating-link"><a ng-click="openBookDetailsModal(record)">3 star</a></span>
 <div class="background-div">
-<div class="progress-bar-yellow-dynamic"></div>
+<div class="progress-bar-yellow-dynamic" ng-style="hoveredBook.width_3_star"></div>
 </div>
-<span>&nbsp;&nbsp;23</span>
+<span>&nbsp;&nbsp;{{hoveredBook.threeStarCount}}</span>
 </div>
 
 <div class="rating-bar-item">
-<span class="rating-link"><a>2 star</a></span>
+<span class="rating-link"><a ng-click="openBookDetailsModal(record)">2 star</a></span>
 <div class="background-div">
-<div class="progress-bar-yellow-dynamic"></div>
+<div class="progress-bar-yellow-dynamic" ng-style="hoveredBook.width_2_star"></div>
 </div>
-<span>&nbsp;&nbsp;23</span>
+<span>&nbsp;&nbsp;{{hoveredBook.twoStarCount}}</span>
 </div>
 
 <div class="rating-bar-item">
-<span class="rating-link"><a>1 star</a></span>
+<span class="rating-link"><a ng-click="openBookDetailsModal(record)">1 star</a></span>
 <div class="background-div">
-<div class="progress-bar-yellow-dynamic"></div>
+<div class="progress-bar-yellow-dynamic" ng-style="hoveredBook.width_1_star"></div>
 </div>
-<span>&nbsp;&nbsp;23</span>
+<span>&nbsp;&nbsp;{{hoveredBook.oneStarCount}}</span>
 </div>
 </div>
 
@@ -61,17 +62,17 @@ Submit your review to help others
 <div class="first-line">Your Rating</div>
 
 <div class="your-star-rating-section">
-<div awesome-rating="ratingOfUser" awesome-rating-options="optionsEditable">{{ratingOfUser}}</div>
+<div awesome-rating="userRating1.ratingOfUser" awesome-rating-options="optionsEditable">{{userRating1.ratingOfUser}}</div>
 </div>
 <div class="submit-review-text-area">
-<textarea placeholder="Submit your review" cols="45" rows="6"></textarea>
+<textarea placeholder="Submit your review" cols="45" rows="6" ng-model="userBookReview"></textarea>
 </div>
 <div class="last-section">
 <div class="left">
 <md-button class="md-raised md-primary" ng-click="backButtonClicked()">Back</md-button>
 </div>
 <div class="right">
-<md-button class="md-raised md-primary" ng-click="">Submit</md-button></div>
+<md-button class="md-raised md-primary" ng-click="insertBookReview()">Submit</md-button></div>
 </div>
 </div>
 </div>

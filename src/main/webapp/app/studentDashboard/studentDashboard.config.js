@@ -26,6 +26,7 @@ studentDashboardModule.config(function config($stateProvider) {
         },
         data: {pageTitle: 'Student Dashboard'}
     })
+
 .state('studentDashboard.shelf', {
         url: '/shelf',
         parent:'studentDashboard',
