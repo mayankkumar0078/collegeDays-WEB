@@ -11,7 +11,6 @@ module.config(function(blockUIConfig,$stateProvider, $urlRouterProvider){
 	blockUIConfig.message = 'Please wait.. !';
 	blockUIConfig.autoBlock = false;
 	$urlRouterProvider.otherwise('/home');
-	//$stateProvider.state('home',{url:'/home', templateUrl:'app/home/home.tpl.html', controller:'HomeCtrl'});
 });
 
 module.controller('appCTRL', function appCTRL($scope, $location, $rootScope,
