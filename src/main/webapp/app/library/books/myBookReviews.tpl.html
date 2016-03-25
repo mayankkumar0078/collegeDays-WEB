@@ -17,7 +17,7 @@
 						editable-textarea="bookReviewDoc.userComment.comment"
 						e-form="textBtnForm" e-rows="2" e-cols="28"
 						onaftersave="updateComment(bookReviewDoc)"> {{
-						bookReviewDoc.userComment.comment || 'empty' }} </span>
+						bookReviewDoc.review || 'empty' }} </span>
 				</div>
 				<div class="review-options-section">
 
@@ -26,7 +26,7 @@
 							ng-click="toggleThumbsUp(bookReviewDoc)"> <i
 							ng-class="{true:'fa fa-thumbs-o-up fa-5px blue-color', false:'fa fa-thumbs-o-up fa-5px'}[bookReviewDoc.likedByCurrentUser]"></i>
 							&nbsp;Like
-						</a> <span>({{bookReviewDoc.userComment.likes}} likes)</span>
+						</a> <span>({{bookReviewDoc.likes}} likes)</span>
 					</div>
 
 
@@ -38,10 +38,19 @@
 						</a>
 					</div>
 					<div class="option">
+						<a class="a-text-color-black gap-5px"
+							ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible">
+							<i class="fa fa-pencil-square-o"></i>&nbsp;comment
+						</a>
+					</div>
+					
+					<div class="option">
 						<div class="your-rating-star"
 							awesome-rating="bookReviewDoc.bookRatingDocument.userRating.rating"
 							awesome-rating-options="bookRatingNonEditable"></div>
 					</div>
+					
+					
 				</div>
 			</div>
 		</div>

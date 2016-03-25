@@ -4,11 +4,18 @@
 }
 
 #bookReviewPartialSec .review-section-area {
-	width: 100%;
+	 width: 100%; 
 	margin: 5px;
-	float: right;
+	float: left;
+	position: relative;
 }
-
+.hide-show-sec{
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	right: 5px;
+	top : 10px;
+}
 #bookReviewPartialSec .review-section-area .left-section {
 	margin: 5px;
 	height: 50px;
@@ -27,9 +34,19 @@
 	padding: 5px;
 	width: 80%;
 	float: right;
+	border-bottom: 1px solid;
+}
+#bookReviewPartialSec .comment-section {
+	padding: 5px;
+	width: 80%;
+	float: right;
+}
+#bookReviewPartialSec .review-section .review-text {
+	padding: 5px;
+	font-weight: bold;
 }
 
-#bookReviewPartialSec .review-section .review-text {
+#bookReviewPartialSec .comment-section .comment-text {
 	padding: 5px;
 }
 
@@ -49,4 +66,18 @@
 }
 .gap-5px {
 	padding-left: 5px;
+}
+
+.comment-section-area{
+	float:left;
+	width: 100%;
+	 transition: height 1s;
+    -webkit-transition: height 1s;        
+    -moz-transition: height 1s;        
+    -o-transition: height 1s; 
+}
+.comment-text-area{
+	margin-left: 10px;
+	padding: 5px;
+	margin-top: 5px;
 }

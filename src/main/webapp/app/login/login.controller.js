@@ -34,7 +34,7 @@ homeModule1.factory('TokenStorage', function() {
 
 
 homeModule1.controller('loginDialogCtrl', function($scope, $rootScope,
-		$location, loginService, $http,TokenStorage) {
+		$location, loginService, $http,TokenStorage, ngDialog) {
 
 	//make the login home page visible when the login page is landed
 	$scope.loginHomePage = true;
@@ -92,7 +92,10 @@ homeModule1.controller('loginDialogCtrl', function($scope, $rootScope,
 						// set the rootScope variable
 						$rootScope.userLoggedIn = true;
 						// set the user coming from the response
-						$rootScope.user = result.firstName;
+						$rootScope.loggedInUser = {}
+						
+						$rootScope.loggedInUser.userEmail = result.userEmail;
+						$rootScope.loggedInUser.userName = result.firstName;
 					}
 
 				}).error(function(result, status, headers) {
@@ -100,6 +103,9 @@ homeModule1.controller('loginDialogCtrl', function($scope, $rootScope,
 			self.errorMessage = result.message;
 			console.log(self.errorMessage);
 		});
+	};
+	self.closeThisDialog = function(){
+		ngDialog.closeAll();
 	};
 	/* retrieves the password for the email */
 	$scope.recoverPassword = function() {

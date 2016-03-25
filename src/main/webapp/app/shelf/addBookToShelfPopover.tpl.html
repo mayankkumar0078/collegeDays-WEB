@@ -1,5 +1,5 @@
  <script type="text/ng-template" id="addBookToShelfPopoverId">
-<div id="add-to-shelf-template">
+<div id="add-to-shelf-template" ng-controller="shelfCtrl">
 <div class="content-area">
 <div class="first-line">Add To</div>
 
@@ -10,7 +10,7 @@
 </div>
 <div class="shelf-section">
 <md-radio-group ng-model="shelfRadioButtonGroup">
-      <md-radio-button ng-repeat="shelf in bookShelves | filter:searchText" ng-value="shelf.shelfName">
+      <md-radio-button ng-click="shelfRadioButtonClicked()" ng-repeat="shelf in bookShelves | filter:searchText" ng-value="shelf.shelfName">
    		{{shelf.shelfName}}
       </md-radio-button>
     </md-radio-group>
@@ -25,7 +25,7 @@
 <input type="text" placeholder="Create New Shelf" class="form-control" ng-model="newShelfName">
 </div>
 <div class="button-section">
-<md-button class="left md-raised md-primary">Create</md-button>
+<md-button class="left md-raised md-primary" ng-click = "createNewShelf()">Create</md-button>
 <md-button class="right md-raised md-primary" ng-click="enableCreateNewShelfLink()">Cancel</md-button>
 </div>
 </div>

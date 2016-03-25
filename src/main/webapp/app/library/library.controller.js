@@ -3,36 +3,109 @@ angular.module('library')
 .controller('libraryCtrl', function libraryCtrl($scope, libraryService, blockUI,  $modal, $rootScope) {
 
 	$scope.shelfRadioButtonGroup = "";
-	var isBookShelfClicked = false;
+	 $scope.isBookShelfClicked = false;
 	var searchBookButtonClicked = false;
 	$scope.showCreateNewShelf = true;
 	//watch the book shelf clicked from the book shelf page
 	  $scope.$watch(function () { return libraryService.getBookShelf(); }, 
 			  		function (newValue, oldValue) {
+		  		if(!(newValue.shelfName == 'dummyShelf')){
 			        if (newValue !== oldValue) {
 			        	resetVariables();
+			        	$scope.noReadableBooksInShelf = false;
+			        	$scope.noBorrowableBooksInShelf = false;
 			        	$scope.readable_infinite_scroll_in_progress = false;
-			        	//break the books into readable and borrowable 
-			        	//then set into scope variable
-			        	$scope.readableBooks = newValue.books;
-			        	$scope.tabs = [
-						               {title:'Readable', page: 'app/library/readable/readable.tpl.html', icon:'assets/img/open-books/open-book.jpg'},
-						               {title:'Borrowable', page: 'app/library/borrowable/borrowable.tpl.html', icon:'assets/img/open-books/open-book.jpg'},
-						               ];
-			        	$scope.searchBookText = '';
+			        	$scope.shelfName = newValue.shelfName;
+			        	var request = [];
+			        	//loop through the books and make list of book ids 
+			        	for(var i in newValue.books){
+			        		request.push(newValue.books[i].bookId);
+			        	}
+			        	  var ratingResource = libraryService.getBookRatings();
+			        	  ratingResource.call(request).$promise.then(function(response) {
+			        		  if(response != undefined){
+			        			  //set the readable and borrowable books
+			        			  $scope.readableBooks = [];
+			        			  $scope.borrowableBooks = [];
+			        			  
+			        			  var bookAvgRatings = response.bookAvgRating;
+			        			  //loop through the shelf books and add the rating to it
+			        			  for(var bookIndex in newValue.books){
+			        				  var notFound = true;
+			        				  for(var ratingIndex in bookAvgRatings){
+			        					  if(newValue.books[bookIndex].bookId == bookAvgRatings[ratingIndex]._id){
+			        						  newValue.books[bookIndex].bookRating =  bookAvgRatings[ratingIndex].avgRating;
+			        						  if(bookAvgRatings[ratingIndex].avgRating != 0){
+			        							  notFound = false;
+			        						  newValue.books[bookIndex].noOfRatings = (bookAvgRatings[ratingIndex].sumOfRatings)/(bookAvgRatings[ratingIndex].avgRating);
+			        						  }
+			        					  }
+			        				  }
+			        				  //set the default one
+			        				  if(notFound){
+			        					  newValue.books[bookIndex].noOfRatings = 1;
+			        					  newValue.books[bookIndex].bookRating =  3;
+			        				  }
+			        				  //find out the type of the book i.e readable/borrowable
+			        				  if(newValue.books[bookIndex].public_scan_b){
+			        					  $scope.readableBooks.push(newValue.books[bookIndex]);
+			        				  }else{
+			        					  $scope.borrowableBooks.push(newValue.books[bookIndex]);
+			        				  }
+			        			  }
+			        		  }
+					        	if($scope.readableBooks != undefined && $scope.readableBooks.length == 0){
+					        		$scope.noReadableBooksInShelf = true;
+					        	}
+			        	  if($scope.borrowableBooks != undefined && $scope.borrowableBooks.length == 0){
+				        		$scope.noBorrowableBooksInShelf = true;
+				        	}
+			        	  
+			        	  //find out the current active tab and display the same
+			        	  var readableTabActive = true;
+			        	  for(var tabIndex in $scope.tabs){
+			        		  if($scope.tabs[tabIndex].title == 'Borrowable' && $scope.tabs[tabIndex].active){
+			        			  readableTabActive = false;
+			        		  }
+			        	  }
+					        	$scope.tabs = [
+								               {title:'Readable', active:readableTabActive, page: 'app/library/readable/readable.tpl.html', icon:'assets/img/open-books/open-book.jpg'},
+								               {title:'Borrowable', active:!readableTabActive, page: 'app/library/borrowable/borrowable.tpl.html', icon:'assets/img/open-books/open-book.jpg'},
+								               ];
+					        	$scope.searchBookText = '';
+			        		},
+			        		function(error) {
+			        			
+			        		}
+			        		);
 			        }
-			        
+	  }
 			    });
-	  
+
 	  //watch the  book shelf clicked boolean form the book shelf
 	  $scope.$watch(function () { return libraryService.getBookShelfClicked(); }, 
 		  		function (newValue, oldValue) {
 		        if (newValue !== oldValue) {
-		        	 isBookShelfClicked = newValue;
-		        	searchBookButtonClicked = !isBookShelfClicked;
+		        	 $scope.isBookShelfClicked = newValue;
+		        	searchBookButtonClicked = !$scope.isBookShelfClicked;
 		        }
 		        
 		    });
+	  
+	  //get the book shelves for the user on page load
+	  var shelfResource = libraryService.retrieveUserShelves($rootScope.loggedInUser.userEmail);
+	  shelfResource.call().$promise.then(function(response) {
+		  if(response != undefined && response.userShelfDocument != undefined){
+			  $rootScope.bookShelves = response.userShelfDocument.shelves; 
+			  //publish the shelves retrieved to the library controller
+			  //libraryService.setUserBookShelves($scope.bookShelves);
+		  }
+		  
+		},
+		function(error) {
+			
+		}
+		);
 	  
 	  //watch the list of user book shelves returned from book shelf page
 	  //this is the list of all the shelves assigned to a user
@@ -40,7 +113,7 @@ angular.module('library')
 		  		function (newValue, oldValue) {
 		        if (newValue !== oldValue) {
 		        	//get the list of book shelves for a user
-		        	$scope.bookShelves = newValue;
+		        	//$scope.bookShelves = newValue;
 		        }
 		        
 		    });
@@ -63,11 +136,17 @@ angular.module('library')
 	var toggleBorrowableBooks = false;
 	
 	$scope.library = {};
-	$scope.hoveredBook = {};
+	
 	//hover event on book rating section
 	$scope.getRatingForBook = function(record){
-		var bookId = record.ia[0];
-		$scope.hoveredBook = record;
+		$scope.hoveredBook = {};
+		if(record != undefined && record.ia != undefined){
+			var bookId = record.ia[0];
+		}else{
+			bookId = record.bookId;
+		}
+		
+		$scope.hoveredBook.record = record;
 		$rootScope.activeBookRecord = record;
 		//check if the book is having the default rating then don't call the service
 		if(record.noOfRatings == 1){
@@ -82,6 +161,10 @@ angular.module('library')
 		}
 	};
 	
+	//set the active record to use it in different controllers
+	$scope.saveActiveRecord = function(record){
+		$rootScope.activeBookRecord = record;
+	};
 	//open book details modal...............................................................
 		$scope.openBookDetailsModal = function(record){
 			$scope.animationsEnabled = true;
@@ -278,8 +361,9 @@ angular.module('library')
 	$scope.searchBooks = function(searchType, advSearchCriteria, isNewSearch){
 		$scope.readable_infinite_scroll_in_progress = true;
 		libraryService.setBookShelfClicked(false);
+		var dummyShelf = {"shelfName":"dummyShelf"};
+		libraryService.setBookShelf(dummyShelf);
 		searchBookButtonClicked = true;
-		$scope.bookShelves = libraryService.getUserBookShelves();
 		bookSearchType = searchType;
 		if(searchType == 'wildCardSearch') {
 			//check if the search call is through recursion.. or it's a new search

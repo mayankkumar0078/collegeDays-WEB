@@ -2,6 +2,10 @@ var libraryModule =  angular.module('library');
 
 libraryModule.controller('bookDetailsModalCTRL', function($scope, $rootScope, libraryService, blockUI,  $modal){
 
+	//set the objects
+	var savedBookReviewDocument = null;
+
+	//set the template 
 	$scope.rightTemplate='app/library/books/bookReviewPartialPage.tpl.html';
 	$scope.leftTemplate = 'app/library/books/bookInfoPartialModal.tpl.html';
 	$scope.bookRatingEditable = {
@@ -22,7 +26,7 @@ libraryModule.controller('bookDetailsModalCTRL', function($scope, $rootScope, li
 
 
 
-	var savedBookReviewDocument = null;
+
 	//Watch on the variable 'userBookRating' and update the rating of the book
 	$scope.$watch('userBookRating', function (newValue, oldValue) {
 		if(newValue != undefined){
@@ -58,12 +62,12 @@ libraryModule.controller('bookDetailsModalCTRL', function($scope, $rootScope, li
 		$scope.rightTemplate='app/library/books/addBookToShelfPartial.tpl.html';
 	};
 
-	//this method is for updating the comment for a book.
-	$scope.updateComment = function(bookReviewDoc){
+	//this method is for updating the review for a book.
+	$scope.updateReview = function(bookReviewDoc){
 		//update the comment in db for the user
 		var bookReviewServiceCall = libraryService.updateBookReview();
 		bookReviewServiceCall.call(bookReviewDoc).$promise.then(function(response){
-			if(reposne != null ){
+			if(response != null ){
 			}
 		},
 		function(error){
@@ -71,6 +75,28 @@ libraryModule.controller('bookDetailsModalCTRL', function($scope, $rootScope, li
 		});
 	};
 
+	//this method is for updating the comment for a review.
+	$scope.updateComment = function(bookReviewDoc, userComment, index){
+		
+		bookReviewDoc.userComments[index] = userComment;
+		//make the request
+		var request = {};
+		request.bookReviewId = bookReviewDoc.id;
+		request.userComment = userComment;
+		request.userComments = bookReviewDoc.userComments;
+		//update the comment in db for the user
+		var bookReviewServiceCall = libraryService.updateBookReviewComment();
+		bookReviewServiceCall.call(request).$promise.then(function(response){
+			if(response != null ){
+				//take the latest user comment and push it to user comments in UI
+				bookReviewDoc.userComments[index] = userComment;
+			}
+		},
+		function(error){
+
+		});
+	};
+	
 	//show review page
 	$scope.showBookReviewsPagePage = function(){
 		$scope.rightTemplate='app/library/books/bookReviewPartialPage.tpl.html';
@@ -152,11 +178,29 @@ libraryModule.controller('bookDetailsModalCTRL', function($scope, $rootScope, li
 		}
 		//calculate the star rating count and progress bar
 		calculateStarRatingCountAndWidth();
-
+		$scope.userHasReviewd = false;
 		//set the boolean for the liked by current user
 		for(var i in $scope.bookReviewDocList){
-			$scope.bookReviewDocList[i].likedByCurrentUser =  currentUserPresentInLikedBy($rootScope.loggedInUser, $scope.bookReviewDocList[i].userComment.likedBy);
-			//$scope.userBookRating =  //bookReviewDoc.userRating;
+			
+			// check if the logged-in user has submitted his reviews or not
+			if($scope.bookReviewDocList[i].user.userEmail == $rootScope.loggedInUser.userEmail){
+				$scope.userHasReviewd = true;
+			}
+			
+			$scope.bookReviewDocList[i].showComments = false;
+			$scope.bookReviewDocList[i].likedByCurrentUser =  currentUserPresentInLikedBy($rootScope.loggedInUser, $scope.bookReviewDocList[i].likedBy);
+			//find out the user comments for that book review 
+			if($scope.bookReviewDocList[i].userComments != undefined && $scope.bookReviewDocList[i].userComments.length > 0){
+				//loop through the user comments and set the likedByCurrentUser
+				for(var j in $scope.bookReviewDocList[i].userComments){
+					
+					for(var k in $scope.bookReviewDocList[i].userComments[j].likedBy){
+						$scope.bookReviewDocList[i].userComments[j].likedByCurrentUser =  currentUserPresentInLikedBy($rootScope.loggedInUser, 
+								$scope.bookReviewDocList[i].userComments[j].likedBy);
+					}
+				}
+				
+			}
 		}
 	}
 	//this method is for calculating the count of different stars and the corresponding width
@@ -190,9 +234,18 @@ libraryModule.controller('bookDetailsModalCTRL', function($scope, $rootScope, li
 		}
 	}
 
-	function currentUserPresentInLikedBy(obj, list) {
+	function currentUserPresentInLikedBy(currentUser, list) {
+		if(currentUser == undefined)
+			return false;
+		if(currentUser.userEmail == undefined)
+			return false;
+		if(list == undefined)
+			return false;
+		if(list.length == 0)
+			return false;
+
 		for (var i in list) {
-			if (list[i].userEmail === obj.userEmail) {
+			if (list[i].userEmail === currentUser.userEmail) {
 				return true;
 			}
 		}
@@ -227,6 +280,10 @@ libraryModule.controller('bookDetailsModalCTRL', function($scope, $rootScope, li
 	$scope.toggleThumbsUp = function(bookReviewDoc){
 		bookReviewDoc.likedByCurrentUser = !bookReviewDoc.likedByCurrentUser;
 
+		if(bookReviewDoc.likes == null || bookReviewDoc.likes == undefined){
+			bookReviewDoc.likes = 0;
+		}
+
 		//logic on Un-liking the comment
 		if(!bookReviewDoc.likedByCurrentUser){
 			//edit the doc to accompany  like and undo like functionality
@@ -234,13 +291,13 @@ libraryModule.controller('bookDetailsModalCTRL', function($scope, $rootScope, li
 			//1. reduce the no of likes for that doc
 			//2. Remove the user from the doc as likedByUser
 			var updatedLikedByUser = [];
-			for(var i in bookReviewDoc.userComment.likedBy){
-				if(bookReviewDoc.userComment.likedBy[i].userEmail != $rootScope.loggedInUser.userEmail){
-					updatedLikedByUser.push(bookReviewDoc.userComment.likedBy[i]);
+			for(var i in bookReviewDoc.likedBy){
+				if(bookReviewDoc.likedBy[i].userEmail != $rootScope.loggedInUser.userEmail){
+					updatedLikedByUser.push(bookReviewDoc.likedBy[i]);
 				}
 			}
-			bookReviewDoc.userComment.likes = bookReviewDoc.userComment.likes - 1;
-			bookReviewDoc.userComment.likedBy = updatedLikedByUser;
+			bookReviewDoc.likes = bookReviewDoc.likes - 1;
+			bookReviewDoc.likedBy = updatedLikedByUser;
 		}
 
 		//logic on liking the comment
@@ -251,13 +308,14 @@ libraryModule.controller('bookDetailsModalCTRL', function($scope, $rootScope, li
 			//2. add the current user in the doc as likedByUser
 			var updatedLikedByUser = [];
 			updatedLikedByUser.push($rootScope.loggedInUser);
-			for(var i in bookReviewDoc.userComment.likedBy){
-				if(bookReviewDoc.userComment.likedBy[i].userEmail != $rootScope.loggedInUser.userEmail){
-					updatedLikedByUser.push(bookReviewDoc.userComment.likedBy[i]);
+			for(var i in bookReviewDoc.likedBy){
+				if(bookReviewDoc.likedBy[i].userEmail != $rootScope.loggedInUser.userEmail){
+					updatedLikedByUser.push(bookReviewDoc.likedBy[i]);
 				}
 			}
-			bookReviewDoc.userComment.likes = bookReviewDoc.userComment.likes + 1;
-			bookReviewDoc.userComment.likedBy = updatedLikedByUser;
+
+			bookReviewDoc.likes = bookReviewDoc.likes + 1;
+			bookReviewDoc.likedBy = updatedLikedByUser;
 		}
 		//remove the unnecessary properties from the bookReviewDoc
 		// delete bookReviewDoc.likedByCurrentUser;
@@ -272,5 +330,103 @@ libraryModule.controller('bookDetailsModalCTRL', function($scope, $rootScope, li
 
 		});
 
+	};
+	//toggle the like button for comments
+	$scope.toggleThumbsUpForComment = function(bookReviewDoc, userComment, index){
+
+		console.log("user comment index is : "+index);
+		if(userComment.likedByCurrentUser == undefined){
+			userComment.likedByCurrentUser = false;
+		}
+		userComment.likedByCurrentUser = !userComment.likedByCurrentUser;
+		if(userComment.likes == null || userComment.likes == undefined){
+			userComment.likes = 0;
+		}
+
+		//logic on Un-liking the comment
+		if(!userComment.likedByCurrentUser){
+			var updatedLikedByUser = [];
+			for(var i in userComment.likedBy){
+				if(userComment.likedBy[i].userEmail != $rootScope.loggedInUser.userEmail){
+					updatedLikedByUser.push(userComment.likedBy[i]);
+				}
+			}
+			userComment.likes = userComment.likes - 1;
+			userComment.likedBy = updatedLikedByUser;
+		}
+
+		//logic on liking the comment
+		if(userComment.likedByCurrentUser){
+			var updatedLikedByUser = [];
+			updatedLikedByUser.push($rootScope.loggedInUser);
+			for(var i in userComment.likedBy){
+				if(userComment.likedBy[i].userEmail != $rootScope.loggedInUser.userEmail){
+					updatedLikedByUser.push(userComment.likedBy[i]);
+				}
+			}
+
+			userComment.likes = userComment.likes + 1;
+			userComment.likedBy = updatedLikedByUser;
+		}
+		//set the updated user comment in the user comments by index
+		 bookReviewDoc.userComments[index] = userComment;
+		var request = {};
+		request.bookReviewId = bookReviewDoc.id;
+		request.userComments =  bookReviewDoc.userComments;
+		request.userComment = userComment;
+		request.userCommentIndex = index;
+		//service call to update the user comments
+		var bookReviewServiceCall = libraryService.updateBookReviewComment();
+		bookReviewServiceCall.call(request).$promise.then(function(response){
+			if(response != null ){
+				//to do .. check if the user repsonse is not 200 then toogle back the previous like
+				console.log('comments updated successfully');
+				//bookReviewDoc.userComments = response.bookReviewDocument.userComments;
+			}
+		},
+		function(error){
+			userComment.likedByCurrentUser = !userComment.likedByCurrentUser;
+		}); 
+	};
+	$scope.user = {};
+
+	//put the value of comments for a review
+	$scope.addNewComment = function(bookReviewDoc){
+		if(event.keyCode == 13 && bookReviewDoc.reviewComment != undefined 
+				&& bookReviewDoc.reviewComment != ""){
+			console.log('enter pressed');
+			var userComment = {};
+			userComment.user = {'userEmail': $rootScope.loggedInUser.userEmail,
+					'userName': $rootScope.loggedInUser.userName};
+			userComment.comment = bookReviewDoc.reviewComment;
+
+			var request = {"bookReviewId" : bookReviewDoc.id, "userComment" : userComment};
+			var bookReviewServiceCall = libraryService.addBookReviewComment();
+			bookReviewServiceCall.call(request).$promise.then(function(response){
+				if(response != null ){
+					console.log('comments updated successfully');
+					//take the latest user comment and push it to user comments in UI
+					var len = response.bookReviewDocument.userComments.length;
+					var latestComment = response.bookReviewDocument.userComments[len-1];
+					latestComment.likedByCurrentUser = false;
+					//check if it is the first user comment
+					if(bookReviewDoc.userComments == undefined ||
+							bookReviewDoc.userComments == null){
+						bookReviewDoc.userComments = [];
+					}
+					bookReviewDoc.userComments.push(latestComment);
+					bookReviewDoc.reviewComment = undefined;
+				}
+			},
+			function(error){
+
+			}); 
+		}
+	};
+
+	//show the comment section
+	$scope.enableComment = function(bookReviewDoc){
+		bookReviewDoc.showComments = true;
+		bookReviewDoc.isFocused = true;
 	};
 });

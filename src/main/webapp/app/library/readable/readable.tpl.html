@@ -1,7 +1,8 @@
 <div>
 	<ul class="book-content-ul" infinite-scroll="addBooksInPage('readableTab')" infinite-scroll-distance="1">
-	
-		<li class="full-book-content" ng-repeat="record in readableBooks">
+	<li class="empty-shelf-caption" ng-show="isBookShelfClicked && noReadableBooksInShelf"> There are no Readable books available for <strong>{{shelfName}}</strong> </li>
+	<li class="non-empty-shelf-caption" ng-show="isBookShelfClicked && !noReadableBooksInShelf"> Books in <strong>{{shelfName}}</strong> </li>
+		<li class="full-book-content"  ng-mouseenter="saveActiveRecord(record)" ng-repeat="record in readableBooks">
 			<div ng-bind="record" ng-show="false"></div>
 			<!-- <a href="{{record.iaUrl}}"> -->
 			<a href="" ng-click="openBookDetailsModal(record)">
@@ -9,16 +10,15 @@
 			<span>Details view</span>
 			</div>
 			</a> 
-			<div class="add-to-shelf" ng-click="" ns-popover
+			<div class="add-to-shelf" ng-controller="shelfCtrl" ng-click="addToShelfButtonClick()" ns-popover
  				 ns-popover-template="addBookToShelfPopoverId"
  				 ns-popover-trigger="click"
  				 ns-popover-placement="bottom">
    				 Add to shelf
 			</div>
 			
-			
 			<div class="book-image-container">
-			<a href="{{record.iaUrl}}">
+			<a href="{{record.iaUrl}}" target="_blank">
 				<img ng-if="record.cover_i"
 					src="http://covers.openlibrary.org/b/id/{{record.cover_i}}-M.jpg">
 
@@ -33,6 +33,17 @@
 			<img alt="" src="assets/read-book-icon.png">
 			</div>
 			</a>
+			
+		<a href="" ng-controller="shelfCtrl" ng-click="deleteBookFromShelf($event, record)" ng-show="isBookShelfClicked">
+				<div class="remove-book-link-section">
+				<span class="fa-stack fa-lg">
+  					<i class="fa fa-circle-thin fa-stack-2x"></i>
+  					<i class="fa fa-times fa-stack-1x fa-color-red"></i>
+				</span>
+					
+			<!-- <img alt="" src="assets/read-book-icon.png"> -->
+			</div>
+			</a>	
 			</div>
 			
 			<div class="book-info-section">

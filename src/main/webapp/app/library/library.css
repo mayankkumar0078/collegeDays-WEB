@@ -25,6 +25,18 @@ ul{
 	float: left;
 	/* height: 200px; */
 }
+.book-content-ul .empty-shelf-caption{
+	width: 100%;
+	height: 20px;
+	text-align: center;
+	font-size: xx-large;
+}
+.book-content-ul .non-empty-shelf-caption{
+	width: 100%;
+	height: 20px;
+	text-align: center;
+	font-size: medium;
+}
 .full-book-content{
 	float: left;
 	/* width: 210px;
@@ -46,6 +58,17 @@ ul{
 	cursor: pointer;
 }
 
+.add-to-shelf{
+	float:right;
+	height:30px;
+	width: 45%;
+	background-color: #7323dc;
+	cursor: pointer!important;
+	color: white;
+	padding: 5px;
+	background-color: transparent;
+	border: 1px solid transparent;
+}
   .full-book-content:HOVER .add-to-shelf{
 	display:inline;
 	float:right;
@@ -59,6 +82,17 @@ ul{
 .book-image-container{
 	position: relative;
 	margin-top: 30px;
+}
+ .book-image-container .remove-book-link-section{
+	position: absolute;
+	bottom: 7%;
+	left: 15%;
+	width: 30px;
+	height: 30px;
+	color:red;
+}
+.fa-color-red{
+	color:red
 }
 .book-image-container img{
 	width: 170px;
@@ -111,18 +145,6 @@ ul{
 	float:left;
 	height:30px;
 	width: 40%;
-	background-color: #7323dc;
-	cursor: pointer!important;
-	color: white;
-	padding: 5px;
-	background-color: transparent;
-	border: 1px solid transparent;
-}
-
-.add-to-shelf{
-	float:right;
-	height:30px;
-	width: 45%;
 	background-color: #7323dc;
 	cursor: pointer!important;
 	color: white;

@@ -1,53 +1,86 @@
-angular.module('studentDashboard').controller('shelfCtrl', function shelfCtrl($scope, $parse, 
+angular.module('studentDashboard').controller('shelfCtrl', function shelfCtrl($scope, $parse, $rootScope,
 		$modal, $mdDialog, $mdMedia, Upload, $timeout, libraryService){
 
-	//watch for the change in the list of book shelves changing from other controllers [libraryController]
-	  $scope.$watch(function () { return libraryService.getUserBookShelves(); }, 
-		  		function (newValue, oldValue) {
-		        if (newValue !== oldValue) {
-		        	$scope.bookShelves = newValue.bookShelves;
-		        }
-		        
-		    });
-	  
-	$scope.bookShelves = [
-	                      {'shelfName':'maths','books':[
-	                                                    {'bookId':'100','title':'title1', 'cover':'assets/img/notes/note1.jpg'}
-	                                                    ,{'bookId':'100','title':'title2', 'cover':'assets/img/notes/note1.jpg'}
-	                                                    ,{'bookId':'100','title':'title3', 'cover':'assets/img/notes/note1.jpg'}
-	                                                    ,{'bookId':'100','title':'title4', 'cover':'assets/img/notes/note1.jpg'}
-	                                                    ,{'bookId':'100','title':'title5', 'cover':'assets/img/no_books_preview/no_image.jpg'}
-	                                                    ,{'bookId':'100','title':'title6', 'cover':'assets/img/no_books_preview/no_image.jpg'}
-	                                                    ]} 
-	                                                    ,{'shelfName':'biology','books':[{'bookId':'100','title':'title7', 'cover':'assets/img/no_books_preview/no_image.jpg'}]}
-	                                                    ,{'shelfName':'chemistry','books':[{'bookId':'100','title':'title8', 'cover':'assets/img/no_books_preview/no_image.jpg'}]}
-	                                                    ,{'shelfName':'science','books':[{'bookId':'100','title':'title9', 'cover':'assets/img/no_books_preview/no_image.jpg'}]},
-	                                                    {'shelfName':'fiction','books':[
-	                                                                                  {'bookId':'100','title':'title10', 'cover':'assets/img/no_books_preview/no_image.jpg'}
-	                                                                                  ,{'bookId':'100','title':'title11', 'cover':'assets/img/no_books_preview/no_image.jpg'}
-
-	                                                                                  ]}
-	                                                    ];
-	
-	//share user book shelves to other controllers like [library controller]
-	libraryService.setUserBookShelves($scope.bookShelves);
-
 	$scope.status = ' ';
-	$scope.showBooksInFirstRow = function(index){
-		if(index == 0){
-			$scope.booksInShelfSlides = $scope.bookShelves[0].books;
-		}else{
+	
+	/*this method is called when you click the 'Add To Shelf' link button*/
+	$scope.addToShelfButtonClick = function(){
+		//find out the current shelf for a particular book saved in the db
+		if($rootScope.activeBookRecord != undefined){
+			for(var shelfIndex in $rootScope.bookShelves){
+				if($rootScope.bookShelves[shelfIndex] != undefined && $rootScope.bookShelves[shelfIndex].books != undefined){
+					for(var bookIndex in $rootScope.bookShelves[shelfIndex].books){
 
+						var book = $rootScope.bookShelves[shelfIndex].books[bookIndex];
+						if($rootScope.activeBookRecord != undefined && 
+								$rootScope.activeBookRecord.ia[0] == book.bookId){
+							//select the shelf radio button
+							$scope.shelfRadioButtonGroup = $rootScope.bookShelves[shelfIndex].shelfName;
+							break;
+						}
+					}
+				}
+			}
 		}
+		
 	};
-
+/*This method is called when you click on the radio button*/
+	$scope.shelfRadioButtonClicked = function(){
+		$scope.isShelfRadioButtonClicked = true;
+	};
+	
+		/*Watch the shelf radio button clicked and save it to the db*/
+	$scope.$watch('shelfRadioButtonGroup', function (newValue, oldValue) {
+		if($scope.isShelfRadioButtonClicked){
+			$scope.isShelfRadioButtonClicked = false;
+		if(newValue != undefined && oldValue != undefined){
+			if(newValue != oldValue){
+				//make the service call to save the current book in the selected shelf
+				//make the request
+				var book = $rootScope.activeBookRecord;//setBookObjectFromRecord($rootScope.activeBookRecord);
+				book.bookId = $rootScope.activeBookRecord.ia[0];
+				var oldShelfName = oldValue;
+				var newShelfName = newValue;
+				var request = {"userId":$rootScope.loggedInUser.userEmail,
+								"book":book,
+								"oldShelfName":oldShelfName,
+								"newShelfName":newShelfName};
+				
+				var resource = libraryService.addBookToShelf();
+				//make the ajax call 
+				resource.call(request).$promise.then(function(response) {
+					if(response.developerMessage == undefined){
+						//put the updated book shelves in the root scope..
+						$rootScope.bookShelves = response.userShelfDocument.shelves;
+						if(libraryService.getBookShelfClicked){
+							//find out the book shelf from the list of shelves and publish it to the library
+							for(var shelfIndex in $rootScope.bookShelves){
+								if($rootScope.bookShelves[shelfIndex].shelfName == oldShelfName){
+									//publish it to the library service to use it in library controller
+									libraryService.setBookShelf($rootScope.bookShelves[shelfIndex]);
+									break;
+								}
+							}
+						}
+					}
+					
+				},
+				function(error) {
+				}
+				);
+				
+			}
+		}
+	}
+	});
+	
+	/*This method is called when you click on any of the shelf link left side of page*/
+	//This pushes the shelf to the library service
 	$scope.showShelfBooks = function(bookShelf, index){
-
 		rowIndex = index;
-
 		//assign the books for the book shelf
 		booksInShelfSlides = [];
-		if(bookShelf != null && bookShelf.books!=null){
+		if(bookShelf != null){
 			//share the clicked book shelf to the library controller 
 			libraryService.setBookShelf(bookShelf);
 			//share the shelf clicked to controllers
@@ -55,18 +88,29 @@ angular.module('studentDashboard').controller('shelfCtrl', function shelfCtrl($s
 		}
 	};
 
-	$scope.renameShelf = function(){
-		$mdDialog.show(
-				$mdDialog.alert()
-				.title('You clicked Rename!')
-				/*.textContent('You clicked the menu item at index ' + index)*/
-				.ok('Nice')
-		);
+	var oldBookShelfName = '';
+	$scope.setOldShelfToScope = function(bookShelfName){
+		oldBookShelfName = bookShelfName;	
+	};
+	
+	$scope.renameShelf = function(bookShelf, shelfIndex){
+		var request = {};
+		request.userId = $rootScope.loggedInUser.userEmail;
+		request.oldShelfName = oldBookShelfName;
+		request.newShelfName = bookShelf.shelfName;
+	
+		//make the ajax call to delete the shelf
+		var resource = libraryService.renameShelf();
+		//make the ajax call 
+		resource.call(request).$promise.then(function(response) {
+			//set the books for the shelf
+			$rootScope.bookShelves = response.userShelfDocument.shelves;
+		}, function error(){ });
 	};
 
-	$scope.deleteShelf = function(event){
+	$scope.deleteBookFromShelf = function(event, record){
 		var confirm = $mdDialog.confirm()
-		.content('<strong>Do You Want To Delete This Shelf ?</strong>')
+		.content('<strong>Do You Want To Delete This Book ?</strong>')
 		.ariaLabel('Lucky day')
 		.cancel('No')
 		.ok('Yes')
@@ -74,8 +118,64 @@ angular.module('studentDashboard').controller('shelfCtrl', function shelfCtrl($s
 		.targetEvent(event);
 
 		$mdDialog.show(confirm).then(function() {
+			//get the book shelf clicked
+			var bookShelf = libraryService.getBookShelf();
+			
+			//get the books from the book shelf
+			var books = bookShelf.books;
+			//loop through the books and delete the record from the books
+			var request = {};
+			request.userId = $rootScope.loggedInUser.userEmail;
+			request.bookId = record.bookId;
+			request.shelfName = bookShelf.shelfName;
+		
+			//make the ajax call to delete the shelf
+			var resource = libraryService.removeBookFromShelf();
+			//make the ajax call 
+			resource.call(request).$promise.then(function(response) {
+				//set the books for the shelf
+				$rootScope.bookShelves = response.userShelfDocument.shelves;
+				//find the current shelf
+				for(var shelfIndex in $rootScope.bookShelves){
+					if(bookShelf.shelfName == $rootScope.bookShelves[shelfIndex].shelfName){
+						libraryService.setBookShelf($rootScope.bookShelves[shelfIndex]);
+						//bookShelf.books = shelves[shelfIndex].books;
+						break;
+					}
+				}
+				
+			}, function error(){ });
+		}, function() {
+			//if no button is clicked in dialog then do nothing
+
+		});
+	};
+	
+	//This deletes the shelf from the rack of shelves for the user
+	$scope.deleteShelf = function(bookShelf, event){
+		
+		var confirm = $mdDialog.confirm()
+		.content('<strong>Do You Want To Delete This Shelf ? \nAll Books will be lost...</strong>')
+		.ariaLabel('Lucky day')
+		.cancel('No')
+		.ok('Yes')
+		.targetEvent(event);
+
+		$mdDialog.show(confirm).then(function() {
 			//make the ajax call to delete the shelf
 
+			var request = {"userId":$rootScope.loggedInUser.userEmail,
+						    "shelfName":bookShelf.shelfName};
+			
+			//ajax call
+			var resource = libraryService.deleteShelf();
+			resource.call(request).$promise.then(function(response) {
+				//set the books for the shelf
+				$rootScope.bookShelves = response.userShelfDocument.shelves;
+				
+			}, function error(){ });
+			
+			
 		}, function() {
 			//if no button is clicked in dialog then do nothing
 
@@ -132,6 +232,34 @@ angular.module('studentDashboard').controller('shelfCtrl', function shelfCtrl($s
 		});
 	};
 
+	//create new shelf
+	$scope.createNewShelf = function(){
+		var user = {"userId":$rootScope.loggedInUser.userEmail,
+				"userName":$rootScope.loggedInUser.userName};
+		var request = {"user":user, "shelfName" : $scope.newShelfName};
+		var resource = libraryService.createNewShelf();
+		resource.call(request).$promise.then(function(response){
+			var bookShelves = undefined;
+			if(response.userShelfDocument != undefined){
+				bookShelves = response.userShelfDocument.shelves;
+			}
+			if($rootScope.bookShelves == undefined){
+				$rootScope.bookShelves = [];
+			}
+			if(bookShelves != undefined && $rootScope.bookShelves != undefined){
+				//take the latest book shelf from the book shelves and push it to the scope
+				var index = bookShelves.length - 1;
+				$rootScope.bookShelves.push(bookShelves[index]);
+
+				//publish the shelf created to the library controller
+				//libraryService.setUserBookShelves($scope.bookShelves);
+			}
+		},
+		function error(){
+
+		});
+
+	};
 	function DialogController($scope, $mdDialog) {
 
 		$scope.upload = function (upload) {

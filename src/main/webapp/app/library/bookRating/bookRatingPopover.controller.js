@@ -18,35 +18,63 @@ libraryModule.controller('bookRatingPopoverCTRL', function($scope, $rootScope, $
 
 	};
 
+	//Insert/update Book Review
 	$scope.insertBookReview = function(){
-		//make the book review document to be saved to mongo db
-		var bookReviewDocument = {};
-		var user = {};
-		var userComment = {};
-		
-		//set the user
-		user.userEmail = $rootScope.loggedInUser.userEmail;
-		user.userName = $rootScope.loggedInUser.userName;
-		
-		//set the user comment
-		userComment.comment = $scope.userBookReview;
-		
-		//set book review document
-		bookReviewDocument.userComment = userComment;
-		bookReviewDocument.bookId = $rootScope.activeBookRecord.ia[0];
-		bookReviewDocument.user = user;
-		
-		//insert new records into mongo db
-		var bookRatingServiceCall = libraryService.insertBookReview();
-		bookRatingServiceCall.call(bookReviewDocument).$promise.then(function(response){
+		if($scope.ratingOfUser == null || $scope.ratingOfUser == 0 ){
+			console.log('user rating is empty');
+		}else{
+			if($scope.hoveredBook.userBookReview != undefined && $scope.hoveredBook.userBookReview != ''){
+				if(($scope.hoveredBook.bookReviewDocument != null ||
+						$scope.hoveredBook.bookReviewDocument != undefined) && $scope.hoveredBook.bookReviewDocument.review != undefined){
+					
+					//set the review
+					$scope.hoveredBook.bookReviewDocument.review =  $scope.hoveredBook.userBookReview ;
+					//update the book review document
+					var bookRatingServiceCall = libraryService.updateBookReview();
+					bookRatingServiceCall.call($scope.hoveredBook.bookReviewDocument).$promise.then(function(response){
 
-			//refresh the book ratings after the insert 
-			//$scope.library.refreshBookRating($scope.hoveredBook.bookRatingDocument.bookId);
+						//refresh the book ratings after the insert 
+						//$scope.library.refreshBookRating($scope.hoveredBook.record.ia[0]);
 
-		},
-		function(error){
+					},
+					function(error){
 
-		});
+					});
+				}else{
+					//make the book review document to be saved to mongo db
+					var bookReviewDocument = {};
+					var user = {};
+					//var userComment = {};
+
+					//set the user
+					user.userEmail = $rootScope.loggedInUser.userEmail;
+					user.userName = $rootScope.loggedInUser.userName;
+
+					//set the book review
+					bookReviewDocument.review = $scope.hoveredBook.userBookReview;
+
+					//set book review document
+					//bookReviewDocument.userComment = userComment;
+					bookReviewDocument.bookId = $rootScope.activeBookRecord.ia[0];
+					bookReviewDocument.user = user;
+
+					//insert new records into mongo db
+					var bookRatingServiceCall = libraryService.insertBookReview();
+					bookRatingServiceCall.call(bookReviewDocument).$promise.then(function(response){
+
+						//refresh the book ratings after the insert 
+						//$scope.library.refreshBookRating($scope.hoveredBook.record.ia[0]);
+
+					},
+					function(error){
+
+					});
+				}
+				//save the book rating
+				saveBookRating($scope.ratingOfUser);
+				
+			}
+		}
 	};
 	//open book details modal...............................................................
 	$scope.openBookDetailsModal = function(record){
@@ -69,91 +97,100 @@ libraryModule.controller('bookRatingPopoverCTRL', function($scope, $rootScope, $
 		}, function () {
 		});
 	};
-	
+
 	//Watch on the variable 'userBookRating' and update the rating of the book
-	$scope.$watch('userRating1.ratingOfUser', function (newValue, oldValue) {
+	$scope.$watch('ratingOfUser', function (newValue, oldValue) {
 		if(newValue != undefined){
 			//$scope.bookRatingDocument.userRating.rating = newValue;
 		}
 		if(oldValue!= undefined && newValue != undefined && oldValue != newValue){
-			//if the $scope.bookRating document is null or undefined then it means it is new 
-			if($scope.hoveredBook.bookRatingDocument == undefined || $scope.hoveredBook.bookRatingDocument == null){
-				var bookRatingDocList = [];
-				//create a new bookRating document for system and user rating and then save it
-				
-				//populate user rating 
-				$scope.hoveredBook.bookRatingDocument = {};
-				var userRating = {};
-				var user = {};
-				user.userEmail = $rootScope.loggedInUser.userEmail;
-				user.userName = $rootScope.loggedInUser.userName;
 
-				userRating.user = user;
-				userRating.rating = newValue;
-
-				//set user rating
-				$scope.hoveredBook.bookRatingDocument.bookId = $scope.hoveredBook.ia[0];
-				$scope.hoveredBook.bookRatingDocument.userRating = userRating;
-				
-				//populate system rating
-				var systemRatingDoc = {};
-				var systemUserRating = {};
-				var systemUser = {};
-				systemUser.userEmail = "admin@collegedays.com";
-				systemUser.userName = "Admin";
-				
-				systemUserRating.user = systemUser;
-				systemUserRating.rating = 3;
-				
-				//set system rating
-				systemRatingDoc.userRating = systemUserRating;
-				systemRatingDoc.bookId = $scope.hoveredBook.ia[0];
-				
-				//set list of system and user rating
-				bookRatingDocList.push(systemRatingDoc);
-				bookRatingDocList.push($scope.hoveredBook.bookRatingDocument);
-				
-				//insert new records into mongo db
-				var bookRatingServiceCall = libraryService.insertBookRatings();
-				bookRatingServiceCall.call(bookRatingDocList).$promise.then(function(response){
-
-					//refresh the book ratings after the insert 
-					$scope.library.refreshBookRating($scope.hoveredBook.bookRatingDocument.bookId);
-
-				},
-				function(error){
-
-				});
-				
-
+			if(($scope.hoveredBook.bookReviewDocument!= null &&
+					$scope.hoveredBook.bookReviewDocument.review != null) 
+					|| ($scope.hoveredBook.bookReviewDocument != undefined
+							&& $scope.hoveredBook.bookReviewDocument.review != undefined)){
+				saveBookRating(newValue);
+			}  else{
+				//notify user to write some review
+				console.log('please enter some review  ');
 			}
-			else{
-				//if the user has already give the rating then 
-				//in that case just update the rating of that user
-				var updatedBookRatingDoc = $scope.hoveredBook.bookRatingDocument;
-				updatedBookRatingDoc.userRating.rating = newValue;
-				//call the service to update the rating of the book
-				var bookRatingServiceCall = libraryService.updateBookRating();
-				bookRatingServiceCall.call(updatedBookRatingDoc).$promise.then(function(response){
-
-					$scope.library.refreshBookRating($scope.hoveredBook.bookRatingDocument.bookId);
-
-				},
-				function(error){
-
-				});
-			}
-
-		}  
+		}
 	});
-	
+	//saves the book rating
+	function saveBookRating(newValue){
+		//if the $scope.bookRating document is null or undefined then it means it is new 
+		if($scope.hoveredBook.bookRatingDocument == undefined || $scope.hoveredBook.bookRatingDocument == null){
+			var bookRatingDocList = [];
+			//create a new bookRating document for system and user rating and then save it
+
+			//populate user rating 
+			$scope.hoveredBook.bookRatingDocument = {};
+			var userRating = {};
+			var user = {};
+			user.userEmail = $rootScope.loggedInUser.userEmail;
+			user.userName = $rootScope.loggedInUser.userName;
+
+			userRating.user = user;
+			userRating.rating = newValue;
+
+			//set user rating
+			$scope.hoveredBook.bookRatingDocument.bookId = $scope.hoveredBook.record.ia[0];
+			$scope.hoveredBook.bookRatingDocument.userRating = userRating;
+
+			//populate system rating
+			var systemRatingDoc = {};
+			var systemUserRating = {};
+			var systemUser = {};
+			systemUser.userEmail = "admin@collegedays.com";
+			systemUser.userName = "Admin";
+
+			systemUserRating.user = systemUser;
+			systemUserRating.rating = 3;
+
+			//set system rating
+			systemRatingDoc.userRating = systemUserRating;
+			systemRatingDoc.bookId = $scope.hoveredBook.record.ia[0];
+
+			//set list of system and user rating
+			bookRatingDocList.push(systemRatingDoc);
+			bookRatingDocList.push($scope.hoveredBook.bookRatingDocument);
+
+			//insert new records into mongo db
+			var bookRatingServiceCall = libraryService.insertBookRatings();
+			bookRatingServiceCall.call(bookRatingDocList).$promise.then(function(response){
+
+				//refresh the book ratings after the insert 
+				$scope.library.refreshBookRating($scope.hoveredBook.record.ia[0]);
+
+			},
+			function(error){
+
+			});
+		}
+		else{
+			//if the user has already give the rating then 
+			//in that case just update the rating of that user
+			var updatedBookRatingDoc = $scope.hoveredBook.bookRatingDocument;
+			updatedBookRatingDoc.userRating.rating = newValue;
+			//call the service to update the rating of the book
+			var bookRatingServiceCall = libraryService.updateBookRating();
+			bookRatingServiceCall.call(updatedBookRatingDoc).$promise.then(function(response){
+
+				$scope.library.refreshBookRating($scope.hoveredBook.record.ia[0]);
+
+			},
+			function(error){
+
+			});
+		}
+	}
 	//refresh the book rating for a book.
 	$scope.library.refreshBookRating = function(bookId){
-		
-		var bookRatingServiceCall = libraryService.getBookRatings(bookId);
+
+		var bookRatingServiceCall = libraryService.getBookReviews(bookId);
 		bookRatingServiceCall.call().$promise.then(function(response){
 			if(response != null ){
-				 setRatingScopeObjects(response);
+				setRatingScopeObjects(response);
 			}
 		},
 		function(error){
@@ -161,25 +198,31 @@ libraryModule.controller('bookRatingPopoverCTRL', function($scope, $rootScope, $
 		});
 	};
 
-	$scope.userRating1 = {};
 	//set the scope objects after the book rating retrieved
 	function setRatingScopeObjects(response){
-		response.overAllBookRating;
-		response.bookRatingDocumentList;
+		$scope.hoveredBook.bookRatingDocument = undefined;
+		$scope.hoveredBook.bookReviewDocument = undefined;
 		//calculate the user rating
 		for(var i in response.bookRatingDocumentList){
-			//set the current user rating out of all the users
+			//set the current user rating and review out of all the users
 			if($rootScope.loggedInUser.userEmail == response.bookRatingDocumentList[i].userRating.user.userEmail){
 				$scope.hoveredBook.bookRatingDocument = response.bookRatingDocumentList[i];
-				$scope.userRating1.ratingOfUser = response.bookRatingDocumentList[i].userRating.rating;
-			
+				$scope.ratingOfUser = response.bookRatingDocumentList[i].userRating.rating;
 			}
-
 		}
+		//loop throught the review to get the current user review
+		for(var j in response.bookReviewDocumentList){
+		//set the review set by the user
+		if($rootScope.loggedInUser.userEmail == response.bookReviewDocumentList[j].user.userEmail){
+			//set the review of the user
+			$scope.hoveredBook.userBookReview = response.bookReviewDocumentList[j].review;
+			$scope.hoveredBook.bookReviewDocument = response.bookReviewDocumentList[j];
+		}
+	}
 		//set the scope objects for no of users and over all rating
 		$scope.hoveredBook.overAllRatingPopUp = response.overAllBookRating;
 		$scope.hoveredBook.noOfRatingsPopUp = response.bookRatingDocumentList.length;
-		 
+
 		//calculate the star rating count 
 		calculateStarRatingCountAndWidth(response.bookRatingDocumentList);
 	}

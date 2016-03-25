@@ -13,8 +13,12 @@
 				<div class="book-shelf">
 					<div class="shelf-name-sec"
 						ng-click="showShelfBooks(bookShelf,$index)">
-						<a class="a-text-color-black"> <strong>{{bookShelf.shelfName}}</strong>
-						</a>
+						<span
+						editable-textarea="bookShelf.shelfName" e-form="renameShelfTextBtnForm"
+						e-rows="1" e-cols="15" onbeforesave="setOldShelfToScope(bookShelf.shelfName)" onaftersave="renameShelf(bookShelf, $index)">
+						{{ bookShelf.shelfName || 'empty' }} </span>
+						<!-- <a class="a-text-color-black"> <strong>{{bookShelf.shelfName}}</strong> -->
+						
 
 						<!-- <div class="shelf-cover-photo"> -->
 
@@ -23,20 +27,24 @@
 								src="assets/img/cancelButton/cancel.png"> -->
 						<div class="shelf-name-sec-hover">
 							<div class="right-section">
-
-
-								<md-menu md-offset="0 -5"> <md-button
+								<md-menu md-offset="0 -5">
+								 <md-button
 									aria-label="Open demo menu" class="md-icon-button"
 									ng-click="$mdOpenMenu($event)"> <!-- <div class="white-background "> -->
 								<md-icon md-font-icon="fa-edit"
 									class="fa s32 md-primary md-hue-2" md-menu-origin> </md-icon> <!-- </div> -->
-								</md-button> <md-menu-content width="3"> <md-menu-item>
-								<md-button ng-click="renameShelf($event)"> <span
-									md-menu-align-target>Rename Shelf</span> </md-button> </md-menu-item> <md-menu-item>
-								<md-button ng-click="deleteShelf($event)"> <span
-									md-menu-align-target>Delete Shelf</span> </md-button> </md-menu-item> <md-menu-item>
-								<md-button ng-click="uploadShelfImage($event, bookShelf)">
-								<span md-menu-align-target>Change Shelf Photo</span> </md-button> </md-menu-item> </md-menu-content> </md-menu>
+								</md-button> 
+								<md-menu-content width="3">
+								 <md-menu-item>
+								<md-button ng-click="renameShelfTextBtnForm.$show()" 
+								ng-hide="renameShelfTextBtnForm.$visible"> <span
+									md-menu-align-target>Rename Shelf</span> </md-button>
+								</md-menu-item>
+								<md-menu-item>
+								<md-button ng-click="deleteShelf(bookShelf, $event)"> <span
+									md-menu-align-target>Delete Shelf</span> </md-button> 
+									</md-menu-item> 
+								 </md-menu-content> </md-menu>
 
 							</div>
 						</div>
@@ -47,7 +55,7 @@
 						<ul>
 							<li><strong>Created On </strong>12/16/2015</li>
 							<li><strong>Last Updated On </strong> 12/16/2015</li>
-							<li><strong>Total Books </strong> 10</li>
+							<li><strong>Total Books </strong> {{bookShelf.books.length}}</li>
 						</ul>
 					</div>
 				</div>

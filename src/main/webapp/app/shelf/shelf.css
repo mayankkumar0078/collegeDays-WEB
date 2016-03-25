@@ -69,7 +69,6 @@
 .shelf-name-sec-hover .right-section {
 	width: 20px;
 	height: 20px;
-	position: absolute;
 	top: 1%;
 	right: 1%;
 	position: absolute;
@@ -84,7 +83,7 @@
 }
  .shelf-name-sec-hover {
     visibility: hidden;
-	position: absolute;
+	/* position: absolute; */
 	width: 20px;
 	height: 20px;
 	right: 0%;
@@ -127,11 +126,15 @@
 }
 
 .shelf-name-sec {
-	width: auto;
+	width: 95%;
 	text-align: left;
 	background-color: whitesmoke;
 	height: 30px;
 	position: relative;
+	padding: 5px;
+	float: left;
+	color: black;
+	cursor:pointer;
 }
 .shelf-name-sec a{
 	width: 100%;

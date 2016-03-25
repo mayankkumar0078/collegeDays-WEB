@@ -91,15 +91,51 @@ service('libraryService', function($resource) {
 		return $resource("http://localhost:8080/book/review",{},{call : {method : 'PUT', isArray:false}});
 	};
 	
+	this.updateBookReviewComment = function(){
+		return $resource("http://localhost:8080/book/review/comment",{},{call : {method : 'PUT', isArray:false}});
+	};
+	
+	this.addBookReviewComment = function(){
+		return $resource("http://localhost:8080/book/review/comment",{},{call : {method : 'POST', isArray:false}});
+	};
+	
+	this.insertBookRatings = function(){
+		return $resource("http://localhost:8080/book/rating/list",{},{call : {method : 'PUT', isArray:false}});
+	};
+	
 	this.updateBookRating = function(){
 		return $resource("http://localhost:8080/book/rating",{},{call : {method : 'PUT', isArray:false}});
 	};
 	
-	this.getBookRatings = function(bookId){
-		return $resource("http://localhost:8080/book/rating?bookId="+bookId,{},{call : {method : 'GET', isArray:false}});
-	};
-	
-	this.insertBookRatings = function(){
+	this.getBookRatings = function(){
 		return $resource("http://localhost:8080/book/rating/list",{},{call : {method : 'POST', isArray:false}});
 	};
+	
+	/*this.createNewShelf = function(){
+		return $resource("http://localhost:9090/user/shelf/list",{},{call : {method : 'POST', isArray:false}});
+	};*/
+	
+	this.retrieveUserShelves = function(userId){
+		return $resource("http://localhost:9090/user/shelf?userId="+userId,{},{call : {method : 'GET', isArray:false}});
+	};
+	
+	this.createNewShelf = function(){
+		return $resource("http://localhost:9090/user/shelf",{},{call : {method : 'POST', isArray:false}});
+	};
+	this.addBookToShelf = function(){
+		return $resource("http://localhost:9090/user/shelf/addbook",{},{call : {method : 'PUT', isArray:false}});
+	};
+	
+	this.removeBookFromShelf = function(){
+		return $resource("http://localhost:9090/user/shelf/removebook",{},{call : {method : 'PUT', isArray:false}});
+	};
+	
+	this.deleteShelf = function(){
+		return $resource("http://localhost:9090/user/shelf/delete",{},{call : {method : 'PUT', isArray:false}});
+	};
+	
+	this.renameShelf = function(){
+		return $resource("http://localhost:9090/user/shelf/rename",{},{call : {method : 'PUT', isArray:false}});
+	};
+	
 });

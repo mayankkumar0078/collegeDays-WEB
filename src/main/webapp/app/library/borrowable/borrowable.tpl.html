@@ -1,13 +1,27 @@
 <div>
-	<div>
-	<ul class="book-content-ul">
-		<li class="full-book-content" ng-repeat="record in borrowableBooks">
+<ul class="book-content-ul" infinite-scroll="addBooksInPage('readableTab')" infinite-scroll-distance="1">
+	<li class="empty-shelf-caption" ng-show="isBookShelfClicked && noBorrowableBooksInShelf"> There are no borrowable books available for <strong>{{shelfName}}</strong> </li>
+	<li class="non-empty-shelf-caption" ng-show="isBookShelfClicked && !noBorrowableBooksInShelf"> Books in <strong>{{shelfName}}</strong> </li>
+	
+	<ul class="book-content-ul" infinite-scroll="addBooksInPage('borrowableTab')" infinite-scroll-distance="1">
+	
+			<li class="full-book-content"  ng-mouseenter="saveActiveRecord(record)" ng-repeat="record in borrowableBooks">
+			<div ng-bind="record" ng-show="false"></div>
+			<!-- <a href="{{record.iaUrl}}"> -->
+			<a href="" ng-click="openBookDetailsModal(record)">
 			<div class="book-quick-view">
-				<div ng-click="openBookDetailsModal(record)">
-					<a href="">Details view </a>
-				</div>
-			</div> <!-- <div class="rate-Book-Section">Rate Book</div> -->
+			<span>Details view</span>
+			</div>
+			</a> 
+			<div class="add-to-shelf" ng-controller="shelfCtrl" ng-click="addToShelfButtonClick()" ns-popover
+ 				 ns-popover-template="addBookToShelfPopoverId"
+ 				 ns-popover-trigger="click"
+ 				 ns-popover-placement="bottom">
+   				 Add to shelf
+			</div>
+			
 			<div class="book-image-container">
+			<a href="{{record.iaUrl}}" target="_blank">
 				<img ng-if="record.cover_i"
 					src="http://covers.openlibrary.org/b/id/{{record.cover_i}}-M.jpg">
 
@@ -16,28 +30,77 @@
 
 				<img ng-if="!record.cover_i && !record.isbn[0]"
 					src="assets/img/no_books_preview/no_image.jpg">
+					</a>
+					<a href="{{record.iaUrl}}" target="_blank">
+					<div class="read-book-link-section">
+			<img alt="" src="assets/read-book-icon.png">
 			</div>
+			</a>
+			
+		<a href="" ng-controller="shelfCtrl" ng-click="deleteBookFromShelf($event, record)" ng-show="isBookShelfClicked">
+				<div class="remove-book-link-section">
+				<span class="fa-stack fa-lg">
+  					<i class="fa fa-circle-thin fa-stack-2x"></i>
+  					<i class="fa fa-times fa-stack-1x fa-color-red"></i>
+				</span>
+					
+			<!-- <img alt="" src="assets/read-book-icon.png"> -->
+			</div>
+			</a>	
+			</div>
+			
 			<div class="book-info-section">
-				<ul class="book-info-section-ul">
-					<li class="book-title-section"><strong>Title:</strong>
-						{{record.title}}</li>
-					<!-- <li><strong>ISBN:</strong> {{record.isbn[0]}}</li>
-					<li class="goodReadRating-section"><strong>GoodRead
-							Rating:</strong>
-						<div ng-if="record.goodReadReviewRating">
-							<div class="star-rating-section"
-								awesome-rating="record.goodReadReviewRating.averageRating"
-								awesome-rating-options="options"></div>
-							<span class="rating-num">{{record.goodReadReviewRating.averageRating}}
-								({{record.goodReadReviewRating.workRatingsCount}} People) </span>
-						</div>
-						<div ng-if="!record.goodReadReviewRating">NAL</div></li> -->
-					<li class="readableLink-li"><a href="{{record.iaUrl">Borrow
-							Books FREE</a></li>
-				</ul>
-			</div>
-		</li>
-		<li><div class="endScrollingSec" ng-show="borrowablePageScrollEnded"><strong>That's All Buddy !  </strong></div></li>
-		</ul>
+		
+		<div class="book-info-row" ns-popover ng-mouseover="getRatingForBook(record)"
+ 				 ns-popover-template="bookRatingPopoverId" ns-popover-theme="ns-popover-tooltip-theme"
+ 				 ns-popover-trigger="mouseenter"
+ 				 ns-popover-placement="right">
+		<div class="book-rating-sec" awesome-rating="record.bookRating" awesome-rating-options="optionsReadOnly"></div>
+		<span>({{record.noOfRatings}} ratings)&nbsp;&nbsp;<i class="fa fa-caret-right"></i></span>
 		</div>
+			    <div class="book-info-row">
+					<div class="book-info-title" style="width: 31px">Title</div>
+					<span class="book-info-value"  show-tooltip="record.title" width="20"></span>
+				</div>
+				<div class="book-info-row">
+				
+				<div class="book-info-title" style="width: 45px">Author</div>
+					<span class="book-info-value"  show-tooltip="record.author_name[0]" width="20"></span>
+					
+					<!-- <div><strong>Author </strong> {{record.author_name[0]}}</div> -->
+				</div>
+				<div class="book-info-row">
+				<div class="book-info-title" style="width: 92px">Published year</div>
+					<span class="book-info-value"  show-tooltip="record.publish_date[0]"></span>
+					
+				</div>
+			</div>
+			
+		</li>
+		
+		<li><div class="endScrollingSec" ng-show="borrowablePageScrollEnded"><strong>That's All Buddy !  </strong></div></li>
+		<li><div class="loading-section-books" ng-show="readable_infinite_scroll_in_progress"><strong>Loading........... </strong></div></li>
+		
+	</ul>
 </div>
+<div ui-view="bookDetailsModalView"></div>
+
+   <script type="text/ng-template" id="bookDetailModal.html"> 
+					<div class="modal-body modal-xl">
+						<div class="bookDetailsDisplay">
+						<div class="first-line">
+                           <div class="cross-image-sec">
+							<img src="assets/img/cancelButton/cancel.png">
+							</div>
+							</div>
+
+						<div class="bookDetailsLeftSection">
+							<ng-include src="leftTemplate"></ng-include>
+						</div>
+						<div class="bookDetailsRightSection">
+							<ng-include src="rightTemplate" class="view-slide-in"></ng-include>
+						</div>
+
+						</div>
+					</div>
+					</script>
