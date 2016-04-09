@@ -76,9 +76,12 @@
 		</li>
 		
 		<li><div class="endScrollingSec" ng-show="readablePageScrollEnded"><strong>That's All Buddy !  </strong></div></li>
-		<li><div class="loading-section-books" ng-show="readable_infinite_scroll_in_progress"><strong>Loading........... </strong></div></li>
 		
+	<li><div class="spinner-location">
+	<span us-spinner spinner-theme="bigPurple" spinner-on = "readable_infinite_scroll_in_progress"></span>
+	</div></li>
 	</ul>
+	
 </div>
 <div ui-view="bookDetailsModalView"></div>
 

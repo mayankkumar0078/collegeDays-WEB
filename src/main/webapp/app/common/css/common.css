@@ -266,3 +266,23 @@ ul>li{
 .blue-color{
 	color: purple;
 }
+ span:focus {
+    outline: none;
+    border: 0;
+ }
+  div:focus {
+    outline: none;
+    border: 0;
+ }
+ .error-message{
+ color:red;
+ font: bold;
+ float: left;
+ padding-bottom: 10px;
+ }
+ .editable-wrap{
+ position:relative;
+  }
+  .margin-10{
+  margin: 10px;
+  }

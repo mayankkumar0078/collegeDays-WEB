@@ -205,6 +205,8 @@
 	height: 30px;
 	font-weight: bold;
 	font-size: large;
+	width: 100%;
+	float: left;
 }
 
 .forgot-password {
@@ -221,14 +223,4 @@
 	border-top: 1px solid;
 	text-align: center;
 	padding-top: 7px;
-}
-
-#loginError{
-	color:red;
-	padding-top:10px;
-}
-
-#loginError img{
-	height:20px;
-	width:20px;
 }

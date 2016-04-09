@@ -6,9 +6,20 @@
 			<div class="first-line-shelf">
 				<span>Shelf</span>
 			</div>
+			
+			<span class="error-message" ng-show = "shelfErrorMsg != undefined">
+			{{shelfErrorMsg}}</span>
+			
+			<span class="create-shelf">
+			<md-button class="md-raised md-primary" ng-click="createNewShelfTextBtnForm.$show()" 
+								ng-hide="createNewShelfTextBtnForm.$visible">
+			<span class="fa fa-plus"></span>&nbsp;Create New Shelf</md-button>
+			</span>
+			
+			<span editable-textarea="newShelfName" e-form="createNewShelfTextBtnForm"
+				  e-rows="1" e-cols="15" onaftersave="createNewShelf()"></span>
+						
 			<div ng-repeat="bookShelf in bookShelves">
-
-
 				<!-- <a href="" ng-click="showShelfBooks(bookShelf,$index)" class="a-text-color-black"> -->
 				<div class="book-shelf">
 					<div class="shelf-name-sec"
@@ -25,7 +36,7 @@
 						<!-- <img alt="" ng-if='bookShelf.cover' src="{{bookShelf.cover}}">
 							<img alt="" ng-if='!bookShelf.cover'
 								src="assets/img/cancelButton/cancel.png"> -->
-						<div class="shelf-name-sec-hover">
+						<div class="shelf-name-sec-hover" ng-hide="renameShelfTextBtnForm.$visible">
 							<div class="right-section">
 								<md-menu md-offset="0 -5">
 								 <md-button

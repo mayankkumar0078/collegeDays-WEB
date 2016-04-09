@@ -1,0 +1,186 @@
+.notes-display-section{
+	width: 830px;
+	/* background-color: red; */
+	float: left;
+	margin-left: 12px;
+}
+.notes-header{
+	width: 100%;
+	height: 50px;
+	padding: 10px;
+}
+.notes-header .left-facet{
+	float: left;
+	padding-left: 10px;
+	width: 60%;
+}
+.notes-header .left-facet .notes-caption{
+	font: bold;
+	font-size: xx-large;
+}
+.notes-header .right-facet{
+	float: right;
+	padding-right: 10px;
+}
+.notes-header .right-facet .publish-notes-section{
+	margin-top: -5px;
+}
+.notes-display-section .notes-tab{
+	margin-top: -50px;
+}
+<!-- ----------------------All notes section -------------------------------------- -->
+.all-notes-section{
+	width: 100%;
+	height: 100%;
+	margin: 10px;
+}
+.note-facet-section{
+	padding: 5px;
+	float: left;
+	margin: 10px;
+}
+.one-note-facet{
+	width: 200px;
+	height: 200px;
+	float: left;
+	margin: 10px;
+	margin-top: 20px;
+}
+.note-topic{
+	width: 100%;
+	font: bold;
+	color: black;
+	padding-bottom: 5px;
+	font-weight: bold;
+}
+.note-image-section{
+	height: 150px;
+	position: relative;
+	cursor: pointer;
+}
+
+.note-info{
+	width: 100%;
+	padding-left: -40px;
+	color: #999;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.note-info li{
+	padding-top: 2px;
+}
+.note-image-border-section{
+	width : 100%;
+	height : 30px;
+	background-color: black;
+	visibility: hidden;
+	position: absolute;
+	bottom: 2px;
+}
+.note-image-section:HOVER .note-image-border-section{
+	visibility: visible;
+}
+.note-image-border-section .options-section{
+	margin: 5px;
+}
+.note-image-border-section .options-section .cando-left{
+	padding-left: 5px;
+	color: white;
+	float: left;
+	cursor: pointer;
+}
+.note-image-border-section .options-section .cando-right{
+	padding-left: 5px;
+	padding-right:5px;
+	color: white;
+	float: right;
+	cursor: pointer;
+}
+<!-- ......................album section....................  -->
+.your-notes-album-section{
+	width: 100%;
+	height: 100%;
+	margin: 10px;
+}
+.header{
+	text-align: center;
+	font-size: xx-large;
+	margin: 10px;
+	margin-bottom: 30px;
+}
+.album-facet{
+	width: 100%;
+}
+.create-album-facet{
+	height: 150px;
+	width: 200px;
+	border: thin dotted;
+	float:left;
+	position: relative;
+	cursor: pointer;
+}
+.create-album-caption{
+	width:100%;
+	position: absolute;
+	top:35%;
+	color: #999;
+}
+.add-album-icon{
+	text-align: center;
+	margin-bottom: 10px;
+}
+.add-album-text{
+	text-align: center;
+	font-size: large;
+}
+.one-album-facet{
+	width: 200px;
+	height: 200px;
+	margin-bottom: 20px;
+	margin-left:10px;
+	margin-right:10px;
+	float: left;
+}
+.album-image{
+	width: 100%;
+	height: 150px;
+	cursor: pointer;
+}
+.album-info{
+	color:#999;
+}
+.album-info li{
+	padding-top: 6px;
+}
+.album-info .album-name{
+	font-weight: bold;
+	color: black;
+}
+
+.create-note-facet{
+	width: 200px;
+	height: 150px;
+	float: left;
+	border: 1px dotted;
+	margin-top: 50px;
+	position: relative;
+}
+.add-note-icon{
+	text-align: center;
+	margin-bottom: 10px;
+}
+.add-note-text{
+	text-align: center;
+	font-size: large;
+}
+.create-note-caption{
+	width:100%;
+	position: absolute;
+	top:35%;
+	color: #999;
+	cursor: pointer;
+}
+.your-all-notes-section{
+	float: left;
+	margin-top: -50px;
+}

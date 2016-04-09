@@ -1,0 +1,36 @@
+<div class="all-notes-section">
+	<div class="note-facet-section" ng-repeat = "userNotesDocument in userNotesDocumentList">
+	<div ng-repeat = "notesRepository in userNotesDocument.notesRepositoryList">
+		<div class="one-note-facet" ng-repeat = "userNotes in notesRepository.notesList">
+			<div class="note-topic">
+				<span>{{userNotes.topic}}</span>
+			</div>
+			<div class="note-image-section" ng-click = "">
+				<img alt="" src="">
+				<div class="note-image-border-section" >
+					<div class="options-section">
+						<div class="cando-left">
+							Like<strong>.</strong>
+						</div>
+						<div class="cando-left">Comment</div>
+						<div class="cando-right">
+							{{userNotes.likes}} &nbsp;&nbsp;<span class="fa fa-thumbs-o-up"></span>
+						</div>
+						<div class="cando-right">
+							{{userNotes.comments.length}}<span class="fa fa-comment-o"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="note-info">
+				<ul>
+					<li>{{userNotes.subject}}</li>
+					<li>{{userNotes.branchFullname}}({{userNotes.branchShortName}})</li>
+					<li>24/10/16</li>
+				</ul>
+			</div>
+		</div>
+	
+	</div>
+</div>
+</div>

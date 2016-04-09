@@ -18,7 +18,7 @@ studentDashboardModule.config(function config($stateProvider) {
         url: '/library',
         parent:'studentDashboard',
         views: {
-            "": {
+            "libraryView": {
                 controller: 'libraryCtrl',
                 templateUrl: 'app/library/library.tpl.html',
                 
@@ -27,19 +27,42 @@ studentDashboardModule.config(function config($stateProvider) {
         data: {pageTitle: 'Student Dashboard'}
     })
 
-.state('studentDashboard.shelf', {
-        url: '/shelf',
+.state('studentDashboard.notes', {
+        url: '/notes',
         parent:'studentDashboard',
         views: {
-            "": {
-                controller: 'shelfCtrl',
-                templateUrl: 'app/shelf/shelf.tpl.html',
+            "libraryView": {
+                controller: 'notesCtrl',
+                templateUrl: 'app/notes/notes.tpl.html',
                 
             }
         },
         data: {pageTitle: 'Student Dashboard'}
     })
-    .state('studentDashboard.library.bookDetails', {
+.state('studentDashboard.notes.all', {
+        url: '/all',
+        views: {
+            "libraryView": {
+                controller: 'notesCtrl',
+                templateUrl: 'app/notes/allNotes.tpl.html',
+                
+            }
+        },
+        data: {pageTitle: 'Student Dashboard'}
+    })  
+ 
+.state('studentDashboard.notes.yournotes', {
+        url: '/yourNotes',
+        views: {
+            "libraryView": {
+                controller: 'notesCtrl',
+                templateUrl: 'app/notes/yourNotes.tpl.html',
+                
+            }
+        },
+        data: {pageTitle: 'Student Dashboard'}
+    })
+.state('studentDashboard.library.bookDetails', {
         url: '/bookDetails',
         views: {
             "bookDetailsModalView": {

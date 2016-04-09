@@ -1,0 +1,175 @@
+<div class="gd-col gu4">
+	<div class="facetList">
+		<div id="facetHead" class="line facet-head">
+			<div class="unit facet-title">Refine</div>
+		</div>
+
+		<div class="body">
+			<div class="oneFacet">
+				<div class="facetContainer">
+					<div class="head line">
+						<div class="facet-title">
+							<h5>College Type</h5>
+							<div class="clear-wrap" ng-show="false">
+								<a class="clear">Clear</a>
+							</div>
+							<span class="icon-notes fa fa-chevron-down"></span>
+						</div>
+					</div>
+					<div class="filterBox" style="display: block;">
+						<input type="text" placeholder="Search by Type"> <span
+							class="icon-notes fa fa-search"></span>
+						<div class="overlay dont-show"></div>
+					</div>
+					<ul class="facets scroll">
+						<li class="facet" ng-repeat = "collegeType in collegeTypes">
+							<a class="active"> 
+								<md-checkbox ng-model="collegeType.collegeTypeName">{{collegeType.collegeTypeName}}</md-checkbox>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="oneFacet">
+				<div class="facetContainer">
+					<div class="head line">
+						<div class="facet-title">
+							<h5>College Name</h5>
+							<div class="clear-wrap" ng-show="false">
+								<a class="clear">Clear</a>
+							</div>
+							<span class="icon-notes fa fa-chevron-down"></span>
+						</div>
+					</div>
+					<div class="auto-complete-box" style="display: block;" ng-controller="notesCtrl as ctrl">
+						
+						
+						    <form ng-submit="$event.preventDefault()">
+						      <md-autocomplete
+						          ng-disabled="ctrl.isDisabled"
+						          md-no-cache="ctrl.noCache"
+						          md-selected-item="ctrl.selectedItem"
+						          md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+						          md-search-text="ctrl.searchText"
+						          md-selected-item-change="ctrl.selectedItemChange(item)"
+						          md-items="item in ctrl.querySearch(ctrl.searchText)"
+						          md-item-text="item.collegeFullName"
+						          md-min-length="0"
+						          placeholder="Search College Name">
+						        <md-item-template>
+						          <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+						        </md-item-template>
+						        <md-not-found>
+						          No college were found.
+						          <a ng-click="">Create a new one!</a>
+						        </md-not-found>
+						      </md-autocomplete>
+						      </form>
+     
+						<div class="overlay dont-show"></div>
+					</div>
+					
+				</div>
+			</div>
+			<div class="oneFacet">
+			
+				<div class="facetContainer">
+					<div class="head line">
+						<div class="facet-title">
+							<h5>Branch</h5>
+							<div class="clear-wrap" ng-show="false">
+								<a class="clear">Clear</a>
+							</div>
+							<span class="icon-notes fa fa-chevron-down"></span>
+						</div>
+					</div>
+					<div class="filterBox" style="display: block;">
+						<input type="text" placeholder="Search by Branch"> <span
+							class="icon-notes fa fa-search"></span>
+						<div class="overlay dont-show"></div>
+					</div>
+					<ul class="facets scroll">
+						<li class="facet" ng-repeat = "branch in branches">
+							<a class="active"> 
+								<md-checkbox ng-model="branch.branchId">{{branch.branchFullName}}({{branch.branchShortName}})</md-checkbox>
+							</a>
+						</li>
+					</ul>
+				</div>
+				
+			</div>
+			
+				<div class="oneFacet">
+				<div class="facetContainer">
+					<div class="head line">
+						<div class="facet-title">
+							<h5>Subject</h5>
+							<div class="clear-wrap" ng-show="false">
+								<a class="clear">Clear</a>
+							</div>
+							<span class="icon-notes fa fa-chevron-down"></span>
+						</div>
+					</div>
+					<div class="auto-complete-box" style="display: block;" ng-controller="notesCtrl as ctrl">
+						
+						
+						    <form ng-submit="$event.preventDefault()">
+						      <md-autocomplete
+						          ng-disabled="ctrl.isDisabled"
+						          md-no-cache="ctrl.noCache"
+						          md-selected-item="ctrl.selectedItem"
+						          md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+						          md-search-text="ctrl.searchText"
+						          md-selected-item-change="ctrl.selectedItemChange(item)"
+						          md-items="item in ctrl.querySearch(ctrl.searchText)"
+						          md-item-text="item.display"
+						          md-min-length="0"
+						          placeholder="Search College Name">
+						        <md-item-template>
+						          <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+						        </md-item-template>
+						        <md-not-found>
+						          No subjects were found.
+						          <a ng-click="ctrl.newState(ctrl.searchText)">Create a new one!</a>
+						        </md-not-found>
+						      </md-autocomplete>
+						      </form>
+     
+						<div class="overlay dont-show"></div>
+					</div>
+					
+				</div>
+			</div>
+			<div class="oneFacet">
+							<div class="facetContainer">
+					<div class="head line">
+						<div class="facet-title">
+							<h5>Semester</h5>
+							<div class="clear-wrap" ng-show="false">
+								<a class="clear">Clear</a>
+							</div>
+							<span class="icon-notes fa fa-chevron-down"></span>
+						</div>
+					</div>
+					<div class="filterBox" style="display: block;">
+						<input type="text" placeholder="Search by Semster"> <span
+							class="icon-notes fa fa-search"></span>
+						<div class="overlay dont-show"></div>
+					</div>
+					<ul class="facets scroll">
+						<li class="facet" ng-repeat = "courseType in courseTypes">
+						<div ng-repeat="semIndex in makeList(courseType.noOfSemesters)">
+							<a class="active"> 
+								<md-checkbox ng-model="">Sem-{{semIndex}}</md-checkbox>
+							</a>
+							</div>
+						</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+</div>

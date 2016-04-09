@@ -1,0 +1,80 @@
+<!-- ...............................Notes Repository section......................................... -->
+<div class="your-notes-album-section" ng-show="a.yourRepositoryIsDisplayed">
+	<div class="header">
+		<span>Your Notes Repository</span>
+	</div>
+	<div class="album-facet">
+		<div class="create-album-facet" ng-click="createNewNotesRepository($event)">
+			<div class="create-album-caption">
+				<div class="add-album-icon">
+					<span class="fa fa-plus fa-2x"></span>
+				</div>
+				<div class="add-album-text">Add Folder</div>
+			</div>
+		</div>
+		<div class="one-album-facet" ng-repeat="notesRepository in currentUserNotesDocument.notesRepositoryList">
+			<div class="album-image">
+			<a ng-click="openNotesSection(notesRepository)">
+				<img alt="" src="">
+				</a>
+			</div>
+			<div class="album-info">
+				<ul>
+					<li class="album-name">{{notesRepository.notesRepositoryName}}</li>
+					<li>{{notesRepository.notesList.length}} notes</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--...................... notes section............................................... -->
+<div class="your-notes-album-section"  ng-show="!a.yourRepositoryIsDisplayed">
+	<div class="header">
+		<a class="back" ng-click="backToRepository()">Back to Repository</a><span>Your Notes in {{selectedRepository.notesRepositoryName}}</span>
+	</div>
+	<div class="your-all-notes-section">
+		<div class="create-note-facet">
+			<div class="create-note-caption">
+				<div class="add-note-icon">
+					<span class="fa fa-plus fa-2x"></span>
+				</div>
+				<div class="add-note-text">Add Note</div>
+			</div>
+		</div>
+		<div class="note-facet-section">
+
+			<div class="one-note-facet" ng-repeat="repositoryNotes in selectedRepositoryNotes">
+				<div class="note-topic">
+					<span>{{repositoryNotes.topic}}</span>
+				</div>
+				<div class="note-image-section">
+					<img alt="" src="">
+					<div class="note-image-border-section">
+						<div class="options-section">
+							<div class="cando-left">
+								Like<strong>.</strong>
+							</div>
+							<div class="cando-left">Comment</div>
+							<div class="cando-right">
+								{{repositoryNotes.likes}} &nbsp;<span class="fa fa-thumbs-o-up"></span>
+							</div>
+							<div class="cando-right">
+								<span class="fa fa-comment-o"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="note-info">
+					<ul>
+						<li>{{repositoryNotes.subject}}</li>
+						<li>{{repositoryNotes.branchFullname}}({{repositoryNotes.branchShortName}})</li>
+						<li>24/10/16</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div ng-include="'app/notes/enterRepositoryNameDialog.tpl.html'"></div>
+

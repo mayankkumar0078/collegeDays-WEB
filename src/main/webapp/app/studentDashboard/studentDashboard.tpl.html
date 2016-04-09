@@ -1,11 +1,19 @@
 <!-- START tabs  -->
 <div class="nav-bar-second">
 	<md-tabs md-selected="selectedIndex" md-dynamic-height md-border-bottom
-		md-autoselect> <md-tab label="Library" ui-sref=".library">
-	<md-content>
+		md-autoselect>
+		 <md-tab label="Library" ui-sref=".library">
+		  	<md-content>
+				<div ui-view="libraryView"></div>
+			</md-content> 
+		</md-tab> 
+		
+		<md-tab label="notes" ui-sref=".notes">
+		 	<md-content>
+			<div ui-view="libraryView"></div>
+			</md-content> 
+		</md-tab>
+	 </md-tabs>
 
-	<div ui-view></div>
-
-	</md-content> </md-tab> </md-tabs>
 </div>
 <!-- END Tabs -->

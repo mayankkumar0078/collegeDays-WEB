@@ -1,4 +1,5 @@
 <div class="login-form" ng-show="signInForm">
+<span class="error-message" ng-show = "loginCtrl.userldPwdMismatchErrorMsg != undefined">{{loginCtrl.userldPwdMismatchErrorMsg}}</span>
 	<span class="login-header"> Login </span>
 	<div class="form-item">
 		<md-input-container> <label>email</label> <input

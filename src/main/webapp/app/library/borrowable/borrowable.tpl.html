@@ -1,9 +1,7 @@
 <div>
-<ul class="book-content-ul" infinite-scroll="addBooksInPage('readableTab')" infinite-scroll-distance="1">
+<ul class="book-content-ul" infinite-scroll="addBooksInPage('borrowableTab')" infinite-scroll-distance="1">
 	<li class="empty-shelf-caption" ng-show="isBookShelfClicked && noBorrowableBooksInShelf"> There are no borrowable books available for <strong>{{shelfName}}</strong> </li>
 	<li class="non-empty-shelf-caption" ng-show="isBookShelfClicked && !noBorrowableBooksInShelf"> Books in <strong>{{shelfName}}</strong> </li>
-	
-	<ul class="book-content-ul" infinite-scroll="addBooksInPage('borrowableTab')" infinite-scroll-distance="1">
 	
 			<li class="full-book-content"  ng-mouseenter="saveActiveRecord(record)" ng-repeat="record in borrowableBooks">
 			<div ng-bind="record" ng-show="false"></div>
@@ -79,8 +77,13 @@
 		</li>
 		
 		<li><div class="endScrollingSec" ng-show="borrowablePageScrollEnded"><strong>That's All Buddy !  </strong></div></li>
-		<li><div class="loading-section-books" ng-show="readable_infinite_scroll_in_progress"><strong>Loading........... </strong></div></li>
+		<li><div class="loading-section-books" ng-show="borrowable_infinite_scroll_in_progress"><strong>Loading........... </strong></div></li>
 		
+		<li>
+		  <div class="spinner-location" ng-show="borrowable_infinite_scroll_in_progress">
+			<span us-spinner spinner-theme="bigPurple" spinner-on = "borrowable_infinite_scroll_in_progress"></span>
+	      </div>
+	    </li>
 	</ul>
 </div>
 <div ui-view="bookDetailsModalView"></div>

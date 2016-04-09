@@ -1,5 +1,5 @@
-var homeModule1 = angular.module('home');
-homeModule1.factory('TokenStorage', function() {
+var homeModule = angular.module('home');
+homeModule.factory('TokenStorage', function() {
 	var storageKey = 'auth_token';
 	return {		
 		store : function(token) {
@@ -33,7 +33,7 @@ homeModule1.factory('TokenStorage', function() {
 });
 
 
-homeModule1.controller('loginDialogCtrl', function($scope, $rootScope,
+homeModule.controller('loginDialogCtrl', function($scope, $rootScope,
 		$location, loginService, $http,TokenStorage, ngDialog) {
 
 	//make the login home page visible when the login page is landed
@@ -70,10 +70,9 @@ homeModule1.controller('loginDialogCtrl', function($scope, $rootScope,
 	self.registerUser = function() {
 		$http.post("http://localhost:9090/userModule/Users", self.user)
 				.success(function(data, status, headers, config) {	
-						
+						self.signUpErrorMsg = data.message;
 				}).error(function(data, status, header, config) {
-					alert("Error");
-					console.log("Error");
+					self.signUpErrorMsg = data.message;
 				});
 
 	};
@@ -83,7 +82,6 @@ homeModule1.controller('loginDialogCtrl', function($scope, $rootScope,
 		$http.post('http://localhost:9090/userModule/Users/authenticate',
 				self.loginCredentials).success(
 				function(result, status, headers) {
-					console.log(result.token);
 					self.authenticated = true;
 					TokenStorage.store(result.token);
 					if (self.authenticated) {
@@ -92,16 +90,14 @@ homeModule1.controller('loginDialogCtrl', function($scope, $rootScope,
 						// set the rootScope variable
 						$rootScope.userLoggedIn = true;
 						// set the user coming from the response
-						$rootScope.loggedInUser = {}
-						
+						$rootScope.loggedInUser = {};
 						$rootScope.loggedInUser.userEmail = result.userEmail;
 						$rootScope.loggedInUser.userName = result.firstName;
 					}
 
 				}).error(function(result, status, headers) {
 			self.isLoginFailed = true;
-			self.errorMessage = result.message;
-			console.log(self.errorMessage);
+			self.userldPwdMismatchErrorMsg = result.message;
 		});
 	};
 	self.closeThisDialog = function(){

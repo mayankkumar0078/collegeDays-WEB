@@ -1,7 +1,39 @@
 angular.module('library')
 
-.controller('libraryCtrl', function libraryCtrl($scope, libraryService, blockUI,  $modal, $rootScope) {
+.controller('libraryCtrl', function libraryCtrl($scope, usSpinnerService, libraryService, blockUI,  $modal, $rootScope) {
 
+	$scope.start = function(){
+		usSpinnerService.spin('spinner-1');
+	};
+	$scope.stop = function(){
+		//usSpinnerService.stop('spinner-1');
+	};
+	$scope.readablePageScrollEnded = false;
+	$scope.scrollablePageScrollEnded = false;
+	$scope.showBookReviewPage = true;
+	$scope.showAddBookToShelfPage = false;
+	
+	$scope.readable_infinite_scroll_in_progress = false;
+	$scope.borrowable_infinite_scroll_in_progress = false;
+	
+	var toggleReadableBooks = true;
+	var toggleBorrowableBooks = false;
+	
+	$scope.library = {};
+	
+	var readableBooks=[];
+	var borrowableBooks=[];
+	var pageNo = 1;
+	var booksInReadablePageList=[];
+	var booksInBorrowablePageList=[];
+	var currentPageInUIReadableTab = 1;
+	var currentPageInUIBorrowableTab = 1;
+	var scrolledBookPageType="";
+	var allBooksSearched = false;
+	var advSearchCriteriaSaved = null;
+	var bookSearchType = "";
+	var totalNoOfRecords = 0;
+	
 	$scope.shelfRadioButtonGroup = "";
 	 $scope.isBookShelfClicked = false;
 	var searchBookButtonClicked = false;
@@ -15,6 +47,7 @@ angular.module('library')
 			        	$scope.noReadableBooksInShelf = false;
 			        	$scope.noBorrowableBooksInShelf = false;
 			        	$scope.readable_infinite_scroll_in_progress = false;
+			        	$scope.borrowable_infinite_scroll_in_progress = false;
 			        	$scope.shelfName = newValue.shelfName;
 			        	var request = [];
 			        	//loop through the books and make list of book ids 
@@ -23,7 +56,7 @@ angular.module('library')
 			        	}
 			        	  var ratingResource = libraryService.getBookRatings();
 			        	  ratingResource.call(request).$promise.then(function(response) {
-			        		  if(response != undefined){
+			        		  if(response != undefined && response.status == 200){
 			        			  //set the readable and borrowable books
 			        			  $scope.readableBooks = [];
 			        			  $scope.borrowableBooks = [];
@@ -95,15 +128,17 @@ angular.module('library')
 	  //get the book shelves for the user on page load
 	  var shelfResource = libraryService.retrieveUserShelves($rootScope.loggedInUser.userEmail);
 	  shelfResource.call().$promise.then(function(response) {
-		  if(response != undefined && response.userShelfDocument != undefined){
+		  if(response != undefined && response.status == 200 && response.userShelfDocument != undefined){
 			  $rootScope.bookShelves = response.userShelfDocument.shelves; 
 			  //publish the shelves retrieved to the library controller
 			  //libraryService.setUserBookShelves($scope.bookShelves);
+		  }else if(response != undefined && response.status != 200){
+			  //show the error message
 		  }
 		  
 		},
 		function(error) {
-			
+			alert("Some problem while retrieving user shelves. Try after some time");
 		}
 		);
 	  
@@ -125,17 +160,6 @@ angular.module('library')
 	  $scope.enableCreateNewShelfLink = function(){
 		  $scope.showCreateNewShelf = true;
 	  };
-	$scope.readablePageScrollEnded = false;
-	$scope.scrollablePageScrollEnded = false;
-	$scope.showBookReviewPage = true;
-	$scope.showAddBookToShelfPage = false;
-	
-	$scope.readable_infinite_scroll_in_progress = false;
-	
-	var toggleReadableBooks = true;
-	var toggleBorrowableBooks = false;
-	
-	$scope.library = {};
 	
 	//hover event on book rating section
 	$scope.getRatingForBook = function(record){
@@ -228,27 +252,12 @@ angular.module('library')
 			$scope.searchBooks();
 		}
 	};
-	var readableBooks=[];
-	var borrowableBooks=[];
-	var pageNo = 1;
-	var booksInReadablePageList=[];
-	var booksInBorrowablePageList=[];
-	var currentPageInUIReadableTab = 1;
-	var currentPageInUIBorrowableTab = 1;
-	var scrolledBookPageType="";
-	var allBooksSearched = false;
-	var advSearchCriteriaSaved = null;
-	var bookSearchType = "";
-	var totalNoOfRecords = 0;
-	
-	$scope.borrowable_infinite_scroll_in_progress = false;
-	
 	
 	//put the books in the readable page on scrolling
 	var putBooksInReadablePage = function(bookType){
 		if(!allBooksSearched){
 		//$scope.searchBooks();
-			
+			usSpinnerService.spin('spinner-1');
 		if(readableBooks.length > booksInReadablePageList.length ){
 			
 			for (var i = booksInReadablePageList.length; i < readableBooks.length; i++) {
@@ -256,7 +265,7 @@ angular.module('library')
 			}
 			blockUI.stop();
 			$scope.readableBooks = booksInReadablePageList;
-			
+			//usSpinnerService.stop('spinner-1');
 		}else{
 			scrolledBookPageType = bookType;
 			pageNo++;
@@ -283,7 +292,7 @@ angular.module('library')
 		if(!allBooksSearched){
 		if(borrowableBooks.length > booksInBorrowablePageList.length ){
 			blockUI.stop();
-			for (var i = booksInBorrowablePageList.length-1 ; i < borrowableBooks.length; i++) {
+			for (var i = booksInBorrowablePageList.length ; i < borrowableBooks.length; i++) {
 				booksInBorrowablePageList.push(borrowableBooks[i]);
 			}
 			$scope.borrowableBooks = booksInBorrowablePageList;
@@ -319,7 +328,7 @@ angular.module('library')
 	};
 	//method to add the books in scrolled page
 	$scope.addBooksInPage = function (bookType) {
-		//infinite scroll only if we have clicked on the scearch button
+		//infinite scroll only if we have clicked on the search button
 		if(searchBookButtonClicked) {
 		//add the books if the tab is readable
 		if(bookType == 'readableTab' && toggleReadableBooks){
@@ -329,8 +338,11 @@ angular.module('library')
 			}
 			//add the books if the page is borrowable
 		}else if(bookType == 'borrowableTab' && toggleBorrowableBooks){
-			currentPageInUIBorrowableTab++;
-			putBooksInBorrowablePage(bookType);
+			if(!$scope.borrowable_infinite_scroll_in_progress){
+				currentPageInUIBorrowableTab++;
+				putBooksInBorrowablePage(bookType);
+			}
+			
 		}
 		}
 	};
@@ -349,17 +361,17 @@ angular.module('library')
 		 searchCalledFromScroll = false;
 		 allBooksSearched = false;
 		 advSearchCriteriaSaved = null;
-		 borrowablePageScrollEnded = false;
-		 readablePageScrollEnded = false;
 		 searchTextSearched="";
 		 $scope.readablePageScrollEnded = false;
 		 $scope.borrowablePageScrollEnded = false;
 		 $scope.readable_infinite_scroll_in_progress = false;
+		 $scope.borrowable_infinite_scroll_in_progress = false;
 	};
 	//function to search the books
 	var searchTextSearched = "";
 	$scope.searchBooks = function(searchType, advSearchCriteria, isNewSearch){
 		$scope.readable_infinite_scroll_in_progress = true;
+		$scope.borrowable_infinite_scroll_in_progress = true;
 		libraryService.setBookShelfClicked(false);
 		var dummyShelf = {"shelfName":"dummyShelf"};
 		libraryService.setBookShelf(dummyShelf);
@@ -377,19 +389,30 @@ angular.module('library')
 		//start the block ui if it is the first page search
 		if(pageNo == 1){
 			blockUI.start();
+		}else{
+			usSpinnerService.spin('spinner-1');
 		}
+		
 		//..................service call............................................
 		//get the resource for searching the book with subject and the page no
 		var resource = libraryService.searchBook(searchTextSearched, pageNo);
 		//make the ajax call 
 		resource.call().$promise.then(function(response) {
+			if(response != undefined && response.status == 200){
 			populateBookSearchResponseInUI(response, searchType);
 			$scope.readable_infinite_scroll_in_progress = false;
+			$scope.borrowable_infinite_scroll_in_progress = false;
+			//usSpinnerService.stop('spinner-1');
+			}else{
+				//do nothing.
+			}
 		},
 		function(error) {
 			$scope.readable_infinite_scroll_in_progress = false;
+			$scope.borrowable_infinite_scroll_in_progress = false;
 			alert(error);
 			blockUI.stop();
+			//usSpinnerService.stop('spinner-1');
 		}
 		);
 
@@ -423,8 +446,9 @@ angular.module('library')
 		var advanceSearchServiceResource = libraryService.advanceBookSearch(pageNo);
 		//make the ajax call 
 		advanceSearchServiceResource.call(advSearchCriteriaSaved).$promise.then(function(response) {
-			
+			if(response != null && response.status == 200){
 			populateBookSearchResponseInUI(response, searchType);
+			}
 		},
 		function(error) {
 			alert(error);
