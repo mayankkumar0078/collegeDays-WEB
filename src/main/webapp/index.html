@@ -48,7 +48,10 @@
 
 <link rel="stylesheet" href="vendor/ng-dialog/ngDialog.css">
 
-<link rel="stylesheet" href="vendor/angular-xeditable/dist/css/xeditable.css">
+<link rel="stylesheet"
+	href="vendor/angular-xeditable/dist/css/xeditable.css">
+
+<link rel="stylesheet" href="vendor/angular-ui-select/select.css">
 
 <link rel="stylesheet"
 	href="app/library/books/addBookToShelfPartial.css" />
@@ -60,14 +63,12 @@
 <link rel="stylesheet" href="app/shelf/addBookToShelfPopover.css">
 <link rel="stylesheet"
 	href="app/library/bookRating/bookRatingPopover.css">
-<link rel="stylesheet"
-	href="app/help/readBookHelp/readBookHelp.css">
+<link rel="stylesheet" href="app/help/readBookHelp/readBookHelp.css">
 <link rel="stylesheet"
 	href="app/library/books/bookReviewPartialPage.css">
-<link rel="stylesheet"
-	href="app/notes/notes.css">
-<link rel="stylesheet"
-	href="app/notes/notesDisplay.css">
+<link rel="stylesheet" href="app/notes/css/notes.css">
+<link rel="stylesheet" href="app/notes/css/notesDisplay.css">
+<link rel="stylesheet" href="app/notes/css/publishNotes.css">
 
 
 <!-- libraries for angular and other dependent CDN files -->
@@ -118,7 +119,7 @@
 
 <script type="text/javascript"
 	src="vendor/angular-material/angular-material.js"></script>
-	
+
 <!-- <script type="text/javascript"
 	src="vendor/angular-messages/angular-messages.js"></script> -->
 
@@ -138,11 +139,16 @@
 
 <script type="text/javascript" src="vendor/nsPopover/src/nsPopover.js"></script>
 
-<script type="text/javascript" src="vendor/angular-xeditable/dist/js/xeditable.js"></script>
+<script type="text/javascript"
+	src="vendor/angular-xeditable/dist/js/xeditable.js"></script>
 
 <script type="text/javascript" src="vendor/angular-spinner/spin.min.js"></script>
 <script type="text/javascript" src="vendor/angular-spinner/spin.js"></script>
-<script type="text/javascript" src="vendor/angular-spinner/angular-spinner.js"></script>
+<script type="text/javascript"
+	src="vendor/angular-spinner/angular-spinner.js"></script>
+<script type="text/javascript" src="vendor/angular-ui-select/select.js"></script>
+<script type="text/javascript"
+	src="vendor/angular-filter/angular-filter.js"></script>
 
 
 <!-- <script type="text/javascript" src="vendor/angular-imagefit/angular-imagefit.js"></script>
@@ -174,8 +180,21 @@
 
 <!-- notes section -->
 <script type="text/javascript" src="app/notes/notes.config.js"></script>
-<script type="text/javascript" src="app/notes/notes.controller.js"></script>
+<script type="text/javascript"
+	src="app/notes/controller/notes.controller.js"></script>
+<script type="text/javascript"
+	src="app/notes/controller/filterNotes.controller.js"></script>
+<script type="text/javascript"
+	src="app/notes/controller/publishNotes.controller.js"></script>
 <script type="text/javascript" src="app/notes/notes.services.js"></script>
+<script type="text/javascript"
+	src="app/common/services/sessionUtil.service.js"></script>
+<script type="text/javascript"
+	src="app/common/constants/common.constants.js"></script>
+<script type="text/javascript"
+	src="app/common/services/college.services.js"></script>
+<script type="text/javascript"
+	src="app/common/services/college.factory.js"></script>
 <!-- end notes section -->
 
 <script type="text/javascript"
@@ -186,6 +205,9 @@
 <script type="text/javascript" src="app/shelf/bookShelf.controller.js"></script>
 
 <script type="text/javascript"
+	src="app/notes/controller/notesShelf.controller.js"></script>
+
+<script type="text/javascript"
 	src="app/common/controller/menu.controller.js"></script>
 
 <script type="text/javascript"
@@ -194,53 +216,34 @@
 <script type="text/javascript"
 	src="app/help/readBookHelp/readBookHelp.controller.js"></script>
 
-
-
-
-
-
-<!-- compiled CSS -->
-<!-- <% styles.forEach( function ( file ) { %>
-    <link rel="stylesheet" type="text/css" href="<%= file %>"/>
-    <% }); %>
- -->
 </head>
 
 <body class="body-background">
 	<!-- put the header common to all the pages  -->
-	<div class="navbar-darkblue" ng-controller="appCTRL">
+	<div class="navbar-darkblue" ng-controller="AppCtrl">
 		<div class="navbar-header">
-			<a class="navbar-brand" ng-click="redirectToHomePage()"> <img alt=""
-				src="assets/letter-c-blue-icon.png" class="header-image"> <span
-				class="header-title">College Days</span>
+			<a class="navbar-brand" ng-click="redirectToHomePage()"> <img
+				alt="" src="assets/letter-c-blue-icon.png" class="header-image">
+				<span class="header-title">College Days</span>
 			</a>
-
 		</div>
-
-
 		<div class="navbar-right">
-
 			<!-- menu option on header -->
-
 			<div class="header-item" ng-show="userLoggedIn">
 				<a class="text link-btn side-nav-btn"> <img
 					class="header-user-pic-section" alt="" src="assets/img/bhabhi.jpg">
 					<span>Hello {{loggedInUser.userName}}</span>
 				</a>
 			</div>
-
 			<div class="header-item" ng-show="!userLoggedIn">
 				<a class="text link-btn side-nav-btn" ng-click="openLoginDialog()">login
 				</a>
 			</div>
-			
 			<div class="header-item" ng-show="userLoggedIn">
 				<a class="text link-btn side-nav-btn" ng-click="logOut()">logout
 				</a>
 			</div>
-			
 			<div class="header-item" ng-controller=menuCtrl>
-
 				<a id="sideNavPushButton" class="text link-btn side-nav-btn"
 					ng-click="toggleRight()" ng-hide="isOpenRight()"> <span
 					class="text">Menu</span> <i class="fa fa-bars"></i>
@@ -250,10 +253,65 @@
 		</div>
 	</div>
 
-	<!-- ui-view content area  -->
-	<div class="ui-view-content-area" ui-view="main"></div>
+	<!-- <div class="fixed-search-area-header">
+	<div class="filter-section">
+	<ng-include src="'app/home/bookSearchSection.tpl.html'">
+	</div>
+	</div> -->
 
+	<div class="content-container">
+		<div class="left-panel" ng-controller="AppCtrl">
+			<div class="panel-guide">
+				<div class="panel-display-guide">
+					<div id="guide-container">
+						<div class="guide-toplevel">
+							<ul>
+								<li class="guide-section"><a class="guide-item" ng-class="{selected : options.selectedOption == 'home'}"
+									ng-click="redirectToPage('/home', 'home')"><span class="fa fa-home"></span>&nbsp;
+										Home</a></li>
+								<li class="guide-section"><a class="guide-item" ng-class="{selected : options.selectedOption == 'library'}"
+									ng-click="redirectToPage('/library', 'library')"><span
+										class="fa fa-book"></span>&nbsp; Library</a></li>
+								<li class="guide-section"><a class="guide-item" ng-class="{selected : options.selectedOption == 'notes'}"
+									ng-click="redirectToPage('/notes','notes')"><span
+										class="fa fa-university"></span>&nbsp; Notes</a></li>
+								<li class="guide-section"><a class="guide-item" ng-class="{selected : options.selectedOption == 'shelf'}"
+									ng-click="redirectToPage('/shelf','shelf')"><span
+										class="fa fa-home"></span>&nbsp; Shelf</a>
+									<div class="guide-child-item">
+										<ul>
+											<li class="guide-section"><a
+												ng-repeat="shelf in shelves | limitTo: shelf.shelfLimit" class="guide-item"
+												ng-click="redirectToPage('/shelf',shelf.shelfName)" ng-class="{selected : options.selectedOption == shelf.shelfName}"><span
+													class="fa fa-list-ul"></span>&nbsp; {{shelf.shelfName}}</a></li>
+													<a><li class="guide-section faded-text" ng-show = "shelf.shelfLimit < shelves.length"
+													ng-click = "shelf.shelfLimit = shelves.length">Show more</li></a>
+													<a><li class="guide-section faded-text" ng-show = "shelf.shelfLimit == shelves.length"
+													ng-click = "shelf.shelfLimit = 4">Show less</li></a>
+										</ul>
+									</div></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<!-- add filter for notes -->
+
+				<!-- add filter section -->
+				<!-- <div>
+					<ng-include src="'app/notes/view/filterNotes.tpl.html'">
+				</div> -->
+			</div>
+		</div>
+
+		<div class="right-panel">
+			<!-- ui-view content area  -->
+			<div class="ui-view-content-area" ui-view="main"></div>
+
+		</div>
+	</div>
 	<!-- side menu is common to all the pages -->
-	<ng-include src="'app/common/menuSidenav.tpl.html'">
+	<ng-include src="'app/common/menuSidenav.tpl.html'"> <!-- include the login modal template -->
+	<ng-include src="'app/login/login.tpl.html'"></ng-include>
 </body>
 </html>

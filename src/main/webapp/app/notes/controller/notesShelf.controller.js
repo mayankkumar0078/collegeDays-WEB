@@ -1,29 +1,30 @@
-angular.module('library').controller('shelfCtrl', function shelfCtrl($scope, $parse, $rootScope,
-		$modal, $mdDialog, $mdMedia, Upload, $timeout, libraryService){
+angular.module('notes').controller('notesShelfCtrl', function shelfCtrl($scope, $parse, $rootScope,
+		$modal, $mdDialog, $mdMedia, Upload, $timeout, notesService, libraryService){
 
 	$scope.status = ' ';
 
 	/*this method is called when you click the 'Add To Shelf' link button*/
-	$scope.addToShelfButtonClick = function(){
-		//find out the current shelf for a particular book saved in the db
-		if($rootScope.activeBookRecord != undefined){
-			for(var shelfIndex in $rootScope.shelves){
-				if($rootScope.shelves[shelfIndex] != undefined && $rootScope.shelves[shelfIndex].books != undefined){
-					for(var bookIndex in $rootScope.shelves[shelfIndex].books){
+		$scope.addToShelfButtonClick = function(){
+			//find out the current shelf for a particular book saved in the db
+			if($rootScope.activeNotesRecord != undefined){
+				for(var shelfIndex in $rootScope.shelves){
+					if($rootScope.shelves[shelfIndex] != undefined && $rootScope.shelves[shelfIndex].notesList != undefined){
+						for(var notesIndex in $rootScope.shelves[shelfIndex].notesList){
 
-						var book = $rootScope.shelves[shelfIndex].books[bookIndex];
-						if($rootScope.activeBookRecord != undefined && 
-								$rootScope.activeBookRecord.ia[0] == book.bookId){
-							//select the shelf radio button
-							$scope.shelfRadioButtonGroup = $rootScope.shelves[shelfIndex].shelfName;
-							break;
+							var notes = $rootScope.shelves[shelfIndex].notesList[notesIndex];
+							if($rootScope.activeNotesRecord != undefined && 
+									$rootScope.activeNotesRecord.id == notes.id){
+								//select the shelf radio button
+								$scope.shelfRadioButtonGroup = $rootScope.shelves[shelfIndex].shelfName;
+								break;
+							}
 						}
 					}
 				}
 			}
-		}
 
-	};
+		};
+
 	/*This method is called when you click on the radio button*/
 	$scope.shelfRadioButtonClicked = function(){
 		$scope.isShelfRadioButtonClicked = true;
@@ -33,35 +34,35 @@ angular.module('library').controller('shelfCtrl', function shelfCtrl($scope, $pa
 	$scope.$watch('shelfRadioButtonGroup', function (newValue, oldValue) {
 		if($scope.isShelfRadioButtonClicked){
 			$scope.isShelfRadioButtonClicked = false;
-			if(newValue != undefined && oldValue != undefined){
+			if(newValue != undefined){
 				if(newValue != oldValue){
 					//make the service call to save the current book in the selected shelf
 					//make the request
-					var book = $rootScope.activeBookRecord;//setBookObjectFromRecord($rootScope.activeBookRecord);
-					book.bookId = $rootScope.activeBookRecord.ia[0];
+					var notes = $rootScope.activeNotesRecord;//setBookObjectFromRecord($rootScope.activeBookRecord);
+					notes.id = $rootScope.activeNotesRecord.id;
 					var oldShelfName = oldValue;
 					var newShelfName = newValue;
 					var request = {"userId":$rootScope.loggedInUser.userEmail,
-							"book":book,
+							"notes":notes,
 							"oldShelfName":oldShelfName,
 							"newShelfName":newShelfName};
 
-					var resource = libraryService.addBookToShelf();
+					var resource = notesService.addNotesToShelf();
 					//make the ajax call 
 					resource.call(request).$promise.then(function(response) {
 						if(response != undefined && response.status == 200){
 							//put the updated book shelves in the root scope..
 							$rootScope.shelves = response.userShelfDocument.shelves;
-							if(libraryService.getBookShelfClicked()){
+						/*	if(libraryService.getBookShelfClicked()){
 								//find out the book shelf from the list of shelves and publish it to the library
-								for(var shelfIndex in $rootScope.shelves){
-									if($rootScope.shelves[shelfIndex].shelfName == oldShelfName){
+								for(var shelfIndex in $rootScope.bookShelves){
+									if($rootScope.bookShelves[shelfIndex].shelfName == oldShelfName){
 										//publish it to the library service to use it in library controller
-										libraryService.setBookShelf($rootScope.shelves[shelfIndex]);
+										libraryService.setBookShelf($rootScope.bookShelves[shelfIndex]);
 										break;
 									}
 								}
-							}
+							}*/
 						}else{
 							alert("Can't process request right now. Please contact administrator for further details");
 						}

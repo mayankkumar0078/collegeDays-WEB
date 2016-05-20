@@ -3,17 +3,17 @@ ul{
 	list-style-type: none;
 }
 .library-section-area{
-	width: 85%;
+	width: 100%;
 }
 .shelf-araea-left{
 	width: 20%;
 	background-color: white;
-	min-height: 500px;
+	min-height: 600px;
 	float: left;
 }
 .book-display-area-right{
-	float: right;
-	width: 79%;
+	float: left;
+	width: 100%;
 	
 }
 .book-display-area-right .panel{
@@ -23,7 +23,7 @@ ul{
 	list-style-type: none;
 	margin-top: 20px;
 	float: left;
-	/* height: 200px; */
+	overflow: hidden;
 }
 .book-content-ul .empty-shelf-caption{
 	width: 100%;

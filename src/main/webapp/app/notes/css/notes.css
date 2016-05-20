@@ -1,0 +1,219 @@
+#notes-section {
+	width: 100%;
+	min-height: 1000px;
+	float: left;
+}
+
+.notes-filter-section {
+	height: 100%;
+	float: left;
+}
+
+/* .notes-display-section {
+	width: 600px;
+	float: right;
+	height: 100%;
+	background-color: white;
+} */
+
+.notes-display-section md-tabs[md-border-bottom] md-tabs-wrapper {
+	margin-left: 20px;
+}
+/* common css */
+.gd-col {
+	padding-left: 14px;
+	float: left;
+	position: relative;
+	background-color: white;
+}
+
+.gu4 {
+	width: 230px;
+}
+
+.gu4-header {
+	width: 100%;
+	height: 50px;
+}
+
+.facetList .facet-head {
+	background: 0;
+	color: #565656;
+	text-transform: uppercase;
+	font-size: 15px;
+	margin-bottom: 5px;
+}
+
+.facetList {
+	margin-top: 30px;
+}
+
+#filter-notes-header {
+	width: 100%;
+	float: left;
+	position: fixed;
+	z-index: 300;
+}
+
+#filter-notes-header .filter-items-header{
+	float: left;
+	margin: 7px;
+	width: 100%;
+	color : black;
+	padding-left: 18%;
+}
+
+#filter-notes-header .filter-item-header{
+	width: 170px;
+	float: left;
+	margin-left: 10px;
+}
+.filter-by-text{
+	color: black;
+	font: bold;
+	margin-left:10px;
+	margin-right: 10px;
+	float: left;
+}
+.facetList .oneFacet {
+	background: #fff;
+	border-top: 1px solid #e5e5e5;
+	text-transform: uppercase;
+}
+
+.facetList .oneFacet .facetContainer {
+	padding: 10px;
+}
+
+.head {
+	padding: 5px;
+	cursor: pointer;
+	text-transform: uppercase;
+}
+
+.line {
+	overflow: hidden;
+}
+
+.facet-title {
+	overflow: hidden;
+	position: relative;
+}
+
+.facet-title h5 {
+	float: left;
+}
+
+.facetList .oneFacet .head .clear {
+	margin-left: 15px;
+	color: #999;
+	text-transform: uppercase;
+	line-height: 19px;
+}
+
+.facetList .oneFacet .head .clear-wrap {
+	margin-top: 6px;
+}
+
+.facetList .filterBox {
+	padding: 5px;
+	display: none;
+	position: relative;
+}
+
+.facetList .filterBox input {
+	width: 211px;
+	padding: 0 5px 5px 0;
+	font-size: 13px;
+	color: #999;
+	height: 18px;
+	line-height: 18px;
+	border: 0;
+	border-bottom: 1px solid #ddd;
+}
+
+.icon-notes {
+	width: 15px;
+	height: 16px;
+	position: absolute;
+	top: 7px;
+	right: 4px;
+	-webkit-transition: -webkit-transform 0.3s ease-in-out;
+	transition: -webkit-transform 0.3s ease-in-out;
+}
+
+.toggle {
+	transform: rotate(180deg);
+	-webkit-transform: rotate(180deg);
+}
+
+.menu-toggle-list {
+	overflow-y: auto;
+	overflow-x: hidden;
+	position: relative;
+	z-index: 1;
+	height: 150px;
+	transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+	transition-property: height;
+}
+
+.hide-section {
+	height: 0px;
+}
+
+.facetList .oneFacet ul.facets {
+	margin-right: 5px;
+	margin-left: -40px;
+}
+
+.facetList .oneFacet .scroll {
+	overflow: auto;
+	height: auto;
+}
+
+.note-info ul {
+	list-style: none;
+	margin-left: -40px;
+}
+
+.facetList .oneFacet li.facet {
+	white-space: nowrap;
+	overflow: hidden;
+	font-size: 12px;
+	color: #666;
+	border: 1px solid transparent;
+	transition: all 100ms linear 0ms;
+}
+
+.facetList .oneFacet li.facet a {
+	display: inline-block;
+	width: 100%;
+	padding: 4px;
+	color: black
+}
+
+.facet .active md-checkbox {
+	line-height: normal;
+	margin: 0px;
+}
+
+.select2>.select2-choice.ui-select-match {
+	/* Because of the inclusion of Bootstrap */
+	height: 29px;
+}
+
+.selectize-control>.selectize-dropdown {
+	top: 36px;
+}
+/* Some additional styling to demonstrate that append-to-body helps achieve the proper z-index layering. */
+.select-box {
+	background: #fff;
+	position: relative;
+	z-index: 1;
+}
+
+.alert-info.positioned {
+	margin-top: 1em;
+	position: relative;
+	z-index: 10000; /* The select2 dropdown has a z-index of 9999 */
+}

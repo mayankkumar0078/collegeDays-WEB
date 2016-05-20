@@ -1,0 +1,75 @@
+
+	<script type="text/ng-template" id="publishNotes.html">
+<div id="publish-notes-section">
+	<div class="margin-10">
+		<div class="publish-notes-header">Publish Your Notes</div>
+		<div class="publish-notes-body-section">
+			<div class="notes-tag">
+				<ul>
+					<li class="row"><span class="tag-label">Program</span>
+						<div class="tag-input">
+							<ui-select multiple ng-model="selectedColleges" theme="bootstrap"
+								ng-disabled="false" close-on-select="false"
+								style="width: 220px;" title="Choose a color"> <ui-select-match
+								placeholder="Select colleges">{{$item.collegeFullName}}</ui-select-match>
+							<ui-select-choices
+								repeat="college in filteredColleges | filter:$select.search">
+							{{college.collegeFullName}} </ui-select-choices> </ui-select>
+						</div></li>
+
+					<li class="row"><span class="tag-label">Specialisation</span>
+						<div class="tag-input">
+							<ui-select multiple ng-model="selectedColleges" theme="bootstrap"
+								ng-disabled="false" close-on-select="false"
+								style="width: 220px;" title="Choose a color"> <ui-select-match
+								placeholder="Select colleges">{{$item.collegeFullName}}</ui-select-match>
+							<ui-select-choices
+								repeat="college in filteredColleges | filter:$select.search">
+							{{college.collegeFullName}} </ui-select-choices> </ui-select>
+						</div></li>
+
+					<li class="row"><span class="tag-label">Specialisation</span>
+						<div class="tag-input">
+							<ui-select multiple ng-model="selectedColleges" theme="bootstrap"
+								ng-disabled="false" close-on-select="false"
+								style="width: 220px;" title="Choose a color"> <ui-select-match
+								placeholder="Select colleges">{{$item.collegeFullName}}</ui-select-match>
+							<ui-select-choices
+								repeat="college in filteredColleges | filter:$select.search">
+							{{college.collegeFullName}} </ui-select-choices> </ui-select>
+						</div></li>
+						<li class="row">
+						<span class="tag-label">Topic</span>
+						<div class="topic-text-area">
+						<textarea rows="3" cols="33"></textarea>
+						</div>
+						</li>
+						<li class="row">
+						<span class="tag-label">Add To folder</span>
+						<div class="tag-input">
+							<ui-select multiple ng-model="selectedColleges" theme="bootstrap"
+								ng-disabled="false" close-on-select="false"
+								style="width: 220px;" title="Choose a color"> <ui-select-match
+								placeholder="Select colleges">{{$item.collegeFullName}}</ui-select-match>
+							<ui-select-choices
+								repeat="college in filteredColleges | filter:$select.search">
+							{{college.collegeFullName}} </ui-select-choices> </ui-select>
+						</div>
+						</li>
+						<li class="row">
+						<span class="tag-label">Upload files</span>
+						<form style="float: left" ng-controller="publishNotesCtrl" name="form">
+						<input type="file" ngf-select="" ng-model="picFile" name="file" ngf-accept="'image/*'" required="" 
+						class="ng-pristine ng-invalid ng-invalid-required" multiple accept="image/*">
+						</form>
+						</li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+	<md-dialog-actions class="footer-button"> 
+	<span flex></span> <md-button ng-click="answer('cancel')"> cancel </md-button>
+	 <md-button ng-click="answer('ok')"> ok </md-button> 
+	 </md-dialog-actions>
+</script>

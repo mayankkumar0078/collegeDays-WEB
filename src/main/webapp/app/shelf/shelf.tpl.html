@@ -1,0 +1,51 @@
+		<div class="shelf-araea-left" ng-controller="shelfCtrl">
+			<div class="first-line-shelf">
+				<span>Shelf</span>
+			</div>
+			<span class="error-message" ng-show="shelfErrorMsg != undefined">
+				{{shelfErrorMsg}}</span> <span class="create-shelf"> <md-button
+					class="md-raised md-primary"
+					ng-click="createNewShelfTextBtnForm.$show()"
+					ng-hide="createNewShelfTextBtnForm.$visible"> <span
+					class="fa fa-plus"></span>&nbsp;Create New Shelf</md-button>
+			</span> <span editable-textarea="newShelfName"
+				e-form="createNewShelfTextBtnForm" e-rows="1" e-cols="15"
+				onaftersave="createNewShelf()"></span>
+
+			<div ng-repeat="bookShelf in shelves">
+				<div class="book-shelf">
+					<div class="shelf-name-sec"
+						ng-click="showShelfBooks(bookShelf,$index)">
+						<span editable-textarea="bookShelf.shelfName"
+							e-form="renameShelfTextBtnForm" e-rows="1" e-cols="15"
+							onbeforesave="setOldShelfToScope(bookShelf.shelfName)"
+							onaftersave="renameShelf(bookShelf, $index)"> {{
+							bookShelf.shelfName || 'empty' }} </span>
+						<div class="shelf-name-sec-hover"
+							ng-hide="renameShelfTextBtnForm.$visible">
+							<div class="right-section">
+								<md-menu md-offset="0 -5"> <md-button
+									aria-label="Open demo menu" class="md-icon-button"
+									ng-click="$mdOpenMenu($event)"> <!-- <div class="white-background "> -->
+								<md-icon md-font-icon="fa-edit"
+									class="fa s32 md-primary md-hue-2" md-menu-origin> </md-icon> <!-- </div> -->
+								</md-button> <md-menu-content width="3"> <md-menu-item>
+								<md-button ng-click="renameShelfTextBtnForm.$show()"
+									ng-hide="renameShelfTextBtnForm.$visible"> <span
+									md-menu-align-target>Rename Shelf</span> </md-button> </md-menu-item> <md-menu-item>
+								<md-button ng-click="deleteShelf(bookShelf, $event)">
+								<span md-menu-align-target>Delete Shelf</span> </md-button> </md-menu-item> </md-menu-content> </md-menu>
+
+							</div>
+						</div>
+					</div>
+					<div class="shelf-info">
+						<ul>
+							<li><strong>Created On </strong>12/16/2015</li>
+							<li><strong>Last Updated On </strong> 12/16/2015</li>
+							<li><strong>Total Books </strong> {{bookShelf.books.length}}</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>

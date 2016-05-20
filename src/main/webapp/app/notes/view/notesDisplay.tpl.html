@@ -1,0 +1,43 @@
+<div class="fixed-search-area-header" ng-controller = "FilterNotesCtrl">
+	<div class="filter-section">
+		<ng-include src="'app/notes/view/filterNotesHeader.tpl.html'">
+	</div>
+</div>
+
+<div class="panel panel-min-height-600">
+	<div class="panel-display">
+		<div class="notes-display-section">
+			<div class="notes-header">
+				<div class="left-facet">
+					<div class="notes-caption">
+						<span>Notes</span>
+					</div>
+				</div>
+				<div class="right-facet">
+					<div class="publish-notes-section">
+						<md-button class="md-raised md-primary"
+							ng-click="publishNotes($event)"> <span
+							class="fa fa-plus"></span>&nbsp;Publish Notes</md-button>
+					</div>
+				</div>
+			</div>
+
+<div>
+<ng-include src="'app/notes/view/allNotes.tpl.html'">
+
+</div>
+			<!-- <div class="notes-tab nav-bar-second">
+				<md-tabs md-selected="selectedIndex" md-dynamic-height
+					md-border-bottom md-autoselect> <md-tab label="All"
+					ui-sref=".all"> <md-content>
+				<div ui-view="main"></div>
+				</md-content> </md-tab> <md-tab label="My Notes" ui-sref=".mynotes"> <md-content>
+				<div ui-view="main"></div>
+				</md-content> </md-tab> </md-tabs>
+
+			</div> -->
+			
+			<ng-include src="'app/notes/view/dialog/publishNotesDialog.tpl.html'">
+		</div>
+	</div>
+</div>

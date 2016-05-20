@@ -85,7 +85,7 @@ homeModule.controller('loginDialogCtrl', function($scope, $rootScope,
 					self.authenticated = true;
 					TokenStorage.store(result.token);
 					if (self.authenticated) {
-						$location.path("/studentDashboard/library");
+						$location.path("/library");
 						self.closeThisDialog('Some value');
 						// set the rootScope variable
 						$rootScope.userLoggedIn = true;

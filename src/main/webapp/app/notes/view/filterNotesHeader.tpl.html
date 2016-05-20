@@ -1,0 +1,128 @@
+<!-- <div id="filter-notes-header" ng-controller="filterNotesCTRL">
+	<div class="filter-items-header">
+		<div class="filter-by-text">Filter By</div>
+		<div class="filter-item-header">
+			<ui-select multiple ng-model="multiselect.selectedColleges"
+				theme="bootstrap" ng-disabled="false" close-on-select="false"
+				title="Choose a College"> <ui-select-match
+				placeholder="Select colleges">({{$item.collegeCode}})</ui-select-match>
+			<ui-select-choices
+				repeat="college in filteredColleges | filter:$select.search track by college.collegeId">
+			{{college.collegeDesc}}<strong>({{college.collegeCode}})</strong> </ui-select-choices> </ui-select>
+		</div>
+
+		<div class="filter-item-header">
+			<ui-select multiple ng-model="multiselect.selectedSpecialisations"
+				theme="bootstrap" ng-disabled="false" close-on-select="false"
+				title="Choose Specialisations"> <ui-select-match
+				placeholder="Select Specialisations">({{$item.specialisationCode}})</ui-select-match>
+			<ui-select-choices
+				repeat="specialisation in filteredSpecialisations | unique: 'specialisationId' | filter:$select.search track by specialisation.specialisationId">
+			{{specialisation.specialisationDesc}}<strong>({{specialisation.specialisationCode}})</strong>
+			</ui-select-choices> </ui-select>
+
+		</div>
+
+		<div class="filter-item-header">
+			<ui-select multiple ng-model="multiselect.selectedSubjects"
+				theme="bootstrap" ng-disabled="false" close-on-select="false"
+				ng-click="filterSubjects()" title="Choose a Subject"> <ui-select-match
+				placeholder="Select Subjects">{{$item.subjectCode}}</ui-select-match>
+			<ui-select-choices
+				repeat="subject in filteredSubjects | filter:$select.search | unique: 'subjectId' track by subject.subjectId">
+			{{subject.subjectDesc}}({{subject.subjectCode}}) </ui-select-choices> </ui-select>
+		</div>
+	</div>
+</div> -->
+
+<div class="search-header">
+<div class="search-section">
+	<div class="type-ahead-box">
+		<input type="text" ng-model="library.searchBookText"
+			placeholder="Search inside Notes e.g Topic, College Name etc"
+			typeahead="state for state in states | filter:$viewValue | limitTo:8"
+			class="form-control">
+	</div>
+	<div class="search-button">
+		<span style="margin-top: 10px" class="fa fa-search fa-lg"></span>
+
+	</div>
+</div>
+
+<div class="advance-filter-section-header" ng-mouseenter = "showHeaderFilterLabels = false"
+ ng-mouseleave = "showHeaderFilterLabels = true">
+ <div class = "advance-filter-section">
+<div class="filter-by-caption">Filter By</div>
+<div class="filter-items">
+
+<div class="filter-item">
+<span class="filter-by-name" ng-show = "showHeaderFilterLabels">University</span>
+<div class="multi-select-section" ng-show = "!showHeaderFilterLabels">
+	<ui-select multiple ng-model="multiselect.selectedColleges" 
+				theme="bootstrap" ng-disabled="false" close-on-select="false"
+				title="Choose a College University"> <ui-select-match
+				placeholder="Select University">({{$item.collegeCode}})</ui-select-match>
+			<ui-select-choices
+				repeat="college in filteredColleges | filter:$select.search track by college.collegeId">
+			{{college.collegeDesc}}<strong>({{college.collegeCode}})</strong> </ui-select-choices> </ui-select>
+</div>
+</div>
+
+<div class="filter-item">
+<span class="filter-by-name" ng-show = "showHeaderFilterLabels">College Name</span>
+<div class="multi-select-section" ng-show = "!showHeaderFilterLabels">
+	<ui-select multiple ng-model="multiselect.selectedColleges" 
+				theme="bootstrap" ng-disabled="false" close-on-select="false"
+				title="Choose a College"> <ui-select-match
+				placeholder="Select colleges">({{$item.collegeCode}})</ui-select-match>
+			<ui-select-choices
+				repeat="college in filteredColleges | filter:$select.search track by college.collegeId">
+			{{college.collegeDesc}}<strong>({{college.collegeCode}})</strong> </ui-select-choices> </ui-select>
+</div>
+</div>
+
+<div class="filter-item">
+<span class="filter-by-name" ng-show = "showHeaderFilterLabels">Program</span>
+<div class="multi-select-section" ng-show = "!showHeaderFilterLabels">
+	<ui-select multiple ng-model="multiselect.selectedColleges" 
+				theme="bootstrap" ng-disabled="false" close-on-select="false"
+				title="Choose a Program"> <ui-select-match
+				placeholder="Select Programs">({{$item.collegeCode}})</ui-select-match>
+			<ui-select-choices
+				repeat="college in filteredColleges | filter:$select.search track by college.collegeId">
+			{{college.collegeDesc}}<strong>({{college.collegeCode}})</strong> </ui-select-choices> </ui-select>
+</div>
+</div>
+
+<div class="filter-item">
+<span class="filter-by-name" ng-show = "showHeaderFilterLabels">Specialisation</span>
+<div class="multi-select-section" ng-show = "!showHeaderFilterLabels">
+<ui-select multiple ng-model="multiselect.selectedSpecialisations" ng-show = "!showHeaderFilterLabels"
+				theme="bootstrap" ng-disabled="false" close-on-select="false"
+				title="Choose Specialisations"> <ui-select-match
+				placeholder="Select Specialisations">({{$item.specialisationCode}})</ui-select-match>
+			<ui-select-choices
+				repeat="specialisation in filteredSpecialisations | unique: 'specialisationId' | filter:$select.search track by specialisation.specialisationId">
+			{{specialisation.specialisationDesc}}<strong>({{specialisation.specialisationCode}})</strong>
+			</ui-select-choices> 
+</ui-select>
+</div>
+</div>
+
+<div class="filter-item">
+<span class="filter-by-name" ng-show = "showHeaderFilterLabels">Subject</span>
+<div class="multi-select-section" ng-show = "!showHeaderFilterLabels">
+<ui-select multiple ng-model="multiselect.selectedSubjects"
+				theme="bootstrap" ng-disabled="false" close-on-select="false"
+				ng-click="filterSubjects()" title="Choose a Subject"> <ui-select-match
+				placeholder="Select Subjects">{{$item.subjectCode}}</ui-select-match>
+			<ui-select-choices
+				repeat="subject in filteredSubjects | filter:$select.search | unique: 'subjectId' track by subject.subjectId">
+			{{subject.subjectDesc}}({{subject.subjectCode}}) </ui-select-choices> 
+</ui-select>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>

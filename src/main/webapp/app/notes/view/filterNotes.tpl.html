@@ -1,0 +1,152 @@
+<div class="gd-col gu4" ng-controller = "filterNotesCTRL">
+	<div class="facetList">
+		<div id="facetHead" class="line facet-head">
+			<div class="unit facet-title">Refine</div>
+		</div>
+
+		<div class="body">
+			<div class="oneFacet">
+				<div class="facetContainer">
+					<div class="head line">
+						<div class="facet-title">
+							<h5>College Type</h5>
+							<div class="clear-wrap" ng-show="multiselect.selectedCollegeTypes.length>0">
+								<a class="clear" ng-click="multiselect.selectedCollegeTypes=[]">Clear</a>
+							</div>
+							<span ng-click="showCollegeTypeSection=!showCollegeTypeSection" class="fa fa-chevron-down icon-notes "
+							ng-class="{false:'toggle'}[showCollegeTypeSection]"></span>
+						</div>
+					</div>
+					<div class="menu-toggle-list" ng-class="{false:'hide-section'}[showCollegeTypeSection]">
+					<div class="filterBox" style="display: block;">
+						<!-- <input type="text" ng-model="collegeTypeSearchText" placeholder="Search by Type"> <span
+							class="icon-notes fa fa-search"></span> -->
+						<div class="overlay dont-show"></div>
+					</div>
+					<ul class="facets scroll">
+						<li class="facet" ng-repeat = "collegeType in collegeTypes | filter: collegeTypeSearchText track by collegeType.collegeTypeId">
+							<a class="active"> 
+								<md-checkbox ng-checked="exists(collegeType, multiselect.selectedCollegeTypes)"
+								 ng-click="toggleCollegeTypeCheckBox(collegeType, multiselect.selectedCollegeTypes)">{{collegeType.collegeTypeCode}}</md-checkbox>
+							</a>
+						</li>
+					</ul>
+					</div>
+				</div>
+			</div>
+			<div class="oneFacet">
+				<div class="facetContainer">
+					<div class="head line">
+						<div class="facet-title">
+							<h5>College Name</h5>
+							<div class="clear-wrap" ng-show="multiselect.selectedColleges.length > 0">
+								<a class="clear" ng-click="multiselect.selectedColleges=[]">Clear</a>
+							</div>
+							<span class="icon-notes fa fa-chevron-down" ng-click="showCollegeSection=!showCollegeSection"
+							ng-class="{false:'toggle'}[showCollegeSection]"></span>
+						</div>
+					</div>
+					<div ng-show="showCollegeSection">
+				<ui-select multiple ng-model="multiselect.selectedColleges" theme="bootstrap" ng-disabled="false" close-on-select="false" 
+				 title="Choose a College">
+    				<ui-select-match placeholder="Select colleges">({{$item.collegeCode}})</ui-select-match>
+   					 <ui-select-choices repeat="college in filteredColleges | filter:$select.search track by college.collegeId">
+      					{{college.collegeDesc}}<strong>({{college.collegeCode}})</strong>
+   					 </ui-select-choices>
+  				</ui-select>
+					</div>
+				</div>
+			</div>
+			
+				<div class="oneFacet">
+			
+				<div class="facetContainer">
+					<div class="head line">
+						<div class="facet-title">
+							<h5>Program</h5>
+							<div class="clear-wrap" ng-show="multiselect.selectedPrograms.length > 0">
+								<a class="clear" ng-click="multiselect.selectedPrograms=[]">Clear</a>
+							</div>
+							<span class="icon-notes fa fa-chevron-down" ng-click="showProgramSection=!showProgramSection"
+							ng-class="{false:'toggle'}[showProgramSection]"></span>
+						</div>
+					</div>
+					<div class="menu-toggle-list" ng-class="{false:'hide-section'}[showProgramSection]">
+					<div class="filterBox" style="display: block;">
+						<input type="text" placeholder="Search by Program" ng-model = "programSearchText"> <span
+							class="icon-notes fa fa-search"></span>
+						<div class="overlay dont-show"></div>
+					</div>
+					<ul class="facets scroll">
+						<li class="facet" ng-repeat = "program in filteredPrograms | unique: 'programId' | filter:programSearchText track by program.programId">
+							<a class="active"> 
+								<md-checkbox ng-checked="exists(program, multiselect.selectedPrograms)"
+								 ng-click="toggleProgramCheckBox(program, multiselect.selectedPrograms)">{{program.programCode}}</md-checkbox>
+							</a>
+						</li>
+					</ul>
+					</div>
+				</div>
+				
+			</div>
+		
+			
+			<div class="oneFacet">
+				<div class="facetContainer">
+					<div class="head line">
+						<div class="facet-title">
+							<h5>Specialisation</h5>
+							<div class="clear-wrap" ng-show="multiselect.selectedSpecialisations.length > 0">
+								<a class="clear" ng-click="multiselect.selectedSpecialisations=[]">Clear</a>
+							</div>
+							<span class="icon-notes fa fa-chevron-down" ng-click="showSpecialisationSection=!showSpecialisationSection"
+							ng-class="{false:'toggle'}[showSpecialisationSection]"></span>
+						</div>
+					</div>
+					<div ng-show="showSpecialisationSection">
+				<ui-select multiple ng-model="multiselect.selectedSpecialisations" theme="bootstrap" ng-disabled="false" close-on-select="false" 
+				 title="Choose Specialisations">
+    				<ui-select-match placeholder="Select Specialisations">({{$item.specialisationCode}})</ui-select-match>
+   					 <ui-select-choices repeat="specialisation in filteredSpecialisations | unique: 'specialisationId' | filter:$select.search track by specialisation.specialisationId">
+      					{{specialisation.specialisationDesc}}<strong>({{specialisation.specialisationCode}})</strong>
+   					 </ui-select-choices>
+  				</ui-select>
+					</div>
+				</div>
+			</div>
+			
+				<div class="oneFacet">
+				<div class="facetContainer">
+					<div class="head line">
+						<div class="facet-title">
+							<h5>Subject</h5>
+							<div class="clear-wrap" ng-show="multiselect.selectedSubjects.length > 0">
+								<a class="clear" ng-click="multiselect.selectedSubjects=[]">Clear</a>
+							</div>
+							<span class="icon-notes fa fa-chevron-down" ng-click="showSubjectSection=!showSubjectSection"
+							ng-class="{false:'toggle'}[showSubjectSection]"></span>
+						</div>
+					</div>
+					<div class="auto-complete-box" style="display: block;">
+						
+						<div ng-show="showSubjectSection">
+						   <ui-select multiple ng-model="multiselect.selectedSubjects" theme="bootstrap" 
+						   ng-disabled="false" close-on-select="false" ng-click="filterSubjects()"
+								 title="Choose a Subject">
+    				<ui-select-match placeholder="Select Subjects">{{$item.subjectCode}}</ui-select-match>
+   					 <ui-select-choices repeat="subject in filteredSubjects | filter:$select.search | unique: 'subjectId' track by subject.subjectId">
+      					{{subject.subjectDesc}}({{subject.subjectCode}})
+   					 </ui-select-choices>
+  				</ui-select>
+     
+						<div class="overlay dont-show"></div>
+					</div>
+					
+				</div>
+			</div>
+	
+		</div>
+
+
+	</div>
+</div>
