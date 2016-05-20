@@ -1,0 +1,74 @@
+<div class="all-notes-section" infinite-scroll="addNotesInPage()"
+	infinite-scroll-distance="1">
+	<div class="count-info-section">
+		<div class="count-info-label">
+			Showing <strong>{{notes.count}}</strong> <span
+				ng-show="multiselect.selectedColleges.length > 0 || multiselect.selectedPrograms.length > 0 || 
+multiselect.selectedSpecialisation.length > 0 || multiselect.selectedSubjects.length > 0">In:
+			</span>
+		</div>
+		<div class="search-criteria-selected">
+			<div ng-repeat="college in multiselect.selectedColleges">
+				<a ng-click="removeCollegeCriteria(college)">{{college.collegeCode}}&nbsp;<span
+					class="fa fa-times"></span></a>
+			</div>
+			<div ng-repeat="program in multiselect.selectedPrograms">
+				<a ng-click="removeProgramCriteria(program)">{{program.programCode}}&nbsp;<span
+					class="fa fa-times"></span></a>
+			</div>
+			<div
+				ng-repeat="specialisation in multiselect.selectedSpecialisations">
+				<a ng-click="removeSpecialisationCriteria(specialisation)">{{specialisation.specialisationCode}}&nbsp;<span
+					class="fa fa-times"></span></a>
+			</div>
+			<div ng-repeat="subject in multiselect.selectedSubjects">
+				<a ng-click="removeSubjectCriteria(subject)">{{subject.subjectCode}}&nbsp;<span
+					class="fa fa-times"></span></a>
+			</div>
+		</div>
+	</div>
+	<!-- <input type="text" ng-model = "notesCount.count"> -->
+	<div class="note-facet-section" ng-repeat="notes in notes.notesList">
+		<div class="one-note-facet">
+
+			<div class="note-image-section" ng-click=""
+				ng-mouseenter="saveActiveNotesRecord(notes)">
+
+				<div class="add-to-shelf" ng-controller="notesShelfCtrl"
+					ng-click="addToShelfButtonClick()" ns-popover
+					ns-popover-template="addNotesToShelfPopoverId"
+					ns-popover-trigger="click" ns-popover-placement="bottom">Add
+					to shelf</div>
+				<img alt="" src="">
+
+				<div class="note-image-border-section">
+					<div class="options-section">
+						<div class="cando-left">
+							Like<strong>.</strong>
+						</div>
+						<div class="cando-left">Comment</div>
+						<div class="cando-right">
+							{{notes.likes}} &nbsp;&nbsp;<span class="fa fa-thumbs-o-up"></span>
+						</div>
+						<div class="cando-right">
+							{{notes.comments.length}}<span class="fa fa-comment-o"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="note-info">
+				<ul>
+					<li style="color: black;" show-tooltip="notes.topic" width="50">{{notes.subject.subjectDesc}}</li>
+					<li>Abhishek(SMVDU Student)</li>
+					<li class="upper-case">
+						{{notes.program.programCode}}&nbsp;.&nbsp;{{notes.specialisation.specialisationCode}}
+						&nbsp;.&nbsp;{{notes.subject.subjectCode}}</li>
+					<li>20 Views &nbsp;.&nbsp;24 Jan 2016</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<ng-include src="'app/notes/view/addNotesToShelfPopover.tpl.html'"></ng-include>
+
+</div>

@@ -1,116 +1,25 @@
 
-<div class="content-container">
-	<div class="library-section-area">
-		<div class="shelf-araea-left" ng-controller="shelfCtrl">
+<div class="fixed-search-area-header">
+	<div class="filter-section">
+		<ng-include src="'app/home/bookSearchSection.tpl.html'">
+	</div>
+</div>
 
-			<div class="first-line-shelf">
-				<span>Shelf</span>
-			</div>
-			
-			<span class="error-message" ng-show = "shelfErrorMsg != undefined">
-			{{shelfErrorMsg}}</span>
-			
-			<span class="create-shelf">
-			<md-button class="md-raised md-primary" ng-click="createNewShelfTextBtnForm.$show()" 
-								ng-hide="createNewShelfTextBtnForm.$visible">
-			<span class="fa fa-plus"></span>&nbsp;Create New Shelf</md-button>
-			</span>
-			
-			<span editable-textarea="newShelfName" e-form="createNewShelfTextBtnForm"
-				  e-rows="1" e-cols="15" onaftersave="createNewShelf()"></span>
-						
-			<div ng-repeat="bookShelf in bookShelves">
-				<!-- <a href="" ng-click="showShelfBooks(bookShelf,$index)" class="a-text-color-black"> -->
-				<div class="book-shelf">
-					<div class="shelf-name-sec"
-						ng-click="showShelfBooks(bookShelf,$index)">
-						<span
-						editable-textarea="bookShelf.shelfName" e-form="renameShelfTextBtnForm"
-						e-rows="1" e-cols="15" onbeforesave="setOldShelfToScope(bookShelf.shelfName)" onaftersave="renameShelf(bookShelf, $index)">
-						{{ bookShelf.shelfName || 'empty' }} </span>
-						<!-- <a class="a-text-color-black"> <strong>{{bookShelf.shelfName}}</strong> -->
-						
-
-						<!-- <div class="shelf-cover-photo"> -->
-
-						<!-- <img alt="" ng-if='bookShelf.cover' src="{{bookShelf.cover}}">
-							<img alt="" ng-if='!bookShelf.cover'
-								src="assets/img/cancelButton/cancel.png"> -->
-						<div class="shelf-name-sec-hover" ng-hide="renameShelfTextBtnForm.$visible">
-							<div class="right-section">
-								<md-menu md-offset="0 -5">
-								 <md-button
-									aria-label="Open demo menu" class="md-icon-button"
-									ng-click="$mdOpenMenu($event)"> <!-- <div class="white-background "> -->
-								<md-icon md-font-icon="fa-edit"
-									class="fa s32 md-primary md-hue-2" md-menu-origin> </md-icon> <!-- </div> -->
-								</md-button> 
-								<md-menu-content width="3">
-								 <md-menu-item>
-								<md-button ng-click="renameShelfTextBtnForm.$show()" 
-								ng-hide="renameShelfTextBtnForm.$visible"> <span
-									md-menu-align-target>Rename Shelf</span> </md-button>
-								</md-menu-item>
-								<md-menu-item>
-								<md-button ng-click="deleteShelf(bookShelf, $event)"> <span
-									md-menu-align-target>Delete Shelf</span> </md-button> 
-									</md-menu-item> 
-								 </md-menu-content> </md-menu>
-
-							</div>
-						</div>
-						<!-- </div> -->
-
-					</div>
-					<div class="shelf-info">
-						<ul>
-							<li><strong>Created On </strong>12/16/2015</li>
-							<li><strong>Last Updated On </strong> 12/16/2015</li>
-							<li><strong>Total Books </strong> {{bookShelf.books.length}}</li>
-						</ul>
-					</div>
-				</div>
-
-
-			</div>
-
-
-
-
-
-		</div>
-
-		<div class="book-display-area-right">
-			<div class="panel panel-min-height-600">
-				<div class="panel-display">
-					<div class="search-section">
-						<div class="type-ahead-box">
-							<input type="text" ng-model="searchBookText"
-								typeahead="state for state in states | filter:$viewValue | limitTo:8"
-								class="form-control">
-						</div>
-						<div class="search-button">
-							<md-button class="md-raised md-primary"
-								ng-click="searchBooks('wildCardSearch', null, true)">Search
-							Books</md-button>
-							<!-- <button ng-click="searchBooks()">Search Books</button> -->
-						</div>
-						<div class="advance-search-link">
-							<a href="" ng-click="showAdvanceSearchModal()">advance Search</a>
-						</div>
-					</div>
-
-					<tabset> <tab ng-repeat="tab in tabs"
-						ng-click="tabClicked(tab.title)" heading="{{tab.title}}"
-						active="tab.active" disable="tab.disabled"> {{tab.content}}
-					<div ng-include src="tab.page"></div>
-					<tab-heading>{{tab.title}}</tab-heading> </tab> </tabset>
-				</div>
+<div class="library-section-area">
+	<div class="book-display-area-right">
+		<div class="panel panel-min-height-600">
+			<div class="panel-display">
+				<tabset> <tab ng-repeat="tab in tabs"
+					ng-click="tabClicked(tab.title)" heading="{{tab.title}}"
+					active="tab.active" disable="tab.disabled"> {{tab.content}}
+				<div ng-include src="tab.page"></div>
+				<tab-heading>{{tab.title}}</tab-heading> </tab> </tabset>
 			</div>
 		</div>
-		<ng-include src="'app/shelf/addBookToShelfPopover.tpl.html'"></ng-include>
-		<ng-include src="'app/library/bookRating/bookRatingPopover.tpl.html'"></ng-include>
-		<script type="text/ng-template" id="advanceBookSearchModal.html"> 
+	</div>
+	<ng-include src="'app/shelf/addBookToShelfPopover.tpl.html'"></ng-include>
+	<ng-include src="'app/library/bookRating/bookRatingPopover.tpl.html'"></ng-include>
+	<script type="text/ng-template" id="advanceBookSearchModal.html"> 
 		<div class="advBookSearchModalDisplay">
 		<div class="cancelButtonSec"><a href="">
  <img alt="" src="assets/img/cancelButton/cancel.png"> </a> </div>
@@ -135,5 +44,4 @@
 
 </div>
 </script>
-	</div>
 </div>

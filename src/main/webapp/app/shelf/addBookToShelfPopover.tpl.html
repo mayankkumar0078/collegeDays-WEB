@@ -10,7 +10,7 @@
 </div>
 <div class="shelf-section">
 <md-radio-group ng-model="shelfRadioButtonGroup">
-      <md-radio-button ng-click="shelfRadioButtonClicked()" ng-repeat="shelf in bookShelves | filter:searchText" ng-value="shelf.shelfName">
+      <md-radio-button ng-click="shelfRadioButtonClicked()" ng-repeat="shelf in shelves | filter:searchText" ng-value="shelf.shelfName">
    		{{shelf.shelfName}}
       </md-radio-button>
     </md-radio-group>

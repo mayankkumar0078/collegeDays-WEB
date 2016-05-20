@@ -123,11 +123,11 @@ service('libraryService', function($resource) {
 		return $resource("http://localhost:9090/user/shelf",{},{call : {method : 'POST', isArray:false}});
 	};
 	this.addBookToShelf = function(){
-		return $resource("http://localhost:9090/user/shelf/addbook",{},{call : {method : 'PUT', isArray:false}});
+		return $resource("http://localhost:9090/user/shelf/add/book",{},{call : {method : 'PUT', isArray:false}});
 	};
 	
 	this.removeBookFromShelf = function(){
-		return $resource("http://localhost:9090/user/shelf/removebook",{},{call : {method : 'PUT', isArray:false}});
+		return $resource("http://localhost:9090/user/shelf/remove/book",{},{call : {method : 'PUT', isArray:false}});
 	};
 	
 	this.deleteShelf = function(){

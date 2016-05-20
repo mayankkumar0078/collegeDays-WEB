@@ -36,6 +36,6 @@ homeModule.controller('HomeCtrl', function HomeCtrl($scope, $parse, $modal, logi
 	
 	//redirect to library page
 	$scope.redirectToLibrary = function(){
-		$location.path("/studentDashboard/library");
+		$location.path("/library");
 	};
 });

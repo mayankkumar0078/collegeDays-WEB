@@ -1,0 +1,310 @@
+.notes-display-section {
+	width: 100%;
+	float: left;
+	margin-left: 12px;
+	overflow-y: hidden
+}
+
+.notes-header {
+	width: 100%;
+	height: 50px;
+	padding: 10px;
+}
+
+.notes-header .left-facet {
+	float: left;
+	padding-left: 10px;
+	width: 68%;
+}
+
+.notes-header .left-facet .notes-caption {
+	font-size: x-large;
+	font-weight: bold;
+}
+
+.notes-header .right-facet {
+	float: left;
+	padding-right: 10px;
+}
+
+.notes-header .right-facet .publish-notes-section {
+	margin-top: -5px;
+}
+
+.notes-display-section .notes-tab {
+	margin-top: -50px;
+}
+
+.all-notes-section {
+	width: 100%;
+	height: 100%;
+	margin: 10px;
+	float: left;
+}
+
+.note-facet-section {
+	padding: 5px;
+	float: left;
+	margin-top: 10px;
+}
+
+.one-note-facet {
+	height: 200px;
+	float: left;
+	margin-top: 20px;
+}
+
+.note-topic {
+	width: 150px;
+	font: bold;
+	color: black;
+	padding-bottom: 5px;
+	font-weight: bold;
+}
+
+.note-image-section {
+	width: 170px;
+	height: 150px;
+	position: relative;
+	cursor: pointer;
+}
+
+.note-info {
+	width: 180px;
+	padding-left: -40px;
+	color: #999;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.note-info li {
+	padding-top: 3px;
+}
+
+.note-image-border-section {
+	width: 100%;
+	height: 30px;
+	background-color: black;
+	visibility: hidden;
+	position: absolute;
+	bottom: 2px;
+}
+
+.note-image-section:HOVER .note-image-border-section {
+	visibility: visible;
+}
+
+.note-image-border-section .options-section {
+	margin: 5px;
+}
+
+.note-image-border-section .options-section .cando-left {
+	padding-left: 5px;
+	color: white;
+	float: left;
+	cursor: pointer;
+}
+
+.note-image-border-section .options-section .cando-right {
+	padding-left: 5px;
+	padding-right: 5px;
+	color: white;
+	float: right;
+	cursor: pointer;
+}
+
+.note-image-section .add-to-shelf {
+	display: inline;
+	float: right;
+	height: 30px;
+	width: 45%;
+	border: 1px solid transparent;
+	background-color: transparent;
+	cursor: pointer;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.note-image-section:HOVER .add-to-shelf {
+	/* display:inline; */
+	background-color: #7323dc;
+}
+
+<!--
+.....................
+.album section .................... -->.your-notes-album-section {
+	width: 100%;
+	height: 100%;
+	margin: 10px;
+}
+
+.header {
+	text-align: center;
+	font-size: xx-large;
+	margin: 10px;
+	margin-bottom: 30px;
+}
+
+.album-facet {
+	width: 100%;
+}
+
+.create-album-facet {
+	height: 150px;
+	width: 200px;
+	border: thin dotted;
+	float: left;
+	position: relative;
+	cursor: pointer;
+}
+
+.create-album-caption {
+	width: 100%;
+	position: absolute;
+	top: 35%;
+	color: #999;
+}
+
+.add-album-icon {
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+.add-album-text {
+	text-align: center;
+	font-size: large;
+}
+
+.one-album-facet {
+	width: 200px;
+	height: 200px;
+	margin-bottom: 20px;
+	margin-left: 10px;
+	margin-right: 10px;
+	float: left;
+}
+
+.album-image {
+	width: 100%;
+	height: 150px;
+	cursor: pointer;
+}
+
+.album-info {
+	color: #999;
+}
+
+.album-info li {
+	padding-top: 6px;
+}
+
+.album-info .album-name {
+	font-weight: bold;
+	color: black;
+}
+
+.create-note-facet {
+	width: 200px;
+	height: 150px;
+	float: left;
+	border: 1px dotted;
+	margin-top: 50px;
+	position: relative;
+}
+
+.add-note-icon {
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+.add-note-text {
+	text-align: center;
+	font-size: large;
+}
+
+.create-note-caption {
+	width: 100%;
+	position: absolute;
+	top: 35%;
+	color: #999;
+	cursor: pointer;
+}
+
+.your-all-notes-section {
+	float: left;
+	margin-top: -50px;
+}
+
+.count-info-section {
+	text-align: center;
+	margin-top: 10px;
+	font-size: 13px;
+	text-transform: uppercase;
+	width: 100%;
+	float: left;
+}
+
+.count-info-label {
+	width: 50%;
+	float: left;
+	text-align: right;
+}
+
+.search-criteria-selected {
+	float: left;
+	width: 50%;
+}
+
+.search-criteria-selected a {
+	color: #999;
+	float: left;
+	margin-right: 5px;
+	padding-left: 10px;
+	float: left;
+	margin-top: 2px;
+}
+
+.search-criteria-selected a:HOVER {
+	text-decoration: line-through;
+}
+
+.advance-filter-section-header {
+	width: 100%;
+	float: left;
+	height: 50px;
+	margin-top: 10px;
+}
+.advance-filter-section-header .advance-filter-section{
+	margin-top: 20px;
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+.filter-by-caption {
+	font-size: medium;
+	width: 100px;
+	float: left;
+}
+
+}
+.filter-items {
+	float: right;
+	width: 93%;
+}
+
+.filter-item {
+	width: 180px;
+	float: left;
+	margin-left: 10px;
+}
+.filter-by-name{
+	width: 180px;
+	float: left;
+	margin-left: 10px;
+	font-weight: 400;
+	font-size: medium;
+}
+.multi-select-section{
+	margin-top: -7px;
+}

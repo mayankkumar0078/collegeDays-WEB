@@ -1,6 +1,6 @@
 angular.module('library')
 
-.controller('libraryCtrl', function libraryCtrl($scope, usSpinnerService, libraryService, blockUI,  $modal, $rootScope) {
+.controller('LibraryCtrl', function LibraryCtrl($scope, usSpinnerService, libraryService, blockUI,  $modal, $rootScope) {
 
 	$scope.start = function(){
 		usSpinnerService.spin('spinner-1');
@@ -21,6 +21,7 @@ angular.module('library')
 	
 	$scope.library = {};
 	
+	$scope.readableBooks = [];
 	var readableBooks=[];
 	var borrowableBooks=[];
 	var pageNo = 1;
@@ -105,7 +106,8 @@ angular.module('library')
 								               {title:'Readable', active:readableTabActive, page: 'app/library/readable/readable.tpl.html', icon:'assets/img/open-books/open-book.jpg'},
 								               {title:'Borrowable', active:!readableTabActive, page: 'app/library/borrowable/borrowable.tpl.html', icon:'assets/img/open-books/open-book.jpg'},
 								               ];
-					        	$scope.searchBookText = '';
+					        	$scope.library.searchBookText = '';
+					        	
 			        		},
 			        		function(error) {
 			        			
@@ -115,6 +117,11 @@ angular.module('library')
 	  }
 			    });
 
+	  //$scope.test1 = "abhishek";
+	/*  $scope.tabs = [
+		               {title:'Readable', active:true, page: 'app/library/readable/readable.tpl.html', icon:'assets/img/open-books/open-book.jpg'},
+		               {title:'Borrowable', active:false, page: 'app/library/borrowable/borrowable.tpl.html', icon:'assets/img/open-books/open-book.jpg'},
+		               ];*/
 	  //watch the  book shelf clicked boolean form the book shelf
 	  $scope.$watch(function () { return libraryService.getBookShelfClicked(); }, 
 		  		function (newValue, oldValue) {
@@ -126,10 +133,11 @@ angular.module('library')
 		    });
 	  
 	  //get the book shelves for the user on page load
+	  if($rootScope.loggedInUser != undefined){
 	  var shelfResource = libraryService.retrieveUserShelves($rootScope.loggedInUser.userEmail);
 	  shelfResource.call().$promise.then(function(response) {
 		  if(response != undefined && response.status == 200 && response.userShelfDocument != undefined){
-			  $rootScope.bookShelves = response.userShelfDocument.shelves; 
+			  $rootScope.shelves = response.userShelfDocument.shelves; 
 			  //publish the shelves retrieved to the library controller
 			  //libraryService.setUserBookShelves($scope.bookShelves);
 		  }else if(response != undefined && response.status != 200){
@@ -141,7 +149,7 @@ angular.module('library')
 			alert("Some problem while retrieving user shelves. Try after some time");
 		}
 		);
-	  
+}
 	  //watch the list of user book shelves returned from book shelf page
 	  //this is the list of all the shelves assigned to a user
 	  $scope.$watch(function () { return libraryService.getUserBookShelves(); }, 
@@ -383,7 +391,7 @@ angular.module('library')
 		//reset the variables if the text is getting searched different 
 		//if(searchTextSearched != $scope.searchBookText){
 			resetVariables();
-			searchTextSearched = $scope.searchBookText;
+			searchTextSearched = $scope.library.searchBookText;
 		//}
 			}
 		//start the block ui if it is the first page search

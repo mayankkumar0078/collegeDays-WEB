@@ -1,68 +1,68 @@
-var studentDashboardModule = angular.module('studentDashboard', ['library',
+var libraryModule = angular.module('library', [
     'ui.router','ngAnimate', 'ui.bootstrap','ngFileUpload', 'ngImgCrop']);
 
 
-studentDashboardModule.config(function config($stateProvider) {
-    $stateProvider.state('studentDashboard', {
-        url: '/studentDashboard',
+libraryModule.config(function config($stateProvider) {
+   /* $stateProvider.state('dashboard', {
+        url: '/dashboard',
         views: {
             "main": {
-                controller: 'studentDashboardCtrl',
+                controller: 'StudentDashboardCtrl',
                 templateUrl: 'app/studentDashboard/studentDashboard.tpl.html'
             }
         },
         data: {pageTitle: 'Student Dashboard'}
-    })
+    })*/
     
-.state('studentDashboard.library', {
+	$stateProvider.state('library', {
         url: '/library',
-        parent:'studentDashboard',
         views: {
-            "libraryView": {
-                controller: 'libraryCtrl',
+            "main": {
+                controller: 'LibraryCtrl',
                 templateUrl: 'app/library/library.tpl.html',
                 
             }
         },
-        data: {pageTitle: 'Student Dashboard'}
+        data: {pageTitle: 'Library'}
     })
 
-.state('studentDashboard.notes', {
+.state('notes', {
         url: '/notes',
-        parent:'studentDashboard',
         views: {
-            "libraryView": {
-                controller: 'notesCtrl',
-                templateUrl: 'app/notes/notes.tpl.html',
+            "main": {
+                controller: 'NotesCtrl',
+                templateUrl: 'app/notes/view/notesDisplay.tpl.html',
                 
             }
         },
-        data: {pageTitle: 'Student Dashboard'}
+        data: {pageTitle: 'College Notes'}
     })
-.state('studentDashboard.notes.all', {
+/*.state('notes.all', {
         url: '/all',
+        parent:'notes',
         views: {
-            "libraryView": {
-                controller: 'notesCtrl',
-                templateUrl: 'app/notes/allNotes.tpl.html',
+            "main": {
+                controller: 'NotesCtrl',
+                templateUrl: 'app/notes/view/allNotes.tpl.html',
                 
             }
         },
         data: {pageTitle: 'Student Dashboard'}
     })  
  
-.state('studentDashboard.notes.yournotes', {
-        url: '/yourNotes',
+.state('notes.mynotes', {
+        url: '/mynotes',
+        parent: 'notes',
         views: {
-            "libraryView": {
-                controller: 'notesCtrl',
-                templateUrl: 'app/notes/yourNotes.tpl.html',
+            "main": {
+                controller: 'NotesCtrl',
+                templateUrl: 'app/notes/view/yourNotes.tpl.html',
                 
             }
         },
         data: {pageTitle: 'Student Dashboard'}
-    })
-.state('studentDashboard.library.bookDetails', {
+    })*/
+.state('library.bookDetails', {
         url: '/bookDetails',
         views: {
             "bookDetailsModalView": {

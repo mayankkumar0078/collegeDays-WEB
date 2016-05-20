@@ -1,4 +1,4 @@
-angular.module('studentDashboard').controller('shelfCtrl', function shelfCtrl($scope, $parse, $rootScope,
+angular.module('library').controller('shelfCtrl', function shelfCtrl($scope, $parse, $rootScope,
 		$modal, $mdDialog, $mdMedia, Upload, $timeout, libraryService){
 
 	$scope.status = ' ';
@@ -7,15 +7,15 @@ angular.module('studentDashboard').controller('shelfCtrl', function shelfCtrl($s
 	$scope.addToShelfButtonClick = function(){
 		//find out the current shelf for a particular book saved in the db
 		if($rootScope.activeBookRecord != undefined){
-			for(var shelfIndex in $rootScope.bookShelves){
-				if($rootScope.bookShelves[shelfIndex] != undefined && $rootScope.bookShelves[shelfIndex].books != undefined){
-					for(var bookIndex in $rootScope.bookShelves[shelfIndex].books){
+			for(var shelfIndex in $rootScope.shelves){
+				if($rootScope.shelves[shelfIndex] != undefined && $rootScope.shelves[shelfIndex].books != undefined){
+					for(var bookIndex in $rootScope.shelves[shelfIndex].books){
 
-						var book = $rootScope.bookShelves[shelfIndex].books[bookIndex];
+						var book = $rootScope.shelves[shelfIndex].books[bookIndex];
 						if($rootScope.activeBookRecord != undefined && 
 								$rootScope.activeBookRecord.ia[0] == book.bookId){
 							//select the shelf radio button
-							$scope.shelfRadioButtonGroup = $rootScope.bookShelves[shelfIndex].shelfName;
+							$scope.shelfRadioButtonGroup = $rootScope.shelves[shelfIndex].shelfName;
 							break;
 						}
 					}
@@ -51,19 +51,19 @@ angular.module('studentDashboard').controller('shelfCtrl', function shelfCtrl($s
 					resource.call(request).$promise.then(function(response) {
 						if(response != undefined && response.status == 200){
 							//put the updated book shelves in the root scope..
-							$rootScope.bookShelves = response.userShelfDocument.shelves;
+							$rootScope.shelves = response.userShelfDocument.shelves;
 							if(libraryService.getBookShelfClicked()){
 								//find out the book shelf from the list of shelves and publish it to the library
-								for(var shelfIndex in $rootScope.bookShelves){
-									if($rootScope.bookShelves[shelfIndex].shelfName == oldShelfName){
+								for(var shelfIndex in $rootScope.shelves){
+									if($rootScope.shelves[shelfIndex].shelfName == oldShelfName){
 										//publish it to the library service to use it in library controller
-										libraryService.setBookShelf($rootScope.bookShelves[shelfIndex]);
+										libraryService.setBookShelf($rootScope.shelves[shelfIndex]);
 										break;
 									}
 								}
 							}
 						}else{
-							alert("Can't process request riht now. Please contact administrator for further details");
+							alert("Can't process request right now. Please contact administrator for further details");
 						}
 
 					},
@@ -107,7 +107,7 @@ angular.module('studentDashboard').controller('shelfCtrl', function shelfCtrl($s
 		resource.call(request).$promise.then(function(response) {
 			if(response != undefined && response.status == 200){
 				//set the books for the shelf
-				$rootScope.bookShelves = response.userShelfDocument.shelves;
+				$rootScope.shelves = response.userShelfDocument.shelves;
 				$scope.shelfErrorMsg = undefined;
 			}else if(response != undefined && response.status != 200){
 				alert("Can't process request riht now. Please contact administrator for further details");
@@ -145,11 +145,11 @@ angular.module('studentDashboard').controller('shelfCtrl', function shelfCtrl($s
 			resource.call(request).$promise.then(function(response) {
 				if(response != undefined && response.status == 200){
 					//set the books for the shelf
-					$rootScope.bookShelves = response.userShelfDocument.shelves;
+					$rootScope.shelves = response.userShelfDocument.shelves;
 					//find the current shelf
-					for(var shelfIndex in $rootScope.bookShelves){
-						if(bookShelf.shelfName == $rootScope.bookShelves[shelfIndex].shelfName){
-							libraryService.setBookShelf($rootScope.bookShelves[shelfIndex]);
+					for(var shelfIndex in $rootScope.shelves){
+						if(bookShelf.shelfName == $rootScope.shelves[shelfIndex].shelfName){
+							libraryService.setBookShelf($rootScope.shelves[shelfIndex]);
 							//bookShelf.books = shelves[shelfIndex].books;
 							break;
 						}
@@ -185,7 +185,7 @@ angular.module('studentDashboard').controller('shelfCtrl', function shelfCtrl($s
 			resource.call(request).$promise.then(function(response) {
 				if(response != undefined && response.status == 200){
 					//set the books for the shelf
-					$rootScope.bookShelves = response.userShelfDocument.shelves;
+					$rootScope.shelves = response.userShelfDocument.shelves;
 				}else if(response != undefined && response.status != 200){
 					alert("Can't process request riht now. Please contact administrator for further details");
 				}
@@ -256,17 +256,17 @@ angular.module('studentDashboard').controller('shelfCtrl', function shelfCtrl($s
 		var resource = libraryService.createNewShelf();
 		resource.call(request).$promise.then(function(response){
 			if(response != undefined && response.status == 200){
-			var bookShelves = undefined;
+			var shelves = undefined;
 			if(response.userShelfDocument != undefined){
-				bookShelves = response.userShelfDocument.shelves;
+				shelves = response.userShelfDocument.shelves;
 			}
-			if($rootScope.bookShelves == undefined){
-				$rootScope.bookShelves = [];
+			if($rootScope.shelves == undefined){
+				$rootScope.shelves = [];
 			}
-			if(bookShelves != undefined && $rootScope.bookShelves != undefined){
+			if(shelves != undefined && $rootScope.shelves != undefined){
 				//take the latest book shelf from the book shelves and push it to the scope
-				var index = bookShelves.length - 1;
-				$rootScope.bookShelves.push(bookShelves[index]);
+				var index = shelves.length - 1;
+				$rootScope.shelves.push(shelves[index]);
 
 				//publish the shelf created to the library controller
 				//libraryService.setUserBookShelves($scope.bookShelves);

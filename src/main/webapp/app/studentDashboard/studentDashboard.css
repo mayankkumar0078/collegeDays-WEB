@@ -1,7 +1,7 @@
 .type-ahead-box {
-width: 50%;
-float: left;
-padding-top: 8px;
+	width: 50%;
+	float: left;
+	padding-top: 8px;
 }
 
 .type-ahead-box .form-control {
@@ -9,29 +9,39 @@ padding-top: 8px;
 }
 
 .search-section .search-button {
-float: left;
+	float: left;
+	width: 50px;
+	height: 34px;
+	margin-top: 8px;
+	text-align: center;
+	border: 1px solid #ccc;
+	background-color: white;
+	cursor: pointer;
 }
 
 .search-section .advance-search-link {
 	float: left;
-	width: 100px;
-	padding-top: 10px;
+    width: 100px;
+    padding-top: 16px;
+    margin-left: 10px;
 }
 
 .advance-search-link a {
-	color: #7323dc;
+	color: white;
 }
 
 .advance-search-link a:HOVER {
-	color: #7323dc;
+	color: white;
+	text-decoration: underline;
 }
 
 .search-section {
-	width: 100%;
-	float: left;
-	min-height: 100px;
+	width: 85%;
+	/* float: left; */
+	min-width: 300px;
 	padding-left: 25%;
 	position: relative;
+	margin-top: -55px;
 }
 
 .name-section {
@@ -45,6 +55,7 @@ float: left;
 	width: 30px;
 	margin-right: 8px;
 }
+
 .btn-group>.btn:first-child {
 	background-color: green;
 }
@@ -54,7 +65,7 @@ float: left;
 }
 
 .nav-bar-second {
-	padding: 50px 10px 10px 10px;
+	padding: 50px 10px 10px 0px;
 }
 
 md-tabs {

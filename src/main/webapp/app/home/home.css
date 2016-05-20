@@ -159,3 +159,44 @@ font-size: large;
 .header-item a{
 	margin-top: 12px;
 }
+/*  left panel for guides and options */ 
+#guide-container {
+    width: 230px;
+    /* padding: 13px 22px; */
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    float: left;
+}
+.guide-item{
+	background-color: white;
+	width: 150px;
+	height: 25px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	color:black;
+	font: bold;
+	font-size: 14px;
+	padding: 5px;
+	float: left;
+}
+.selected{
+	background-color: #7323dc;
+	color : white;
+}
+.guide-item:HOVER{
+	background-color: #7323dc;
+	color: white;
+}
+.guide-section{
+	float: left;
+	}
+.guide-toplevel>ul{
+	margin-left: -35px;
+	margin-top: -10px;
+}
+.guide-child-item>ul{
+	margin-left: -25px;
+}
+.faded-text{
+	color:#767676;
+}
