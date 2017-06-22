@@ -68,7 +68,7 @@ homeModule.controller('loginDialogCtrl', function($scope, $rootScope,
 	var self=this; 
 	/*registers a new user*/
 	self.registerUser = function() {
-		$http.post("http://localhost:9090/userModule/Users", self.user)
+		$http.post("http://localhost:8090/userModule/Users/", self.user)
 				.success(function(data, status, headers, config) {	
 						self.signUpErrorMsg = data.message;
 				}).error(function(data, status, header, config) {
@@ -79,7 +79,7 @@ homeModule.controller('loginDialogCtrl', function($scope, $rootScope,
 
 	self.login = function() {
 
-		$http.post('http://localhost:9090/userModule/Users/authenticate',
+		$http.post('http://localhost:8090/userModule/Users/authenticate',
 				self.loginCredentials).success(
 				function(result, status, headers) {
 					self.authenticated = true;
